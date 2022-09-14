@@ -18,10 +18,6 @@ would be able to add new players, send players to the IL/SL, plan games, plan st
 
 A comprehensive list of features to be added to the software is as follows:
 
-### Comprehensive Login and Security Suite:
-I want the software to be as secure as possible. In a future update, it is possible that I write both a user and 
-manager point of view to the software. However, at this time, the intention is to write only the manager point of view.
-
 ### Multi-Team Management:
 Ideally, this software will allow one person to manage multiple different teams. For instance, I am a fan of 
 both the Atlanta Braves and the Los Angles Dodgers. I would be able to manage these organizations both, using a dropdown
