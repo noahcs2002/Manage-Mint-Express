@@ -36,4 +36,6 @@ public class PitcherTest
         Assert.assertEquals(5, pitcher2.getWalks(), 0);
 
     }
+
+    
 }
