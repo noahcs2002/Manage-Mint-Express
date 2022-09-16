@@ -1,19 +1,16 @@
 package Members;
 
+import java.util.List;
+
+import Interfaces.IMember;
+import Misc.*;
+
 /**
  * (ABSTRACT) A member of the ballclub
  */
-@SuppressWarnings("unused")
-public abstract class Member 
+// @SuppressWarnings("unused")
+public class Member implements IMember
 {
-
-    private enum Role
-    {
-        HeadManagement,
-        MiddleManagement,
-        Player,
-        Other
-    }
 
     /**
      * Name of the memeber of the ball club

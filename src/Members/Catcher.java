@@ -1,6 +1,6 @@
 package Members;
 
-public class Catcher extends Player
+public class Catcher implements Player
 {
     
 }

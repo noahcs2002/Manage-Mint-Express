@@ -1,6 +1,6 @@
 package Members;
 
-public class Outfielder extends Player
+public class Outfielder implements Player
 {
     
 }

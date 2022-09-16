@@ -1,8 +1,11 @@
 package Members;
 
+import java.util.List;
+import Interfaces.IPlayer;
 import Misc.Stat;
 
-public class Pitcher extends Player
+@SuppressWarnings("unused")
+public class Pitcher implements IPlayer
 {
     private Stat InningsPitched;
     private Stat Hits;
@@ -14,6 +17,12 @@ public class Pitcher extends Player
     private Stat Saves;
     private Stat EarnedRunAverage;
     private Stat WHIP;
+    private boolean isSuspended;
+    private boolean isInjured;
+    private String name;
+    private String number;
+    private String injuredReason;
+    private String suspendedReason;
 
     public Pitcher()
     {
@@ -54,7 +63,7 @@ public class Pitcher extends Player
 
     //#region
     public double getInningsPitched() 
-    {
+{
         return this.InningsPitched.getStat();
     }
 
@@ -153,5 +162,63 @@ public class Pitcher extends Player
         this.WHIP = new Stat(WHIP);
     }
     //#endregion
+
+    @Override
+    public void recordGame(List<Stat> stats) 
+    {
+        // .stream() works like .Where() in C#
+        this.InningsPitched = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Innings pitched")).findFirst().get());
+
+        this.Hits = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Hits")).findFirst().get());
+
+        this.Runs = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Runs")).findFirst().get());
+
+        this.EarnedRuns = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Earned Runs")).findFirst().get());
+
+        this.Walks = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Walks")).findFirst().get());
+
+        this.StrikeOuts = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Strikeouts")).findFirst().get());
+
+        this.Homeruns = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Homeruns Allowed")).findFirst().get());
+
+        this.Saves = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Saves Made")).findFirst().get());
+
+        this.EarnedRunAverage = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Earned Runs on Average")).findFirst().get());
+
+        this.WHIP = new Stat(stats.stream().filter(
+            (stat) -> stat.getStatDescription().equals("Walks and Hits per Inning Pitched (WHIP)")).findFirst().get());
+    }
+
+    @Override
+    public void setup() 
+    {
+        this.name = "";
+        this.number = "";
+    }
+
+    @Override
+    public void putOnInjuredList(String message) 
+    {
+        this.isInjured = true;
+        this.injuredReason = message;
+        
+    }
+
+    @Override
+    public void putOnSuspensionList(String message) 
+    {
+        this.isSuspended = true;
+        this.suspendedReason = message;
+        
+    }
 
 }
