@@ -4,7 +4,7 @@ package Engine;
 import Graphics.*;
 
 /**
- * Main Driver class for Baseball Manager
+ * Main Driver class for Manage-Mint Express
  */
 public class Driver
 {

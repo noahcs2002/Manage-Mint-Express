@@ -210,7 +210,6 @@ public class Pitcher implements IPlayer
     {
         this.isInjured = true;
         this.injuredReason = message;
-        
     }
 
     @Override
@@ -218,7 +217,5 @@ public class Pitcher implements IPlayer
     {
         this.isSuspended = true;
         this.suspendedReason = message;
-        
     }
-
 }

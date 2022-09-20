@@ -4,12 +4,21 @@ public class Stat
     private String statDescription;
     private double stat;
     
+    /**
+     * {@summary} Makes a Stat Object
+     * @param statDescription An english description of a Stat
+     * @param stat The actual statistic
+     */
     public Stat(String statDescription, double stat)
     {
         this.statDescription = statDescription;
         this.stat = stat;
     }
 
+    /**
+     * {@summary} Convience Method to reset a statistic
+     * @param s
+     */
     public Stat(Stat s)
     {
         this.statDescription = s.statDescription;

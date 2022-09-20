@@ -1,6 +1,5 @@
 package Members;
 
-import java.util.List;
 
 import Interfaces.IMember;
 import Misc.*;
@@ -8,7 +7,7 @@ import Misc.*;
 /**
  * (ABSTRACT) A member of the ballclub
  */
-// @SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class Member implements IMember
 {
 

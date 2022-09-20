@@ -9,26 +9,30 @@ public class Outfielder implements IPlayer
 {
 
     @Override
-    public void recordGame(List<Stat> stats) {
-        // TODO Auto-generated method stub
+    public void recordGame(List<Stat> stats) 
+    {
+        
         
     }
 
     @Override
-    public void setup() {
-        // TODO Auto-generated method stub
+    public void setup() 
+    {
+        
         
     }
 
     @Override
-    public void putOnInjuredList(String message) {
-        // TODO Auto-generated method stub
+    public void putOnInjuredList(String message) 
+    {
+        
         
     }
 
     @Override
-    public void putOnSuspensionList(String message) {
-        // TODO Auto-generated method stub
+    public void putOnSuspensionList(String message) 
+    {
+        
         
     }
     
