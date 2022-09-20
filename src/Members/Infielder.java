@@ -1,5 +1,8 @@
 package Members;
 
+import java.util.List;
+
+import Interfaces.IPlayer;
 import Misc.Stat;
 
 /**
@@ -7,7 +10,7 @@ import Misc.Stat;
  * https://www.cbssports.com/mlb/stats/player/fielding/nl/regular/1B/qualifiers/?sortcol=po&sortdir=descending
  */
 
-public class Infielder implements Player
+public class Infielder implements IPlayer
 {
     
     Stat GamesPlayed;
@@ -53,5 +56,29 @@ public class Infielder implements Player
         this.DoublePlays = new Stat(DoublePlays);
         this.OutfieldAssists = new Stat(OutfieldAssists);
         this.FieldingPercentage = new Stat(FieldingPercentage);        
+    }
+
+    @Override
+    public void recordGame(List<Stat> stats) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setup() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void putOnInjuredList(String message) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void putOnSuspensionList(String message) {
+        // TODO Auto-generated method stub
+        
     }
 }

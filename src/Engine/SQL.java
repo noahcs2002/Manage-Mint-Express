@@ -1,14 +1,24 @@
 package Engine;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class SQL 
 {
  
-    private final String connectionString =  "jdbc:sqlserver://yourserver.database.windows.net:1433;"
-    + "database=NS.baseball.manager;"
-    + "user=MYTHINKPAD;"
-    + "encrypt=true;"
-    + "trustServerCertificate=true;"
-    + "loginTimeout=30;";
+    private final String connectionString =  "jdbc:sqlserver://localhost; encrypt=true; integratedSecurity=true;";
+    
+    public SQL()
+    {
+        try(Connection conn = DriverManager.getConnection(connectionString))
+        {
+            System.out.println("Connection Made");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
 
 
 }
