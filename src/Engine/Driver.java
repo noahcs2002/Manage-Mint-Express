@@ -1,5 +1,4 @@
 package Engine;
-
 // import Members.*;
 import Graphics.*;
 
@@ -10,6 +9,6 @@ public class Driver
 {
     public static void main(String[] args) 
     {
-        new FancyFrame();   
+        new FancyFrame();
     }
 }
