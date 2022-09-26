@@ -10,6 +10,7 @@ public class AddTeamDialog extends JDialog
 
     JPanel panel = new JPanel();
     SQL connection = new SQL();
+    private String newTeamName;
 
     public AddTeamDialog()
     {
@@ -26,18 +27,18 @@ public class AddTeamDialog extends JDialog
         // layout.setAutoCreateContainerGaps(true);
         // panel.setLayout(layout);
 
-
         this.add(panel, BorderLayout.CENTER);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         JPanel teamNamePanel = new JPanel();
-            teamNamePanel.setLayout(new FlowLayout());
+        teamNamePanel.setLayout(new FlowLayout());
+
         JPanel teamRankPanel = new JPanel();
-            teamRankPanel.setLayout(new FlowLayout());  
+        teamRankPanel.setLayout(new FlowLayout());  
 
         JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.setLayout(new FlowLayout());
 
         JLabel teamNameLabel = new JLabel("Team Name: ");
         JLabel teamRankLabel = new JLabel("Team Rank: ");
@@ -70,6 +71,7 @@ public class AddTeamDialog extends JDialog
                     int teamRank = Integer.parseInt(teamRankField.getText());
 
                     connection.makeTeam(teamName, teamRank);
+                    dispose();
                 }
                 catch(Exception ex)
                 {
@@ -79,5 +81,12 @@ public class AddTeamDialog extends JDialog
         });
 
         panel.add(addTeamButton);
+        this.pack();
+
+    }
+    
+    public String getNewTeamName()
+    {
+        return this.newTeamName;
     }
 }

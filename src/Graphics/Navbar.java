@@ -1,11 +1,11 @@
 package Graphics;
 
-import javax.naming.event.ObjectChangeListener;
 import javax.swing.*;
 import Engine.SQL;
+import Interfaces.ISubscriber;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Observable;
 
 public class Navbar extends JPanel
 {
@@ -17,13 +17,14 @@ public class Navbar extends JPanel
     JLabel currentTeamLabel = new JLabel("Currently Managing: ");
     SQL connector;
 
-    public Navbar()
+    public Navbar(ISubscriber subscriber)
     {
         connector = new SQL();
 
         try
         {
             String[] teams = connector.getTeams();
+
             for(String s : teams)
                 teamChoice.addItem(s);
         }
@@ -33,6 +34,7 @@ public class Navbar extends JPanel
         }
 
         currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
+
         teamChoice.addActionListener(new ActionListener()
         {
 
@@ -51,34 +53,39 @@ public class Navbar extends JPanel
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                AddTeamDialog d = new AddTeamDialog();
+                AddTeamDialog newTeamDialog = new AddTeamDialog();
                 
-                d.addWindowListener(new WindowAdapter()
+                newTeamDialog.addWindowListener(new WindowAdapter()
                 {
                     public void windowClosed(WindowEvent e) 
                     {
                         try
                         {
                             System.out.println("windowClosed Event Reached");
+                            String[] teams = connector.getTeams();
+
+                            for(int i = 0; i < teamChoice.getItemCount(); i += 1)
+                            {
+                                teamChoice.removeItemAt(i);
+                            }
+                            
+                            for(String s : teams)
+                                teamChoice.addItem(s);
+
                         }
                         catch(Exception ex)
                         {
-                            System.out.println("<DEBUG> : Exception Handled \n\n\n" + ex.getLocalizedMessage());
+                            System.out.println("<DEBUG> : Exception Handled \n\n\n" + ex.getMessage());
                         }
                     }
                 });
-
-
-                // connector.makeTeam("Arizona Diamondbacks", 6);
             }
-
         });
 
         this.setLayout(new BorderLayout());
         this.add(teamChoice, BorderLayout.EAST);
 
         JPanel centerRegionPanel = new JPanel();
-        // centerRegionPanel.setLayout(new BorderLayout());
 
         centerRegionPanel.add(addTeamButton);
 
@@ -87,6 +94,4 @@ public class Navbar extends JPanel
         this.add(managerNameLabel, BorderLayout.WEST);
         this.add(currentTeamLabel, BorderLayout.NORTH);
     }
-
-    
 }

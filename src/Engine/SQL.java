@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SQL 
 {
-//  jdbc:sqlserver://localhost;encrypt=true;databaseName=AdventureWorks;integratedSecurity=true;
+    //  jdbc:sqlserver://localhost;encrypt=true;databaseName=AdventureWorks;integratedSecurity=true;
     // url = "jdbc:sqlserver://" +serverName + ":1433;DatabaseName=" + dbName + ";encrypt=true;trustServerCertificate=true;
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
@@ -46,7 +46,7 @@ public class SQL
             for(int i =0; i < res.size(); i += 1)
                 resArr[i] = res.get(i);
             
-                return resArr;
+            return resArr;
 
         }
         catch(Exception ex)
@@ -56,6 +56,11 @@ public class SQL
         }
     }
 
+    /**
+     * @apiNote Upper : Run executeUpdate
+     * @param teamName Team name to add
+     * @param rank Rank of the team
+     */
     public void makeTeam(String teamName, int rank)
     {
 
@@ -63,9 +68,9 @@ public class SQL
 
         try
         {
-
+            System.out.println("Beginning query");
             Statement addStatement = conn.createStatement();
-            ResultSet set = addStatement.executeQuery(query);
+            addStatement.executeUpdate(query);
 
             System.out.println("Query ran");
 
@@ -75,4 +80,56 @@ public class SQL
             System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
         }
     }
+    
+    /**
+     * @apiNote Downer : Run executeQuery
+     * @param dataNames
+     * @return result set of query results
+     */
+    public ArrayList<Object[]> getPitchers(String teamName)
+    {
+        try
+        {
+            String sql = "SELECT * FROM PitchingStaff WHERE Team = '" + teamName + "';";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sql);
+            ArrayList<Object[]> results = new ArrayList<>();
+
+            while(set.next())
+            {
+                results.add(new Object[]
+                {
+                    set.getString("Player"),
+                    set.getString("Team"),
+                    set.getDouble("InningsPitched"),
+                    set.getDouble("Hits"),
+                    set.getDouble("Runs"),
+                    set.getDouble("EarnedRuns"),
+                    set.getDouble("Walks"),
+                    set.getDouble("StrikeOuts"),
+                    set.getDouble("homeruns"),
+                    set.getDouble("Saves"),
+                    set.getDouble("ERA"),
+                    set.getDouble("WHIP"),
+                    set.getBoolean("IsInjured"),
+                    set.getBoolean("IsSuspended"),
+                    set.getDouble("Number"),
+                    set.getString("InjuredReason"),
+                    set.getString("SuspendedReason"),
+                });
+            }
+
+            
+            return results;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("<DEBUG> : EXCPETION HANDLED : " + ex.getMessage());
+            return null;
+        }
+    }
+
+    
 }
