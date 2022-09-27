@@ -131,5 +131,144 @@ public class SQL
         }
     }
 
-    
+    public ArrayList<Object[]> getCatchers(String teamName)
+    {
+        try
+        {
+            final String sql = "SELECT * FROM CatchingStaff WHERE Team = '" + teamName + "';";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sql);
+            ArrayList<Object[]> results = new ArrayList<>();
+
+            while(set.next())
+            {
+                results.add(new Object[]
+                {
+                    set.getString("Name"),
+                    set.getString("Team"),
+
+                    set.getDouble("GamesPlayed"),
+                    set.getDouble("GamesStarted"),
+                    set.getDouble("InningsPlayed"),
+                    set.getDouble("TotalChances"),
+                    set.getDouble("Putouts"),
+                    set.getDouble("Assists"),
+                    set.getDouble("Errors"),
+                    set.getDouble("DoublePlays"),
+                    set.getDouble("StolenBasesAllowed"),
+                    set.getDouble("StealsCaught"),
+                    set.getDouble("StolenBaseAllowedPercentage"),
+                    set.getDouble("WildPitches"),
+                    set.getDouble("FieldingPercentage"),
+
+                    set.getBoolean("IsInjured"),
+                    set.getString("InjuredReason"),
+                    set.getBoolean("IsSuspended"),
+                    set.getString("SuspendedReason"),
+                });
+            }
+
+        
+            return results;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error in getCatchers:\n\n" + ex.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<Object[]> getInfielders(String teamName)
+    {
+        try
+        {
+            final String sql = "SELECT * FROM Infielders WHERE Team = '" + teamName + "';";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sql);
+            ArrayList<Object[]> results = new ArrayList<>();
+
+            while(set.next())
+            {
+                results.add(new Object[]
+                {
+                    set.getString("Name"),
+                    set.getString("Team"),
+
+                    set.getDouble("GamesPlayed"),
+                    set.getDouble("GamesStarted"),
+                    set.getDouble("InningsPlayed"),
+                    set.getDouble("TotalChances"),
+                    set.getDouble("Putouts"),
+                    set.getDouble("Assists"),
+                    set.getDouble("Errors"),
+                    set.getDouble("DoublePlays"),
+
+                    set.getBoolean("IsInjured"),
+                    set.getString("InjuredReason"),
+                    set.getBoolean("IsSuspended"),
+                    set.getString("SuspendedReason"),
+
+                    set.getString("Position")
+                });
+            }
+
+        
+            return results;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<Object[]> getOutfielders(String teamName)
+    {
+        try
+        {
+            final String sql = "SELECT * FROM Outfielders WHERE Team = '" + teamName + "';";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sql);
+            ArrayList<Object[]> results = new ArrayList<>();
+
+            while(set.next())
+            {
+                results.add(new Object[]
+                {
+                    set.getString("Name"),
+                    set.getString("Team"),
+
+                    set.getDouble("GamesPlayed"),
+                    set.getDouble("GamesStarted"),
+                    set.getDouble("InningsPlayed"),
+                    set.getDouble("TotalChances"),
+                    set.getDouble("Putouts"),
+                    set.getDouble("Assists"),
+                    set.getDouble("Errors"),
+                    set.getDouble("DoublePlays"),
+
+                    set.getBoolean("IsInjured"),
+                    set.getString("InjuredReason"),
+                    set.getBoolean("IsSuspended"),
+                    set.getString("SuspendedReason"),
+                });
+            }
+
+        
+            return results;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            return null;
+        }
+    }
+
+
 }

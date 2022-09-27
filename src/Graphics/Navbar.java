@@ -2,24 +2,39 @@ package Graphics;
 
 import javax.swing.*;
 import Engine.SQL;
+import Interfaces.ISubscribable;
 import Interfaces.ISubscriber;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Navbar extends JPanel
+public class Navbar extends JPanel implements ISubscribable
 {
         
     private String managerName = "Noah Sternberg";
     JLabel welcomeLabel = new JLabel("Welcome!");
     JComboBox<String> teamChoice = new JComboBox<>();
+    JComboBox<String> positionChoice = new JComboBox<>();
     JLabel managerNameLabel = new JLabel("Current User: " + managerName);
     JLabel currentTeamLabel = new JLabel("Currently Managing: ");
     SQL connector;
+    ArrayList<ISubscriber> subscribers;
 
-    public Navbar(ISubscriber subscriber)
+    public Navbar()
     {
+        subscribers = new ArrayList<>();
         connector = new SQL();
+        String[] positions = 
+        {
+            "Pitchers",
+            "Catchers",
+            "Infielders",
+            "Outfielders",
+        };
+
+        for(String p : positions)
+            positionChoice.addItem(p);
 
         try
         {
@@ -35,6 +50,17 @@ public class Navbar extends JPanel
 
         currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
 
+        positionChoice.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);                
+            }
+            
+        });
+
         teamChoice.addActionListener(new ActionListener()
         {
 
@@ -42,6 +68,7 @@ public class Navbar extends JPanel
             public void actionPerformed(ActionEvent e) 
             {
                 currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
+                sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 0);
             }
         });
 
@@ -83,7 +110,12 @@ public class Navbar extends JPanel
         });
 
         this.setLayout(new BorderLayout());
-        this.add(teamChoice, BorderLayout.EAST);
+        JPanel flowPanel = new JPanel();
+        flowPanel.setLayout(new FlowLayout());
+        flowPanel.add(positionChoice);
+        flowPanel.add(teamChoice);
+        
+        this.add(flowPanel, BorderLayout.EAST);
 
         JPanel centerRegionPanel = new JPanel();
 
@@ -93,5 +125,36 @@ public class Navbar extends JPanel
 
         this.add(managerNameLabel, BorderLayout.WEST);
         this.add(currentTeamLabel, BorderLayout.NORTH);
+    }
+
+    @Override
+    public void subscribe(ISubscriber subscriber) 
+    {
+        this.subscribers.add(subscriber);
+    }
+
+    @Override
+    public void unsubscribe(ISubscriber subscriber) 
+    {
+        this.subscribers.remove(subscriber);
+    }
+
+    @Override
+    /**
+     * @apiNote CODE LIST: 
+     * 0 -> Team selection has been updated
+     * 1 -> Position selection has been updated
+     */
+    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
+    {
+        for(ISubscriber i : subscribers)
+            i.recieveUpdate(change, code);
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    {
+        for (ISubscriber iSubscriber : subscribers) 
+            iSubscriber.recieveUpdate(change);    
     }
 }

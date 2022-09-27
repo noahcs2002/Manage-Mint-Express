@@ -5,19 +5,22 @@ import javax.swing.*;
 // import java.awt.event.*;
 // import java.awt.event.*;
 
-import Interfaces.ISubscriber;
-
-public class FancyFrame extends JFrame implements ISubscriber
+public class FancyFrame extends JFrame
 {
     JPanel mainPanel = new JPanel();
-    Navbar navbar = new Navbar(this);
+    Navbar navbar = new Navbar();
 
 
     public FancyFrame()
     {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(navbar, BorderLayout.NORTH);
-        mainPanel.add(new PitchingPanel("LA Dodgers"), BorderLayout.CENTER);
+        InformationPanel pitchingPanel = new InformationPanel("LA Dodgers");
+
+        //pitching panel has subscribed to changes from the navabr
+        navbar.subscribe(pitchingPanel);
+
+        mainPanel.add(pitchingPanel, BorderLayout.CENTER);
 
         this.add(mainPanel);
         
