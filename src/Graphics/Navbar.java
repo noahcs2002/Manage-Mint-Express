@@ -12,7 +12,7 @@ import java.util.List;
 public class Navbar extends JPanel implements ISubscribable
 {
         
-    private String managerName = "Noah Sternberg";
+    private String managerName = "Noah";
     JLabel welcomeLabel = new JLabel("Welcome!");
     JComboBox<String> teamChoice = new JComboBox<>();
     JComboBox<String> positionChoice = new JComboBox<>();
@@ -84,34 +84,39 @@ public class Navbar extends JPanel implements ISubscribable
                 
                 newTeamDialog.addWindowListener(new WindowAdapter()
                 {
-                    public void windowClosed(WindowEvent e) 
-                    {
-                        try
-                        {
-                            System.out.println("windowClosed Event Reached");
-                            String[] teams = connector.getTeams();
+                    // public void windowClosed(WindowEvent e) 
+                    // {
+                    //     try
+                    //     {
+                    //         System.out.println("windowClosed Event Reached");
 
-                            for(int i = 0; i < teamChoice.getItemCount(); i += 1)
-                            {
-                                teamChoice.removeItemAt(i);
-                            }
-                            
-                            for(String s : teams)
-                                teamChoice.addItem(s);
 
-                        }
-                        catch(Exception ex)
-                        {
-                            System.out.println("<DEBUG> : Exception Handled \n\n\n" + ex.getMessage());
-                        }
-                    }
+                    //     }
+                    //     catch(Exception ex)
+                    //     {
+                    //         System.out.println("<DEBUG> : Exception Handled \n\n\n" + ex.getMessage());
+                    //     }
+                    // }
                 });
+            }
+        });
+
+        JButton addPlayerButton = new JButton("Add Player");
+
+        addPlayerButton.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
             }
         });
 
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
+        flowPanel.add(addPlayerButton);
         flowPanel.add(positionChoice);
         flowPanel.add(teamChoice);
         
@@ -157,4 +162,6 @@ public class Navbar extends JPanel implements ISubscribable
         for (ISubscriber iSubscriber : subscribers) 
             iSubscriber.recieveUpdate(change);    
     }
+
+    
 }

@@ -28,7 +28,7 @@ public class FancyFrame extends JFrame
         this.setDefaultCloseOperation(3);
         this.pack();
         this.setVisible(true);
-        this.setTitle("Baseball Team Manager");
+        this.setTitle("Manage-Mint Express");
         this.setLocationRelativeTo(null);
     }
 }

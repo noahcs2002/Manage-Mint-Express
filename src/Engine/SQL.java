@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Interfaces.IMember;
+
 public class SQL 
 {
     //  jdbc:sqlserver://localhost;encrypt=true;databaseName=AdventureWorks;integratedSecurity=true;
@@ -21,7 +23,7 @@ public class SQL
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            System.out.println("Connection established\nhostname resolved\nport access granted\n");
+            System.out.println("Connection Established");
         }
         catch(Exception ex)
         {
@@ -268,6 +270,11 @@ public class SQL
             System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
             return null;
         }
+    }
+
+    public void makePlayer(String team, String position, IMember memberModel)
+    {
+
     }
 
 
