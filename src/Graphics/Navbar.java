@@ -161,7 +161,5 @@ public class Navbar extends JPanel implements ISubscribable
     {
         for (ISubscriber iSubscriber : subscribers) 
             iSubscriber.recieveUpdate(change);    
-    }
-
-    
+    }   
 }
