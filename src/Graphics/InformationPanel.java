@@ -34,9 +34,9 @@ public class InformationPanel extends JPanel implements ISubscriber
         "WHIP",
         "Inj.",
         "Sus.",
-        "Num.",
         "Injury:",
-        "Suspended Reason: "
+        "Suspended Reason: ",
+        "Number"
     };
 
     private final String[] catchingTableColumnNames = 
@@ -51,14 +51,11 @@ public class InformationPanel extends JPanel implements ISubscriber
         "A",
         "E",
         "DP",
-        "SBA",
-        "SC",
-        "SBAP",
-        "WP",
-        "Inj.",
+        "Inj",
         "Injury",
         "Sus.",
         "Suspension Reason",
+        "Pos.",
         "Number"
     };
 
@@ -78,7 +75,8 @@ public class InformationPanel extends JPanel implements ISubscriber
         "Injury",
         "Sus.",
         "Suspension Reason",
-        "Pos."
+        "Pos.",
+        "Number"
     };
 
     private final String[] outfielderTableColumnNames = 
@@ -89,7 +87,7 @@ public class InformationPanel extends JPanel implements ISubscriber
         "GS",
         "IP",
         "TC",
-        "POs",
+        "PO",
         "A",
         "E",
         "DP",
@@ -97,9 +95,10 @@ public class InformationPanel extends JPanel implements ISubscriber
         "Injury",
         "Sus.",
         "Suspension Reason",
+        "Pos.",
+        "Number"
     };
 
-    Object[][] data;
 
     public InformationPanel(String teamName)
     {

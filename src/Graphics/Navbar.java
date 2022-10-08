@@ -109,7 +109,7 @@ public class Navbar extends JPanel implements ISubscribable
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                // new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
+                new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
             }
         });
 
