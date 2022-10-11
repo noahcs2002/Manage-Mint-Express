@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import Controllers.SqlController;
+import Controllers.SqlControler;
 import Interfaces.ISubscriber;
 
 public class InformationPanel extends JPanel implements ISubscriber
 {
     JTable informationTable;
-    SqlController connectionDriver = new SqlController();
+    SqlControler connectionDriver = new SqlControler();
 
     private String currentPositionSelection;
     private String currentTeamSelection;
@@ -101,7 +101,7 @@ public class InformationPanel extends JPanel implements ISubscriber
     public InformationPanel(String teamName)
     {
         currentPositionSelection = "Pitchers";
-        currentTeamSelection = "LA Dodgers";
+        currentTeamSelection = "L.A. Dodgers";
         try
         {
             DefaultTableModel tableModel = new DefaultTableModel(pitchingTableColumnNames, 0);

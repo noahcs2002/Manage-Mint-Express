@@ -14,7 +14,7 @@ public class FancyFrame extends JFrame
     {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(navbar, BorderLayout.NORTH);
-        InformationPanel infoPanel = new InformationPanel("LA Dodgers");
+        InformationPanel infoPanel = new InformationPanel("L.A. Dodgers");
 
         //pitching panel has subscribed to changes from the navabr
         navbar.subscribe(infoPanel);

@@ -5,7 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import Controllers.SqlController;
+import Controllers.SqlControler;
 import Members.Pitcher;
 
 import java.awt.*;
@@ -101,7 +101,7 @@ public class AddPlayerDialog extends JDialog
     {
         this.teamChoice = team;
         this.position = position;
-        SqlController connectionDriver = new SqlController();
+        SqlControler connectionDriver = new SqlControler();
         DefaultTableModel model = new DefaultTableModel();
         JButton confButton = new JButton("Confirm");
         this.teamChoice = team;

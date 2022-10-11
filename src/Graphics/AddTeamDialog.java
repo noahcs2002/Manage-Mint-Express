@@ -2,7 +2,7 @@ package Graphics;
 
 import javax.swing.*;
 
-import Controllers.SqlController;
+import Controllers.SqlControler;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +11,7 @@ public class AddTeamDialog extends JDialog
 {
 
     JPanel panel = new JPanel();
-    SqlController connection = new SqlController();
+    SqlControler connection = new SqlControler();
     private String newTeamName;
 
     public AddTeamDialog()

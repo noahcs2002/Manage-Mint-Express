@@ -1,7 +1,7 @@
 package Graphics;
 
 import javax.swing.*;
-import Controllers.SqlController;
+import Controllers.SqlControler;
 import Interfaces.ISubscribable;
 import Interfaces.ISubscriber;
 import java.awt.*;
@@ -17,13 +17,13 @@ public class Navbar extends JPanel implements ISubscribable
     JComboBox<String> positionChoice = new JComboBox<>();
     JLabel managerNameLabel = new JLabel("Current User: " + managerName);
     JLabel currentTeamLabel = new JLabel("Currently Managing: ");
-    SqlController connector;
+    SqlControler connector;
     ArrayList<ISubscriber> subscribers;
 
     public Navbar()
     {
         subscribers = new ArrayList<>();
-        connector = new SqlController();
+        connector = new SqlControler();
         String[] positions = 
         {
             "Pitchers",
