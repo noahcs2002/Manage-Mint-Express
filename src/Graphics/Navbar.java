@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Navbar extends JPanel implements ISubscribable
+public class Navbar extends JPanel implements ISubscribable, ISubscriber
 {
         
     private String managerName = "Noah";
@@ -22,6 +22,8 @@ public class Navbar extends JPanel implements ISubscribable
 
     public Navbar()
     {
+
+
         subscribers = new ArrayList<>();
         connector = new SqlControler();
         String[] positions = 
@@ -62,10 +64,7 @@ public class Navbar extends JPanel implements ISubscribable
 
         JButton addTeamButton = new JButton("Add Team");
 
-        addTeamButton.addActionListener(e -> 
-        {
-            new AddTeamDialog();
-        });
+       
         
         JButton addPlayerButton = new JButton("Add Player");
 
@@ -78,7 +77,7 @@ public class Navbar extends JPanel implements ISubscribable
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
-        flowPanel.add(addPlayerButton);
+        // flowPanel.add(addPlayerButton);
         flowPanel.add(positionChoice);
         flowPanel.add(teamChoice);
         
@@ -86,7 +85,7 @@ public class Navbar extends JPanel implements ISubscribable
 
         JPanel centerRegionPanel = new JPanel();
 
-        centerRegionPanel.add(addTeamButton);
+        // centerRegionPanel.add(addTeamButton);
 
         this.add(centerRegionPanel, BorderLayout.CENTER);
 
@@ -123,5 +122,26 @@ public class Navbar extends JPanel implements ISubscribable
     {
         for (ISubscriber iSubscriber : subscribers) 
             iSubscriber.recieveUpdate(change);    
+    }
+
+    @Override
+    public void recieveUpdate(Object change) 
+    {
+        this.teamChoice.addItem((String) change);
+        this.repaint();
+        this.revalidate();
+    }
+
+    @Override
+    public void recieveUpdate(Object change, int code) 
+    {
+        recieveUpdate(change);
+    }
+
+    @Override
+    public void subscribeTo(ISubscribable subscribable) 
+    {
+        subscribable.subscribe(this);
+        
     }   
 }

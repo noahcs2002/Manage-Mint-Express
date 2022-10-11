@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.SqlControler;
+import Interfaces.ISubscribable;
 import Interfaces.ISubscriber;
 
 public class InformationPanel extends JPanel implements ISubscriber
@@ -215,5 +216,11 @@ public class InformationPanel extends JPanel implements ISubscriber
                     tableModel.addRow(objects); 
             break;
         }
+    }
+
+    @Override
+    public void subscribeTo(ISubscribable subscribable) {
+        // TODO Auto-generated method stub
+        
     }
 }

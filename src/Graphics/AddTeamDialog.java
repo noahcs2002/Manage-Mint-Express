@@ -3,19 +3,31 @@ package Graphics;
 import javax.swing.*;
 
 import Controllers.SqlControler;
+import Interfaces.ISubscribable;
+import Interfaces.ISubscriber;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Flow.Subscriber;
 
-public class AddTeamDialog extends JDialog
+public class AddTeamDialog extends JDialog implements ISubscribable
 {
 
     JPanel panel = new JPanel();
     SqlControler connection = new SqlControler();
     private String newTeamName;
 
-    public AddTeamDialog()
+    ArrayList<ISubscriber> subs;
+
+    public AddTeamDialog(ISubscriber sub)
     {
+        subs = new ArrayList<>();
+        subs.add(sub);
+
+        
+
         this.setTitle("Team Creation Wizard");
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -73,6 +85,10 @@ public class AddTeamDialog extends JDialog
                     int teamRank = Integer.parseInt(teamRankField.getText());
 
                     connection.makeTeam(teamName, teamRank);
+
+                    String update = teamName;
+                    System.out.println(update);
+                    sendNotification(subs, update, 0);
                     dispose();
                 }
                 catch(Exception ex)
@@ -90,5 +106,33 @@ public class AddTeamDialog extends JDialog
     public String getNewTeamName()
     {
         return this.newTeamName;
+    }
+
+    @Override
+    public void subscribe(ISubscriber subscriber) 
+    {
+        subs.add(subscriber);
+    }
+
+    @Override
+    public void unsubscribe(ISubscriber subscriber) 
+    {   
+        subs.remove(subscriber);
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
+    {
+        for (ISubscriber iSubscriber : subscribers) {
+            iSubscriber.recieveUpdate(change, code);
+        }
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    {
+        for (ISubscriber iSubscriber : subscribers) {
+            iSubscriber.recieveUpdate(change);
+        }
     }
 }

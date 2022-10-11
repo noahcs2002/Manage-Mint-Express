@@ -14,4 +14,6 @@ public interface ISubscriber
      * @param code Code corresponding to update. Can be custom interpreted this way
      */
     public void recieveUpdate(Object change, int code);
+
+    public void subscribeTo(ISubscribable subscribable);
 }
