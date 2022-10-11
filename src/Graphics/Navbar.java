@@ -22,8 +22,6 @@ public class Navbar extends JPanel implements ISubscribable, ISubscriber
 
     public Navbar()
     {
-
-
         subscribers = new ArrayList<>();
         connector = new SqlControler();
         String[] positions = 
