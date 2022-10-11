@@ -1,4 +1,4 @@
-package Engine;
+package Controllers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,9 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Interfaces.IMember;
+import Members.Catcher;
+import Members.Pitcher;
 
-public class SQL 
+public class SqlController 
 {
     //  jdbc:sqlserver://localhost;encrypt=true;databaseName=AdventureWorks;integratedSecurity=true;
     // url = "jdbc:sqlserver://" +serverName + ":1433;DatabaseName=" + dbName + ";encrypt=true;trustServerCertificate=true;
@@ -18,7 +19,7 @@ public class SQL
 
     private Connection conn ;
 
-    public SQL()
+    public SqlController()
     {
         try
         {
@@ -41,7 +42,7 @@ public class SQL
             ResultSet set = selectStatement.executeQuery("SELECT * FROM Teams");
 
             while(set.next())
-                res.add(set.getString("Team"));
+                res.add(set.getString("Name"));
 
             String[] resArr = new String[res.size()];
 
@@ -66,7 +67,7 @@ public class SQL
     public void makeTeam(String teamName, int rank)
     {
 
-        String query = "INSERT INTO Teams (Team, Ranking) VALUES ('" + teamName +"', " + rank +");";
+        String query = "INSERT INTO Teams (Name, Rank) VALUES ('" + teamName +"', " + rank +");";
 
         try
         {
@@ -111,15 +112,15 @@ public class SQL
                     set.getDouble("EarnedRuns"),
                     set.getDouble("Walks"),
                     set.getDouble("StrikeOuts"),
-                    set.getDouble("homeruns"),
+                    set.getDouble("Homeruns"),
                     set.getDouble("Saves"),
                     set.getDouble("ERA"),
                     set.getDouble("WHIP"),
                     set.getBoolean("IsInjured"),
+                    set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
+                    set.getString("Suspension"),
                     set.getDouble("Number"),
-                    set.getString("InjuredReason"),
-                    set.getString("SuspendedReason"),
                 });
             }
 
@@ -159,12 +160,7 @@ public class SQL
                     set.getDouble("Assists"),
                     set.getDouble("Errors"),
                     set.getDouble("DoublePlays"),
-                    set.getDouble("StolenBasesAllowed"),
-                    set.getDouble("StealsCaught"),
-                    set.getDouble("StolenBaseAllowedPercentage"),
-                    set.getDouble("WildPitches"),
-                    set.getDouble("FieldingPercentage"),
-
+                
                     set.getBoolean("IsInjured"),
                     set.getString("InjuredReason"),
                     set.getBoolean("IsSuspended"),
@@ -210,11 +206,13 @@ public class SQL
                     set.getDouble("DoublePlays"),
 
                     set.getBoolean("IsInjured"),
-                    set.getString("InjuredReason"),
+                    set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
                     set.getString("SuspendedReason"),
 
-                    set.getString("Position")
+                    set.getString("Position"),
+                    set.getString("Number")
+
                 });
             }
 
@@ -256,9 +254,11 @@ public class SQL
                     set.getDouble("DoublePlays"),
 
                     set.getBoolean("IsInjured"),
-                    set.getString("InjuredReason"),
+                    set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
                     set.getString("SuspendedReason"),
+                    set.getString("Position"),
+                    set.getString("Number"),
                 });
             }
 
@@ -272,10 +272,56 @@ public class SQL
         }
     }
 
-    public void makePlayer(String team, String position, IMember memberModel)
+    public void makePitcher(Pitcher pitcher)
     {
+        final String sqlString = "INSERT INTO PitchingStaff VALUES ('" 
+            + pitcher.name + "', '" + pitcher.team + "', "
+            + pitcher.InningsPitched + ", " + pitcher.Hits + ", "
+            + pitcher.Runs + ", " + pitcher.EarnedRuns + ", "
+            + pitcher.Walks + ", " + pitcher.StrikeOuts + ", "
+            + pitcher.Homeruns + ", " + pitcher.Saves + ", "
+            + pitcher.EarnedRunAverage + ", " + pitcher.WHIP + ", "
+            + pitcher.isInjured + ", '" + pitcher.injuredReason + "', "
+            + pitcher.isSuspended + ", '" + pitcher.suspendedReason + "', "
+            + pitcher.number + ");";
 
+        System.out.println(sqlString);
+
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new pitcher\n" + ex.getMessage());
+        }
     }
 
+    public void makeCatcher(Catcher catcher)
+    {
+        final String sqlString = "INSERT INTO CatchingStaff ("
+            + "Player, Team, GamesPlayed, GamesStarted,"
+            + "InningsPlayed, TotalChances, PutOuts, Assists, DoublePlays,"
+            + "IsInjured, Injury, IsSuspended, Suspension, Position, Number )"
+            + "VALUES ( '" 
+            + catcher.name + "', '" + catcher.team + "', "
+            + catcher.gamesPlayed+ ", " + catcher.gamesStarted + ", "
+            + catcher.inningsPlayed + ", " + catcher.totalChances + ", "
+            + catcher.putOuts + ", " + catcher.assists + ", "
+            + catcher.doublePlays + ", " + catcher.isInjured + ", "
+            + catcher.isInjured + ", " + catcher.injury + ", "
+            + catcher.isSuspended + ", " + catcher.suspension + ", "
+            + catcher.position + "," + catcher.number + ");";
 
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new pitcher");
+        }
+    }
+
+    
 }

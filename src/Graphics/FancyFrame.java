@@ -14,14 +14,16 @@ public class FancyFrame extends JFrame
     {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(navbar, BorderLayout.NORTH);
-        InformationPanel pitchingPanel = new InformationPanel("LA Dodgers");
+        InformationPanel infoPanel = new InformationPanel("LA Dodgers");
 
         //pitching panel has subscribed to changes from the navabr
-        navbar.subscribe(pitchingPanel);
+        navbar.subscribe(infoPanel);
 
-        mainPanel.add(pitchingPanel, BorderLayout.CENTER);
+        mainPanel.add(infoPanel, BorderLayout.CENTER);
 
         this.add(mainPanel);
+
+        this.setJMenuBar(new HelpBar());
         
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.setDefaultCloseOperation(3);

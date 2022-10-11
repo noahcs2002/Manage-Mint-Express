@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import Engine.SQL;
-// import java.awt.event.*;
-// import java.sql.DriverManager;
-// import java.awt.*;
+
+import Controllers.SqlController;
 import Interfaces.ISubscriber;
 
 public class InformationPanel extends JPanel implements ISubscriber
 {
     JTable informationTable;
-    SQL connectionDriver = new SQL();
+    SqlController connectionDriver = new SqlController();
 
     private String currentPositionSelection;
     private String currentTeamSelection;

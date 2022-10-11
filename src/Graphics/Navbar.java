@@ -1,11 +1,10 @@
 package Graphics;
 
 import javax.swing.*;
-import Engine.SQL;
+import Controllers.SqlController;
 import Interfaces.ISubscribable;
 import Interfaces.ISubscriber;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +17,13 @@ public class Navbar extends JPanel implements ISubscribable
     JComboBox<String> positionChoice = new JComboBox<>();
     JLabel managerNameLabel = new JLabel("Current User: " + managerName);
     JLabel currentTeamLabel = new JLabel("Currently Managing: ");
-    SQL connector;
+    SqlController connector;
     ArrayList<ISubscriber> subscribers;
 
     public Navbar()
     {
         subscribers = new ArrayList<>();
-        connector = new SQL();
+        connector = new SqlController();
         String[] positions = 
         {
             "Pitchers",
@@ -50,68 +49,31 @@ public class Navbar extends JPanel implements ISubscribable
 
         currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
 
-        positionChoice.addActionListener(new ActionListener()
+        positionChoice.addActionListener(e -> 
         {
-
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);                
-            }
-            
+            sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);  
         });
 
-        teamChoice.addActionListener(new ActionListener()
+        teamChoice.addActionListener(e -> 
         {
-
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
-                sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 0);
-            }
+            currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
+            sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 0);  
         });
 
         JButton addTeamButton = new JButton("Add Team");
 
-        addTeamButton.addActionListener(new ActionListener()
+        addTeamButton.addActionListener(e -> 
         {
-
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                AddTeamDialog newTeamDialog = new AddTeamDialog();
-                
-                newTeamDialog.addWindowListener(new WindowAdapter()
-                {
-                    // public void windowClosed(WindowEvent e) 
-                    // {
-                    //     try
-                    //     {
-                    //         System.out.println("windowClosed Event Reached");
-
-
-                    //     }
-                    //     catch(Exception ex)
-                    //     {
-                    //         System.out.println("<DEBUG> : Exception Handled \n\n\n" + ex.getMessage());
-                    //     }
-                    // }
-                });
-            }
+            new AddTeamDialog();
         });
-
+        
         JButton addPlayerButton = new JButton("Add Player");
 
-        addPlayerButton.addActionListener(new ActionListener()
+        addPlayerButton.addActionListener(e -> 
         {
+            new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
 
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
-            }
-        });
+        });        
 
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();

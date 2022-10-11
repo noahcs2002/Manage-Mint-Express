@@ -16,8 +16,12 @@ if object_id ('PitchingStaff' , 'U') is not null
 	drop table PitchingStaff;
 go
 
+if object_id ('Teams' , 'U') is not null
+	drop table Teams;
+go
+
 create table CatchingStaff (
-	Player nvarchar(MAX),
+	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
 	GamesStarted decimal(18,0),
@@ -25,6 +29,7 @@ create table CatchingStaff (
 	TotalChances decimal(18,0),
 	PutOuts decimal(18,0),
 	Assists decimal(18,0),
+	Errors decimal(18,0),
 	DoublePlays decimal(18,0),
 	IsInjured bit,
 	Injury nvarchar(MAX),
@@ -35,7 +40,7 @@ create table CatchingStaff (
 );
 
 create table Infielders (
-	Player nvarchar(MAX),
+	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
 	GamesStarted decimal(18,0),
@@ -43,6 +48,7 @@ create table Infielders (
 	TotalChances decimal(18,0),
 	PutOuts decimal(18,0),
 	Assists decimal(18,0),
+	Errors decimal(18,0),
 	DoublePlays decimal(18,0),
 	IsInjured bit,
 	Injury nvarchar(MAX),
@@ -53,7 +59,7 @@ create table Infielders (
 );
 
 create table Outfielders (
-	Player nvarchar(MAX),
+	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
 	GamesStarted decimal(18,0),
@@ -61,6 +67,7 @@ create table Outfielders (
 	TotalChances decimal(18,0),
 	PutOuts decimal(18,0),
 	Assists decimal(18,0),
+	Errors decimal(18,0),
 	DoublePlays decimal(18,0),
 	IsInjured bit,
 	Injury nvarchar(MAX),
@@ -78,7 +85,7 @@ create table PitchingStaff (
 	Runs decimal(18,0),
 	EarnedRuns decimal(18,0),
 	Walks decimal(18,0),
-	StrikeOut decimal(18,0),
+	StrikeOuts decimal(18,0),
 	Homeruns decimal(18,0),
 	Saves decimal(18,0),
 	ERA decimal(18,0),
@@ -89,3 +96,8 @@ create table PitchingStaff (
 	Suspension nvarchar(MAX),
 	Number nvarchar(MAX)
 );
+
+create table Teams (
+	Name nvarchar(MAX),
+	Rank decimal(18, 0)
+)

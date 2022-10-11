@@ -16,14 +16,14 @@ public interface IHeadManager
      * @param memeber Memeber to suspend
      * @param reason Reason for suspension
      */
-    public void suspendPlayer(IMember memeber, String reason);
+    public void suspendPlayer(IPlayer player, String reason);
 
     /**
      * {@summary}
      * Puts a player on the injured list
      * @param member Memeber that is injured
      */
-    public void putPlayerOnInjuredList(IMember member);
+    public void putPlayerOnInjuredList(IPlayer player);
 
     /**
      * {@summary}
@@ -32,7 +32,7 @@ public interface IHeadManager
      * @param member Memeber to offer as a trade
      * @param req Memeber to request in the trade
      */
-    public void offerTrade(ITeam team, IMember member, IMember req);
+    public void offerTrade(ITeam team, IPlayer player, IPlayer req);
 
     /**
      * {@summary} Run updates to player stats after a game
