@@ -1,0 +1,147 @@
+package Graphics;
+
+import javax.swing.*;
+import Controllers.SqlControler;
+import Interfaces.ISubscribable;
+import Interfaces.ISubscriber;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class InfoBar extends JPanel implements ISubscribable, ISubscriber
+{
+        
+    private String managerName = "Noah";
+    JLabel welcomeLabel = new JLabel("Welcome!");
+    JComboBox<String> teamChoice = new JComboBox<>();
+    JComboBox<String> positionChoice = new JComboBox<>();
+    JLabel managerNameLabel = new JLabel("Current User: " + managerName);
+    JLabel currentTeamLabel = new JLabel("Currently Managing: ");
+    SqlControler connector;
+    ArrayList<ISubscriber> subscribers;
+
+    public InfoBar()
+    {
+        subscribers = new ArrayList<>();
+        connector = new SqlControler();
+        String[] positions = 
+        {
+            "Pitchers",
+            "Catchers",
+            "Infielders",
+            "Outfielders",
+        };
+
+        for(String p : positions)
+            positionChoice.addItem(p);
+
+        try
+        {
+            String[] teams = connector.getTeams();
+
+            for(String s : teams)
+                teamChoice.addItem(s);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n"+ex.getLocalizedMessage());
+        }
+
+        currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
+
+        positionChoice.addActionListener(e -> 
+        {
+            sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);  
+        });
+
+        teamChoice.addActionListener(e -> 
+        {
+            currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
+            sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 123);  
+        });
+       
+        
+
+             
+
+        this.setLayout(new BorderLayout());
+        JPanel flowPanel = new JPanel();
+        flowPanel.setLayout(new FlowLayout());
+        // flowPanel.add(addPlayerButton);
+        flowPanel.add(positionChoice);
+        flowPanel.add(teamChoice);
+        
+        this.add(flowPanel, BorderLayout.EAST);
+
+        JPanel centerRegionPanel = new JPanel();
+
+        // centerRegionPanel.add(addTeamButton);
+
+        this.add(centerRegionPanel, BorderLayout.CENTER);
+
+        this.add(managerNameLabel, BorderLayout.WEST);
+        this.add(currentTeamLabel, BorderLayout.NORTH);
+    }
+
+    @Override
+    public void subscribe(ISubscriber subscriber) 
+    {
+        this.subscribers.add(subscriber);
+    }
+
+    @Override
+    public void unsubscribe(ISubscriber subscriber) 
+    {
+        this.subscribers.remove(subscriber);
+    }
+
+    @Override
+    /**
+     * @apiNote CODE LIST: 
+     * 0 -> Team selection has been updated
+     * 1 -> Position selection has been updated
+     */
+    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
+    {
+        for(ISubscriber i : subscribers)
+            i.recieveUpdate(change, code);
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    {
+        for (ISubscriber iSubscriber : subscribers) 
+            iSubscriber.recieveUpdate(change);    
+    }
+
+    @Override
+    public void recieveUpdate(Object change) 
+    {
+        this.teamChoice.addItem((String) change);
+        this.repaint();
+        this.revalidate();
+    }
+
+    @Override
+    public void recieveUpdate(Object change, int code) 
+    {
+        switch(code)
+        {
+            case 0 :
+                this.recieveUpdate(change);
+            break;
+
+            case 1452316, 145233, 1452310, 1452315 :
+                this.repaint();
+                this.revalidate();
+            break;
+        }
+    }
+
+    @Override
+    public void subscribeTo(ISubscribable subscribable) 
+    {
+        subscribable.subscribe(this);
+        
+    }   
+}

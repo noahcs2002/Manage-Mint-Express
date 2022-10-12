@@ -1,20 +1,26 @@
 package Graphics;
 
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import Controllers.SqlControler;
+import Interfaces.ISubscribable;
+import Interfaces.ISubscriber;
 import Members.Pitcher;
 
 import java.awt.*;
 
-public class AddPlayerDialog extends JDialog
+public class AddPlayerDialog extends JDialog implements ISubscribable
 {
     private String position;
     private String teamChoice;
     JTable emptyTable = new JTable();
+    ArrayList<ISubscriber> subs;
 
     private final String[] pitchingTableColumnNames = 
     {
@@ -97,14 +103,16 @@ public class AddPlayerDialog extends JDialog
         "Number"
     };
 
-    public AddPlayerDialog(String team, String position)
+    public AddPlayerDialog(String team, String position, ISubscriber sub)
     {
+        subs = new ArrayList<>();
+        this.subs.add(sub);
+
         this.teamChoice = team;
         this.position = position;
         SqlControler connectionDriver = new SqlControler();
         DefaultTableModel model = new DefaultTableModel();
         JButton confButton = new JButton("Confirm");
-        this.teamChoice = team;
 
         try
         {
@@ -181,6 +189,9 @@ public class AddPlayerDialog extends JDialog
                     name, teamName, inningsPitched, hits, runs, earnedRuns, walks, strikeouts,
                     homeruns, saves, era, whip, isInjuredBit, isSuspendedBit, injury, suspension, number, teamChoice
                 ));
+
+                this.sendNotification(subs, null, 1452316);
+                this.dispose();
             }
         });
         
@@ -199,5 +210,35 @@ public class AddPlayerDialog extends JDialog
         helperPanel.add(confButton);
 
         this.add(helperPanel, BorderLayout.SOUTH);
+    }
+
+    @Override
+    public void subscribe(ISubscriber subscriber) 
+    {
+        this.subs.add(subscriber);
+    }
+
+    @Override
+    public void unsubscribe(ISubscriber subscriber) 
+    {
+        this.subs.remove(subscriber);
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
+    {
+        for (ISubscriber sub : subscribers) 
+        {
+            sub.recieveUpdate(change, code);
+        }
+    }
+
+    @Override
+    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    {
+        for (ISubscriber sub : subscribers) 
+        {
+            sub.recieveUpdate(change);
+        }
     }
 }

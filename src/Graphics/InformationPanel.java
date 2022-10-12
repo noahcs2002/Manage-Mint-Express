@@ -144,9 +144,6 @@ public class InformationPanel extends JPanel implements ISubscriber
     @Override
     public void recieveUpdate(Object change, int code) 
     {
-        // 0 -> team change
-        // 1 -> position change
-        
         switch(code) 
         {
             case 0 :
@@ -161,6 +158,12 @@ public class InformationPanel extends JPanel implements ISubscriber
                 currentPositionSelection = change.toString();
                 updateInformation(currentTeamSelection, currentPositionSelection);
 
+            break;
+
+            
+            case 1452316, 145233, 1452310, 1452315 :
+                this.repaint();
+                this.revalidate();
             break;
 
             default :

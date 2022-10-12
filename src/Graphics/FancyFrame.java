@@ -10,26 +10,27 @@ import Interfaces.ISubscriber;
 public class FancyFrame extends JFrame implements ISubscriber
 {
     JPanel mainPanel = new JPanel();
-    Navbar navbar = new Navbar();
-    UpperNavbar upperNavbar = new UpperNavbar();
+    InfoBar infoBar = new InfoBar();
+    Navbar navbar = new Navbar("L.A. Dodgers");
 
 
     public FancyFrame()
     {
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(navbar, BorderLayout.NORTH);
+        mainPanel.add(infoBar, BorderLayout.NORTH);
         InformationPanel infoPanel = new InformationPanel("L.A. Dodgers");
 
-        //pitching panel has subscribed to changes from the navabr
-        navbar.subscribe(infoPanel);
-        upperNavbar.subscribe(navbar);
+        //pitching panel has subscribed to changes from the navbar
+        infoBar.subscribe(infoPanel);
+        navbar.subscribe(infoBar);
+        infoBar.subscribe(navbar);
 
 
         mainPanel.add(infoPanel, BorderLayout.CENTER);
 
         this.add(mainPanel);
 
-        this.setJMenuBar(upperNavbar);
+        this.setJMenuBar(navbar);
         
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.setDefaultCloseOperation(3);
