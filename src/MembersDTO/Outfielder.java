@@ -1,11 +1,11 @@
-package Members;
+package MembersDTO;
 
 import java.util.List;
 
-import Interfaces.IPlayer;
+import Interfaces.Pitcher;
 import Misc.Stat;
 
-public class Outfielder implements IPlayer
+public class Outfielder implements Pitcher
 {
 
     @Override

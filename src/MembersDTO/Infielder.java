@@ -1,8 +1,8 @@
-package Members;
+package MembersDTO;
 
 import java.util.List;
 
-import Interfaces.IPlayer;
+import Interfaces.Pitcher;
 import Misc.Stat;
 
 /**
@@ -10,7 +10,7 @@ import Misc.Stat;
  * https://www.cbssports.com/mlb/stats/player/fielding/nl/regular/1B/qualifiers/?sortcol=po&sortdir=descending
  */
 
-public class Infielder implements IPlayer
+public class Infielder implements Pitcher
 {
     
     Stat GamesPlayed;

@@ -2,21 +2,18 @@ package Graphics;
 
 import javax.swing.*;
 
-import Controllers.SqlControler;
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
+import Controllers.SqlController;
+import Subscribers.ISubscriber;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Flow.Subscriber;
 
-public class AddTeamDialog extends JDialog implements ISubscribable
+public class AddTeamDialog extends JDialog
 {
 
     JPanel panel = new JPanel();
-    SqlControler connection = new SqlControler();
+    SqlController connection = new SqlController();
     private String newTeamName;
 
     ArrayList<ISubscriber> subs;
@@ -88,7 +85,6 @@ public class AddTeamDialog extends JDialog implements ISubscribable
 
                     String update = teamName;
                     System.out.println(update);
-                    sendNotification(subs, update, 0);
                     dispose();
                 }
                 catch(Exception ex)
@@ -108,31 +104,5 @@ public class AddTeamDialog extends JDialog implements ISubscribable
         return this.newTeamName;
     }
 
-    @Override
-    public void subscribe(ISubscriber subscriber) 
-    {
-        subs.add(subscriber);
-    }
-
-    @Override
-    public void unsubscribe(ISubscriber subscriber) 
-    {   
-        subs.remove(subscriber);
-    }
-
-    @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
-    {
-        for (ISubscriber iSubscriber : subscribers) {
-            iSubscriber.recieveUpdate(change, code);
-        }
-    }
-
-    @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change) 
-    {
-        for (ISubscriber iSubscriber : subscribers) {
-            iSubscriber.recieveUpdate(change);
-        }
-    }
+    
 }

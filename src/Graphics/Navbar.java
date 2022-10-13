@@ -1,145 +1,171 @@
 package Graphics;
 
 import javax.swing.*;
-import Controllers.SqlControler;
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
+import MembersDTO.InfoCode;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
 import java.awt.*;
+import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Navbar extends JPanel implements ISubscribable, ISubscriber
+public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 {
-        
-    private String managerName = "Noah";
-    JLabel welcomeLabel = new JLabel("Welcome!");
-    JComboBox<String> teamChoice = new JComboBox<>();
-    JComboBox<String> positionChoice = new JComboBox<>();
-    JLabel managerNameLabel = new JLabel("Current User: " + managerName);
-    JLabel currentTeamLabel = new JLabel("Currently Managing: ");
-    SqlControler connector;
-    ArrayList<ISubscriber> subscribers;
+    ArrayList<ISubscriber> subs;
+    private String currentTeam;
+    
+    JMenu help = new JMenu("Help");
+    JMenu addPlayer = new JMenu("Add Player");
+    JMenuItem addTeam = new JMenuItem("Add Team");
 
-    public Navbar()
+    JMenuItem pitcher = new JMenuItem("Pitcher");
+    JMenuItem catcher = new JMenuItem("Catcher");
+    JMenuItem infielder = new JMenuItem("Infielder");
+    JMenuItem outfielder = new JMenuItem("Outfielder");
+
+    JMenuItem faq = new JMenuItem("FAQ's");
+    JMenuItem howToUse = new JMenuItem("How to use");
+    JMenuItem documentation = new JMenuItem("Docs");
+    private final String uri = "https://github.com/noahcs2002/Mangage-Mint-Express";
+
+    public Navbar(String currentTeam)
     {
-        subscribers = new ArrayList<>();
-        connector = new SqlControler();
-        String[] positions = 
-        {
-            "Pitchers",
-            "Catchers",
-            "Infielders",
-            "Outfielders",
-        };
+        this.currentTeam = currentTeam;
+        subs = new ArrayList<>();
 
-        for(String p : positions)
-            positionChoice.addItem(p);
+        addPlayer.add(pitcher);
+        addPlayer.add(catcher);
+        addPlayer.add(outfielder);
+        addPlayer.add(infielder);
 
-        try
-        {
-            String[] teams = connector.getTeams();
+        help.add(faq);
+        help.add(howToUse);
+        help.add(documentation);
 
-            for(String s : teams)
-                teamChoice.addItem(s);
-        }
-        catch(Exception ex)
-        {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n"+ex.getLocalizedMessage());
-        }
+        this.add(help);
+        this.add(addPlayer);
+        this.add(addTeam);
 
-        currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
-
-        positionChoice.addActionListener(e -> 
-        {
-            sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);  
+        addTeam.addActionListener(e -> 
+        {   
+            
         });
 
-        teamChoice.addActionListener(e -> 
+        faq.addActionListener(e -> 
         {
-            currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
-            sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 0);  
+            JDialog faqDialog = new JDialog();
+            faqDialog.setTitle("FAQ's");
+
+            final String[] faqs = 
+            {
+                "Q. Who developed this? A. Noah Sternberg, a student at Murray State University.",
+                "Q. What was this developed for? A. A final project for an Advance Objects class.",
+                "Q. How long did this take? A. Too long.",
+                "Q. Will this ever get more features? A. I don't know.",
+                "Q. Why did you make ___ design choice? A. Because I'm bad at graphic design.",
+            };
+
+            JList<String> list = new JList<>(faqs);
+
+            faqDialog.add(list);
+
+            faqDialog.setLocationRelativeTo(null);
+            faqDialog.setSize(500,150);
+            faqDialog.setVisible(true);
         });
 
-        JButton addTeamButton = new JButton("Add Team");
-
-       
-        
-        JButton addPlayerButton = new JButton("Add Player");
-
-        addPlayerButton.addActionListener(e -> 
+        howToUse.addActionListener(e -> 
         {
-            new AddPlayerDialog(teamChoice.getSelectedItem().toString(), positionChoice.getSelectedItem().toString());
 
-        });        
+        });
 
-        this.setLayout(new BorderLayout());
-        JPanel flowPanel = new JPanel();
-        flowPanel.setLayout(new FlowLayout());
-        // flowPanel.add(addPlayerButton);
-        flowPanel.add(positionChoice);
-        flowPanel.add(teamChoice);
-        
-        this.add(flowPanel, BorderLayout.EAST);
+        documentation.addActionListener(e -> 
+        {
+            if(Desktop.isDesktopSupported())
+            {
+                Desktop desktop = Desktop.getDesktop();
+                try
+                {
+                    desktop.browse(new URI(uri));
+                }
+                catch(Exception ex)
+                {
+                    System.out.println("EXCEPTION HANDLED BROWSING INTERNET: \n" + ex.getLocalizedMessage());
+                }
+            }
+        });
 
-        JPanel centerRegionPanel = new JPanel();
+        pitcher.addActionListener(e -> 
+        {
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Pitchers");
+            
+            this.subscribe(dialog);
 
-        // centerRegionPanel.add(addTeamButton);
+            System.out.println(this.currentTeam);
+        });
 
-        this.add(centerRegionPanel, BorderLayout.CENTER);
+        catcher.addActionListener(e -> 
+        {
+            // new AddPlayerDialog(this.currentTeam, "Catchers", this);
+            System.out.println(this.currentTeam);
+        });
 
-        this.add(managerNameLabel, BorderLayout.WEST);
-        this.add(currentTeamLabel, BorderLayout.NORTH);
+        infielder.addActionListener(e -> 
+        {
+            // new AddPlayerDialog(this.currentTeam, "Infielders", this);
+            System.out.println(this.currentTeam);
+        });
+
+        outfielder.addActionListener(e -> 
+        {
+            // new AddPlayerDialog(this.currentTeam,"Outfielders", this);
+            System.out.println(this.currentTeam);
+        });
     }
 
     @Override
-    public void subscribe(ISubscriber subscriber) 
+    public void alert(Object change, InfoCode infoCode) 
     {
-        this.subscribers.add(subscriber);
+        for (ISubscriber sub : subs) 
+        {
+            sub.getAlert(change, infoCode);    
+        }    
     }
 
     @Override
-    public void unsubscribe(ISubscriber subscriber) 
+    public void addSubsriber(ISubscriber subscriber) 
     {
-        this.subscribers.remove(subscriber);
+        subs.add(subscriber);
     }
 
     @Override
-    /**
-     * @apiNote CODE LIST: 
-     * 0 -> Team selection has been updated
-     * 1 -> Position selection has been updated
-     */
-    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
+    public void removeSubscriber(ISubscriber subscriber) 
     {
-        for(ISubscriber i : subscribers)
-            i.recieveUpdate(change, code);
+        subs.remove(subscriber);
     }
 
     @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    public void getAlert(Object change, InfoCode infoCode) 
     {
-        for (ISubscriber iSubscriber : subscribers) 
-            iSubscriber.recieveUpdate(change);    
+        if(infoCode == InfoCode.TEAM_CHANGE)
+        {
+            this.currentTeam = (String) change;
+            System.out.println(currentTeam);
+        }
+
+        alert(change, infoCode);
     }
 
     @Override
-    public void recieveUpdate(Object change) 
+    public void subscribe(ISubscribable subscribable) 
     {
-        this.teamChoice.addItem((String) change);
-        this.repaint();
-        this.revalidate();
+        subscribable.addSubsriber(this);
     }
 
     @Override
-    public void recieveUpdate(Object change, int code) 
+    public void unsubscribe(ISubscribable subscribable) 
     {
-        recieveUpdate(change);
+        subscribable.addSubsriber(this);
     }
 
-    @Override
-    public void subscribeTo(ISubscribable subscribable) 
-    {
-        subscribable.subscribe(this);
-        
-    }   
+    
 }

@@ -1,25 +1,36 @@
 package Graphics;
 
-import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
-import Controllers.SqlControler;
-import Members.Pitcher;
+import Controllers.SqlController;
+import MembersDTO.Catcher;
+import MembersDTO.Infielder;
+import MembersDTO.InfoCode;
+import MembersDTO.Outfielder;
+import MembersDTO.Pitcher;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
 
 import java.awt.*;
 
-public class AddPlayerDialog extends JDialog
+public class AddPlayerDialog extends JDialog implements ISubscribable
 {
     private String position;
     private String teamChoice;
     JTable emptyTable = new JTable();
+    ArrayList<ISubscriber> subs;
+
+    private Pitcher pitcher;
+    private Catcher catcher;
+    private Infielder infielder;
+    private Outfielder outfielder;
 
     private final String[] pitchingTableColumnNames = 
     {
         "Player",
-        "Team",
         "IP",
         "H",
         "R",
@@ -40,7 +51,6 @@ public class AddPlayerDialog extends JDialog
     private final String[] catchingTableColumnNames = 
     {
         "Player",
-        "Team",
         "GP",
         "GS",
         "IP",
@@ -60,7 +70,6 @@ public class AddPlayerDialog extends JDialog
     private final String[] infielderTableColumnNames = 
     {
         "Player",
-        "Team",
         "GP",
         "GS",
         "IP",
@@ -80,7 +89,6 @@ public class AddPlayerDialog extends JDialog
     private final String[] outfielderTableColumnNames = 
     {
         "Player",
-        "Team",
         "GP",
         "GS",
         "IP",
@@ -99,12 +107,12 @@ public class AddPlayerDialog extends JDialog
 
     public AddPlayerDialog(String team, String position)
     {
+        subs = new ArrayList<>();
         this.teamChoice = team;
         this.position = position;
-        SqlControler connectionDriver = new SqlControler();
+        SqlController connectionDriver = new SqlController();
         DefaultTableModel model = new DefaultTableModel();
         JButton confButton = new JButton("Confirm");
-        this.teamChoice = team;
 
         try
         {
@@ -152,22 +160,21 @@ public class AddPlayerDialog extends JDialog
             {
 
                 var name = emptyTable.getModel().getValueAt(1, 0).toString();
-                var teamName = emptyTable.getModel().getValueAt(1, 1).toString();
-                var inningsPitched = Double.parseDouble(emptyTable.getModel().getValueAt(1, 2).toString());
-                var hits = Double.parseDouble(emptyTable.getModel().getValueAt(1, 3).toString());
-                var runs = Double.parseDouble(emptyTable.getModel().getValueAt(1, 4).toString());
-                var earnedRuns = Double.parseDouble(emptyTable.getModel().getValueAt(1, 5).toString());
-                var walks = Double.parseDouble(emptyTable.getModel().getValueAt(1, 6).toString());
-                var strikeouts = Double.parseDouble(emptyTable.getModel().getValueAt(1, 7).toString());
-                var homeruns = Double.parseDouble(emptyTable.getModel().getValueAt(1, 8).toString());
-                var saves = Double.parseDouble(emptyTable.getModel().getValueAt(1, 9).toString());
-                var era = Double.parseDouble(emptyTable.getModel().getValueAt(1, 10).toString());
-                var whip = Double.parseDouble(emptyTable.getModel().getValueAt(1, 11).toString());
-                var isInjured = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 12).toString());
-                var isSuspended = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 13).toString());
-                var injury = emptyTable.getModel().getValueAt(1, 14).toString();
-                var suspension = emptyTable.getModel().getValueAt(1, 15).toString();
-                var number = emptyTable.getModel().getValueAt(1, 16).toString();
+                var inningsPitched = Double.parseDouble(emptyTable.getModel().getValueAt(1, 1).toString());
+                var hits = Double.parseDouble(emptyTable.getModel().getValueAt(1, 2).toString());
+                var runs = Double.parseDouble(emptyTable.getModel().getValueAt(1, 3).toString());
+                var earnedRuns = Double.parseDouble(emptyTable.getModel().getValueAt(1, 4).toString());
+                var walks = Double.parseDouble(emptyTable.getModel().getValueAt(1, 5).toString());
+                var strikeouts = Double.parseDouble(emptyTable.getModel().getValueAt(1, 6).toString());
+                var homeruns = Double.parseDouble(emptyTable.getModel().getValueAt(1, 7).toString());
+                var saves = Double.parseDouble(emptyTable.getModel().getValueAt(1, 8).toString());
+                var era = Double.parseDouble(emptyTable.getModel().getValueAt(1, 9).toString());
+                var whip = Double.parseDouble(emptyTable.getModel().getValueAt(1, 10).toString());
+                var isInjured = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 11).toString());
+                var isSuspended = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 12).toString());
+                var injury = emptyTable.getModel().getValueAt(1, 13).toString();
+                var suspension = emptyTable.getModel().getValueAt(1, 14).toString();
+                var number = emptyTable.getModel().getValueAt(1, 15).toString();
 
                 int isInjuredBit = 0;
                 int isSuspendedBit = 0;
@@ -177,16 +184,19 @@ public class AddPlayerDialog extends JDialog
                 if(isSuspended == true)
                     isSuspendedBit = 1;    
 
-                connectionDriver.makePitcher(new Pitcher(
-                    name, teamName, inningsPitched, hits, runs, earnedRuns, walks, strikeouts,
+                pitcher = new Pitcher(
+                    name, this.teamChoice, inningsPitched, hits, runs, earnedRuns, walks, strikeouts,
                     homeruns, saves, era, whip, isInjuredBit, isSuspendedBit, injury, suspension, number, teamChoice
-                ));
+                );
+
+                connectionDriver.makePitcher(pitcher);
+                this.alert(pitcher, InfoCode.NEW_PITCHER);
+
+                this.dispose();
             }
         });
         
-        HelpBar menuBar = new HelpBar();
-
-        this.setJMenuBar(menuBar);
+        this.setJMenuBar(new Navbar(position));
         this.setLayout(new BorderLayout());
         this.setTitle("Player Creation Wizard");
         this.setVisible(true);
@@ -199,5 +209,44 @@ public class AddPlayerDialog extends JDialog
         helperPanel.add(confButton);
 
         this.add(helperPanel, BorderLayout.SOUTH);
+    }
+
+    public Pitcher getPitcher()
+    {
+        return this.pitcher;
+    }
+
+    public Catcher getCatcher()
+    {
+        return this.catcher;
+    }
+
+    public Infielder getInfielder()
+    {
+        return this.infielder;
+    }
+
+    public Outfielder getOutfielder()
+    {
+        return this.outfielder;
+    }
+
+    @Override
+    public void alert(Object change, InfoCode infoCode) 
+    {
+        for(ISubscriber sub : subs)
+            sub.getAlert(change, infoCode);
+    }
+
+    @Override
+    public void addSubsriber(ISubscriber subscriber) 
+    {
+        this.subs.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) 
+    {
+        this.subs.remove(subscriber);
     }
 }

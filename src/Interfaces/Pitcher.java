@@ -4,7 +4,7 @@ import java.util.List;
 
 import Misc.Stat;
 
-public interface IPlayer 
+public interface Pitcher 
 {
     /**
      * @param stats What stats were recorded during the game:

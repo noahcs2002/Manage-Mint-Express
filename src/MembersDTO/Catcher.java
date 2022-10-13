@@ -1,10 +1,10 @@
-package Members;
+package MembersDTO;
 
-import Interfaces.IPlayer;
+import Interfaces.Pitcher;
 import java.util.List;
 import Misc.Stat;
 
-public class Catcher implements IPlayer
+public class Catcher implements Pitcher
 {
     public String name;
     public String team;

@@ -4,18 +4,21 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import Controllers.SqlController;
+import MembersDTO.InfoCode;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
 
-import Controllers.SqlControler;
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
 
-public class InformationPanel extends JPanel implements ISubscriber
+public class InformationPanel extends JPanel implements ISubscribable, ISubscriber
 {
     JTable informationTable;
-    SqlControler connectionDriver = new SqlControler();
+    SqlController connectionDriver = new SqlController();
 
     private String currentPositionSelection;
     private String currentTeamSelection;
+
+    ArrayList<ISubscriber> subs = new ArrayList<>();
 
     private final String[] pitchingTableColumnNames = 
     {
@@ -126,48 +129,7 @@ public class InformationPanel extends JPanel implements ISubscriber
         }
     }
 
-    @Override
-    public void recieveUpdate(Object change) 
-    {
-            DefaultTableModel tableModel = new DefaultTableModel(pitchingTableColumnNames, 0);
-
-            this.informationTable.setModel(tableModel);
-            
-            ArrayList<Object[]> results = connectionDriver.getPitchers(change.toString());
-
-            tableModel.addRow(pitchingTableColumnNames);
-
-            for (Object[] objects : results) 
-                tableModel.addRow(objects);    
-    }
-
-    @Override
-    public void recieveUpdate(Object change, int code) 
-    {
-        // 0 -> team change
-        // 1 -> position change
-        
-        switch(code) 
-        {
-            case 0 :
-
-                currentTeamSelection = change.toString();
-                updateInformation(currentTeamSelection, currentPositionSelection);
-
-            break;
-
-            case 1:
-            
-                currentPositionSelection = change.toString();
-                updateInformation(currentTeamSelection, currentPositionSelection);
-
-            break;
-
-            default :
-                System.out.println("Unknown code handled in InformationPanel: \nCode: " + code );
-            break;
-        }        
-    }
+   
 
     public void updateInformation(String team, String position)
     {
@@ -184,6 +146,9 @@ public class InformationPanel extends JPanel implements ISubscriber
 
                 for (Object[] objects : results) 
                     tableModel.addRow(objects); 
+
+                this.repaint();
+                this.revalidate();
             break;
 
             case "Catchers" :
@@ -194,6 +159,9 @@ public class InformationPanel extends JPanel implements ISubscriber
 
                 for (Object[] objects : results) 
                     tableModel.addRow(objects); 
+                
+                this.repaint();
+                this.revalidate();
             break;
 
             case "Infielders" :
@@ -204,6 +172,9 @@ public class InformationPanel extends JPanel implements ISubscriber
 
                 for (Object[] objects : results) 
                     tableModel.addRow(objects); 
+
+                this.repaint();
+                this.revalidate();
             break;
 
             case "Outfielders" :
@@ -214,13 +185,60 @@ public class InformationPanel extends JPanel implements ISubscriber
 
                 for (Object[] objects : results) 
                     tableModel.addRow(objects); 
+
+                this.repaint();
+                this.revalidate();
             break;
         }
     }
 
     @Override
-    public void subscribeTo(ISubscribable subscribable) {
-        // TODO Auto-generated method stub
-        
+    public void getAlert(Object change, InfoCode infoCode) 
+    {
+        switch(infoCode)
+        {
+            case TEAM_CHANGE : 
+                updateInformation((String)change, currentPositionSelection);
+            break;
+
+            case POSITION_CHANGE :
+                updateInformation(currentTeamSelection, (String) change);
+            break;
+
+            case NEW_PITCHER, NEW_CATCHER, NEW_INFIELDER, NEW_OUTFIELDER :
+                updateInformation(currentTeamSelection, currentPositionSelection);
+            break;
+        }
+    }
+
+    @Override
+    public void subscribe(ISubscribable subscribable) 
+    {
+        subscribable.addSubsriber(this);
+    }
+
+    @Override
+    public void unsubscribe(ISubscribable subscribable) 
+    {
+        subscribable.removeSubscriber(this);
+    }
+
+    @Override
+    public void alert(Object change, InfoCode infoCode) 
+    {
+        for(ISubscriber sub : subs)
+            sub.getAlert(change, infoCode);
+    }
+
+    @Override
+    public void addSubsriber(ISubscriber subscriber) 
+    {
+        this.subs.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) 
+    {
+        this.subs.remove(subscriber);
     }
 }

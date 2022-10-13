@@ -5,5 +5,5 @@ import Interfaces.*;
 
 public class Team implements ITeam
 {
-    List<IPlayer> roster;
+    List<Pitcher> roster;
 }

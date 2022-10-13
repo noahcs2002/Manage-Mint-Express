@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Members.Catcher;
-import Members.Pitcher;
+import MembersDTO.Catcher;
+import MembersDTO.Pitcher;
 
 public class SqlController 
 {
