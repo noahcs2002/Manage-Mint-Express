@@ -1,11 +1,10 @@
-package Members;
+package MembersDTO;
 
 import java.util.List;
-import Interfaces.IPlayer;
 import Misc.Stat;
 
 @SuppressWarnings("unused")
-public class Pitcher implements IPlayer
+public class Pitcher
 {
     public String name;
     public String team;
@@ -65,29 +64,9 @@ public class Pitcher implements IPlayer
         this.team = team;
     }
 
-    @Override
-    public void putOnInjuredList(String message) 
+    public String toString()
     {
-        this.isInjured = 1;
-        this.injuredReason = message;
+        return this.name;
     }
-
-    @Override
-    public void putOnSuspensionList(String message) 
-    {
-        this.isSuspended = 1;
-        this.suspendedReason = message;
-    }
-
-    @Override
-    public void recordGame(List<Stat> stats) 
-    {
-        
-    }
-
-    @Override
-    public void setup() 
-    {
-        
-    }
+    
 }

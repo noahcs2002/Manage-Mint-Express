@@ -1,17 +1,14 @@
 package Graphics;
 
 import javax.swing.*;
-
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
-
+import MembersDTO.InfoCode;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
 import java.awt.*;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
-
-public class Navbar extends JMenuBar implements ISubscribable, ISubscriber
+public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 {
     ArrayList<ISubscriber> subs;
     private String currentTeam;
@@ -25,13 +22,10 @@ public class Navbar extends JMenuBar implements ISubscribable, ISubscriber
     JMenuItem infielder = new JMenuItem("Infielder");
     JMenuItem outfielder = new JMenuItem("Outfielder");
 
-    
-    
-
     JMenuItem faq = new JMenuItem("FAQ's");
     JMenuItem howToUse = new JMenuItem("How to use");
     JMenuItem documentation = new JMenuItem("Docs");
-    private String uri = "https://github.com/noahcs2002/Mangage-Mint-Express";
+    private final String uri = "https://github.com/noahcs2002/Mangage-Mint-Express";
 
     public Navbar(String currentTeam)
     {
@@ -53,7 +47,7 @@ public class Navbar extends JMenuBar implements ISubscribable, ISubscriber
 
         addTeam.addActionListener(e -> 
         {   
-            new AddTeamDialog(this);
+            
         });
 
         faq.addActionListener(e -> 
@@ -73,7 +67,6 @@ public class Navbar extends JMenuBar implements ISubscribable, ISubscriber
             JList<String> list = new JList<>(faqs);
 
             faqDialog.add(list);
-
 
             faqDialog.setLocationRelativeTo(null);
             faqDialog.setSize(500,150);
@@ -103,100 +96,76 @@ public class Navbar extends JMenuBar implements ISubscribable, ISubscriber
 
         pitcher.addActionListener(e -> 
         {
-            new AddPlayerDialog(  this.currentTeam, "Pitchers", this);
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Pitchers");
+            
+            this.subscribe(dialog);
+
             System.out.println(this.currentTeam);
         });
 
         catcher.addActionListener(e -> 
         {
-            new AddPlayerDialog(this.currentTeam, "Catchers", this);
+            // new AddPlayerDialog(this.currentTeam, "Catchers", this);
             System.out.println(this.currentTeam);
         });
 
         infielder.addActionListener(e -> 
         {
-            new AddPlayerDialog(this.currentTeam, "Infielders", this);
+            // new AddPlayerDialog(this.currentTeam, "Infielders", this);
             System.out.println(this.currentTeam);
         });
 
         outfielder.addActionListener(e -> 
         {
-            new AddPlayerDialog(this.currentTeam,"Outfielders", this);
+            // new AddPlayerDialog(this.currentTeam,"Outfielders", this);
             System.out.println(this.currentTeam);
         });
     }
 
     @Override
-    public void subscribe(ISubscriber subscriber) 
+    public void alert(Object change, InfoCode infoCode) 
     {
-        subs.add(subscriber);        
-    }
-
-    @Override
-    public void unsubscribe(ISubscriber subscriber)
-    {
-        subs.remove(subscriber);        
-    }
-
-    @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
-    {
-        for (ISubscriber iSubscriber : subscribers) 
+        for (ISubscriber sub : subs) 
         {
-             iSubscriber.recieveUpdate(change, code);
+            sub.getAlert(change, infoCode);    
         }    
     }
 
     @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change) 
+    public void addSubsriber(ISubscriber subscriber) 
     {
-        for (ISubscriber iSubscriber : subscribers) 
+        subs.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) 
+    {
+        subs.remove(subscriber);
+    }
+
+    @Override
+    public void getAlert(Object change, InfoCode infoCode) 
+    {
+        if(infoCode == InfoCode.TEAM_CHANGE)
         {
-            iSubscriber.recieveUpdate(change);
+            this.currentTeam = (String) change;
+            System.out.println(currentTeam);
         }
+
+        alert(change, infoCode);
     }
 
     @Override
-    public void recieveUpdate(Object change) 
+    public void subscribe(ISubscribable subscribable) 
     {
-        return;        
-    }
-
-    /**
-     * @apiNote CODE LIST:
-     * 0 -> new team
-     * 1 -> new player
-     * 123 -> team change
-     * 1452316 -> new pitcher made
-     * 145233 -> new catcher made
-     * 1452310 -> new infielder made
-     * 1452315 -> new outfielder made
-     * @param change change to observe
-     * @param code code to determine the change
-     */
-    @Override
-    public void recieveUpdate(Object change, int code) 
-    {
-        switch(code)
-        {
-            case 0, 1452316, 145233, 1452310, 1452315 :
-                sendNotification(subs, change, code);
-            break;
-
-            case 1 :
-
-            break;
-
-            case 123 :
-                this.currentTeam = (String) change;
-                System.out.println(currentTeam);
-            break;
-        }        
+        subscribable.addSubsriber(this);
     }
 
     @Override
-    public void subscribeTo(ISubscribable subscribable) 
+    public void unsubscribe(ISubscribable subscribable) 
     {
-        subscribable.subscribe(this);        
+        subscribable.addSubsriber(this);
     }
+
+    
 }

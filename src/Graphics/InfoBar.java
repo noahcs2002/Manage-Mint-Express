@@ -1,29 +1,42 @@
 package Graphics;
 
 import javax.swing.*;
-import Controllers.SqlControler;
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
+
+import Controllers.SqlController;
+import MembersDTO.InfoCode;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
+
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class InfoBar extends JPanel implements ISubscribable, ISubscriber
+public class InfoBar extends JPanel implements ISubscriber, ISubscribable
 {
-        
+    private String team;
+    private String pos;    
+
+
     private String managerName = "Noah";
     JLabel welcomeLabel = new JLabel("Welcome!");
     JComboBox<String> teamChoice = new JComboBox<>();
     JComboBox<String> positionChoice = new JComboBox<>();
     JLabel managerNameLabel = new JLabel("Current User: " + managerName);
     JLabel currentTeamLabel = new JLabel("Currently Managing: ");
-    SqlControler connector;
+    SqlController connector;
     ArrayList<ISubscriber> subscribers;
 
-    public InfoBar()
+    /**
+     * 
+     * @param team Default team
+     * @param pos Default pos
+     */
+    public InfoBar(String team, String pos)
     {
+        this.team = team;
+        this.pos = pos;
+
         subscribers = new ArrayList<>();
-        connector = new SqlControler();
+        connector = new SqlController();
         String[] positions = 
         {
             "Pitchers",
@@ -51,19 +64,17 @@ public class InfoBar extends JPanel implements ISubscribable, ISubscriber
 
         positionChoice.addActionListener(e -> 
         {
-            sendNotification(subscribers, positionChoice.getSelectedItem().toString(), 1);  
+            this.pos = positionChoice.getSelectedItem().toString();
+            alert(this.pos, InfoCode.POSITION_CHANGE);
         });
 
         teamChoice.addActionListener(e -> 
         {
             currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
-            sendNotification(subscribers, teamChoice.getSelectedItem().toString(), 123);  
+            this.team = teamChoice.getSelectedItem().toString();
+            alert(this.teamChoice.getSelectedItem().toString(), InfoCode.TEAM_CHANGE);
         });
        
-        
-
-             
-
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
@@ -84,64 +95,48 @@ public class InfoBar extends JPanel implements ISubscribable, ISubscriber
     }
 
     @Override
-    public void subscribe(ISubscriber subscriber) 
+    public void alert(Object change, InfoCode infoCode) 
     {
-        this.subscribers.add(subscriber);
-    }
-
-    @Override
-    public void unsubscribe(ISubscriber subscriber) 
-    {
-        this.subscribers.remove(subscriber);
-    }
-
-    @Override
-    /**
-     * @apiNote CODE LIST: 
-     * 0 -> Team selection has been updated
-     * 1 -> Position selection has been updated
-     */
-    public void sendNotification(List<ISubscriber> subscribers, Object change, int code) 
-    {
-        for(ISubscriber i : subscribers)
-            i.recieveUpdate(change, code);
-    }
-
-    @Override
-    public void sendNotification(List<ISubscriber> subscribers, Object change) 
-    {
-        for (ISubscriber iSubscriber : subscribers) 
-            iSubscriber.recieveUpdate(change);    
-    }
-
-    @Override
-    public void recieveUpdate(Object change) 
-    {
-        this.teamChoice.addItem((String) change);
-        this.repaint();
-        this.revalidate();
-    }
-
-    @Override
-    public void recieveUpdate(Object change, int code) 
-    {
-        switch(code)
+        for (ISubscriber sub : subscribers) 
         {
-            case 0 :
-                this.recieveUpdate(change);
-            break;
+            sub.getAlert(change, infoCode);    
+        }
+    }
 
-            case 1452316, 145233, 1452310, 1452315 :
-                this.repaint();
-                this.revalidate();
+    @Override
+    public void addSubsriber(ISubscriber subscriber) 
+    {
+        subscribers.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) 
+    {
+        subscribers.remove(subscriber);
+    }
+
+    @Override
+    public void getAlert(Object change, InfoCode infoCode) 
+    {
+        switch(infoCode)
+        {
+            case TEAM_CHANGE :
+                this.team = (String) change;
             break;
         }
     }
 
     @Override
-    public void subscribeTo(ISubscribable subscribable) 
+    public void subscribe(ISubscribable subscribable) 
     {
-        subscribable.subscribe(this);
-        
-    }   
+        subscribable.addSubsriber(this);
+    }
+
+    @Override
+    public void unsubscribe(ISubscribable subscribable) 
+    {
+        subscribable.removeSubscriber(this);
+    }
+
+   
 }

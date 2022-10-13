@@ -3,29 +3,28 @@ package Graphics;
 import java.awt.*;
 import javax.swing.*;
 
-import Interfaces.ISubscribable;
-import Interfaces.ISubscriber;
-
-
-public class FancyFrame extends JFrame implements ISubscriber
+public class FancyFrame extends JFrame
 {
     JPanel mainPanel = new JPanel();
-    InfoBar infoBar = new InfoBar();
-    Navbar navbar = new Navbar("L.A. Dodgers");
-
-
+    InfoBar infoBar = new InfoBar("L.A. Dodgers", "Pitchers");
+    Navbar navbar = new Navbar("L.A. Dodgers");    
+    
     public FancyFrame()
     {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(infoBar, BorderLayout.NORTH);
         InformationPanel infoPanel = new InformationPanel("L.A. Dodgers");
 
-        //pitching panel has subscribed to changes from the navbar
-        infoBar.subscribe(infoPanel);
-        navbar.subscribe(infoBar);
         infoBar.subscribe(navbar);
+        navbar.subscribe(infoBar);
+        
+        infoPanel.subscribe(navbar);
+        navbar.subscribe(infoPanel);
 
-
+        infoPanel.subscribe(infoBar);
+        infoBar.subscribe(infoPanel);
+        
+    
         mainPanel.add(infoPanel, BorderLayout.CENTER);
 
         this.add(mainPanel);
@@ -41,23 +40,5 @@ public class FancyFrame extends JFrame implements ISubscriber
     }
 
 
-    @Override
-    public void recieveUpdate(Object change) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
-    @Override
-    public void recieveUpdate(Object change, int code) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
-    @Override
-    public void subscribeTo(ISubscribable subscribable) {
-        // TODO Auto-generated method stub
-        
-    }
+   
 }
