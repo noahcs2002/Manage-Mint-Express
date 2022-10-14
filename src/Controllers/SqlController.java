@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import MembersDTO.Catcher;
+import MembersDTO.Infielder;
+import MembersDTO.Outfielder;
 import MembersDTO.Pitcher;
 
 public class SqlController 
@@ -162,9 +164,10 @@ public class SqlController
                     set.getDouble("DoublePlays"),
                 
                     set.getBoolean("IsInjured"),
-                    set.getString("InjuredReason"),
+                    set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
-                    set.getString("SuspendedReason"),
+                    set.getString("Suspension"),
+                    set.getString("Number")
                 });
             }
 
@@ -200,7 +203,7 @@ public class SqlController
                     set.getDouble("GamesStarted"),
                     set.getDouble("InningsPlayed"),
                     set.getDouble("TotalChances"),
-                    set.getDouble("Putouts"),
+                    set.getDouble("PutOuts"),
                     set.getDouble("Assists"),
                     set.getDouble("Errors"),
                     set.getDouble("DoublePlays"),
@@ -208,7 +211,7 @@ public class SqlController
                     set.getBoolean("IsInjured"),
                     set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
-                    set.getString("SuspendedReason"),
+                    set.getString("Suspension"),
 
                     set.getString("Position"),
                     set.getString("Number")
@@ -256,7 +259,7 @@ public class SqlController
                     set.getBoolean("IsInjured"),
                     set.getString("Injury"),
                     set.getBoolean("IsSuspended"),
-                    set.getString("SuspendedReason"),
+                    set.getString("Suspension"),
                     set.getString("Position"),
                     set.getString("Number"),
                 });
@@ -300,18 +303,20 @@ public class SqlController
     public void makeCatcher(Catcher catcher)
     {
         final String sqlString = "INSERT INTO CatchingStaff ("
-            + "Player, Team, GamesPlayed, GamesStarted,"
-            + "InningsPlayed, TotalChances, PutOuts, Assists, DoublePlays,"
-            + "IsInjured, Injury, IsSuspended, Suspension, Position, Number )"
+            + "Name, Team, GamesPlayed, GamesStarted,"
+            + "InningsPlayed, TotalChances, PutOuts, Assists, Errors, DoublePlays,"
+            + "IsInjured, Injury, IsSuspended, Suspension, Number )"
             + "VALUES ( '" 
             + catcher.name + "', '" + catcher.team + "', "
             + catcher.gamesPlayed+ ", " + catcher.gamesStarted + ", "
             + catcher.inningsPlayed + ", " + catcher.totalChances + ", "
-            + catcher.putOuts + ", " + catcher.assists + ", "
-            + catcher.doublePlays + ", " + catcher.isInjured + ", "
-            + catcher.isInjured + ", " + catcher.injury + ", "
-            + catcher.isSuspended + ", " + catcher.suspension + ", "
-            + catcher.position + "," + catcher.number + ");";
+            + catcher.putOuts + ", " + catcher.assists + ", " + catcher.errors + ", "
+            + catcher.doublePlays + ", " + catcher.isInjured + ", '"
+            + catcher.injury + "', "
+            + catcher.isSuspended + ", '" + catcher.suspension + "', "
+            + catcher.number + ");";
+
+        System.out.println(sqlString);
 
         try(Statement statement = conn.createStatement())
         {
@@ -319,7 +324,53 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new pitcher");
+            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+        }
+    }
+
+    public void makeInfielder(Infielder infielder)
+    {
+        final String sqlString = "INSERT INTO Infielders VALUES('"
+        + infielder.name + "', '" + infielder.team + "', " + infielder.gamesPlayed
+        + ", " + infielder.gamesStarted + ", " + infielder.inningsPlayed 
+        + ", " + infielder.totalChances + ", " + infielder.putOuts + ", " + infielder.assists
+        + ", " + infielder.errors + ", " + infielder.doublePlaysTurned + ", " + infielder.isInjured
+        + ", '" + infielder.injury + "', " + infielder.isSuspended + ", '" + infielder.suspension 
+        + "', '" + infielder.position + "', " + infielder.number
+        + ");";
+
+        System.out.println(sqlString);
+
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+        }
+    }
+
+    public void makeOutfielder(Outfielder infielder)
+    {
+        final String sqlString = "INSERT INTO Outfielders VALUES('"
+        + infielder.name + "', '" + infielder.team + "', " + infielder.gamesPlayed
+        + ", " + infielder.gamesStarted + ", " + infielder.inningsPlayed 
+        + ", " + infielder.totalChances + ", " + infielder.putOuts + ", " + infielder.assists
+        + ", " + infielder.errors + ", " + infielder.doublePlaysTurned + ", " + infielder.isInjured
+        + ", '" + infielder.injury + "', " + infielder.isSuspended + ", '" + infielder.suspension 
+        + "', '" + infielder.position + "', " + infielder.number
+        + ");";
+
+        System.out.println(sqlString);
+
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new Catcher\n" + ex.getMessage());
         }
     }
 

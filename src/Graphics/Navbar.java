@@ -105,19 +105,27 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
         catcher.addActionListener(e -> 
         {
-            // new AddPlayerDialog(this.currentTeam, "Catchers", this);
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Catchers");
+            
+            this.subscribe(dialog);
+
             System.out.println(this.currentTeam);
         });
 
         infielder.addActionListener(e -> 
         {
-            // new AddPlayerDialog(this.currentTeam, "Infielders", this);
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Infielders");
+            
+            this.subscribe(dialog);
+
             System.out.println(this.currentTeam);
         });
 
         outfielder.addActionListener(e -> 
         {
-            // new AddPlayerDialog(this.currentTeam,"Outfielders", this);
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
+            this.subscribe(dialog);
+
             System.out.println(this.currentTeam);
         });
     }

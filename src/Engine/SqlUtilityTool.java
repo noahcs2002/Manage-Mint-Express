@@ -16,7 +16,7 @@ public class SqlUtilityTool
           while(currentLine != null)
           {
             result += currentLine;
-            result += " ";
+            result += "\n";
             currentLine = reader.readLine();
           }
 

@@ -1,26 +1,21 @@
 -- Used to clear or scaffold the necessary tables -- 
 
-if object_id ('CatchingStaff' , 'U') is not null
-	drop table CatchingStaff;
-go
+IF object_id ('CatchingStaff' , 'U') IS NOT NULL
+	DROP TABLE CatchingStaff;
 
-if object_id ('Infielders' , 'U') is not null
-	drop table Infielders;
-go
+IF object_id ('Infielders' , 'U') IS NOT NULL
+	DROP TABLE Infielders;
 
-if object_id ('Outfielders' , 'U') is not null
-	drop table Outfielders;
-go
+IF object_id ('Outfielders' , 'U') IS NOT NULL
+	DROP TABLE Outfielders;
 
-if object_id ('PitchingStaff' , 'U') is not null
-	drop table PitchingStaff;
-go
+IF object_id ('PitchingStaff' , 'U') IS NOT NULL
+	DROP TABLE PitchingStaff;
 
-if object_id ('Teams' , 'U') is not null
-	drop table Teams;
-go
+IF object_id ('Teams' , 'U') IS NOT NULL
+	DROP TABLE Teams;
 
-create table CatchingStaff (
+CREATE TABLE CatchingStaff (
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -39,7 +34,7 @@ create table CatchingStaff (
 	Number nvarchar(MAX)
 );
 
-create table Infielders (
+CREATE TABLE Infielders (
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -58,7 +53,7 @@ create table Infielders (
 	Number nvarchar(MAX)
 );
 
-create table Outfielders (
+CREATE TABLE Outfielders (
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -77,7 +72,7 @@ create table Outfielders (
 	Number nvarchar(MAX)
 );
 
-create table PitchingStaff (
+CREATE TABLE PitchingStaff (
 	Player nvarchar(MAX),
 	Team nvarchar(MAX),
 	InningsPitched decimal(18,0),
@@ -97,7 +92,7 @@ create table PitchingStaff (
 	Number nvarchar(MAX)
 );
 
-create table Teams (
+CREATE TABLE Teams (
 	Name nvarchar(MAX),
 	Rank decimal(18, 0)
-)
+);

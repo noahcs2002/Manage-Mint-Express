@@ -14,10 +14,11 @@ public class Catcher implements Pitcher
     public double totalChances;
     public double putOuts;
     public double assists;
+    public double errors;
     public double doublePlays;
-    public boolean isInjured;
+    public int isInjured;
     public String injury;
-    public boolean isSuspended;
+    public int isSuspended;
     public String suspension;
     public String position;
     public String number;
@@ -31,12 +32,12 @@ public class Catcher implements Pitcher
         double totalChances,
         double putOuts,
         double assists,
+        double errors,
         double doublePlays,
-        boolean isInjured,
+        int isInjured,
         String injury,
-        boolean isSuspended,
+        int isSuspended,
         String suspension,
-        String position,
         String number
     )
     {
@@ -49,12 +50,12 @@ public class Catcher implements Pitcher
         this.totalChances = totalChances;
         this.putOuts = putOuts;
         this.assists = assists;
+        this.errors = errors;
         this.doublePlays = doublePlays;
         this.isInjured = isInjured;
         this.injury = injury;
         this.isSuspended = isSuspended;
         this.suspension = suspension;
-        this.position = position;
         this.number = number;
     }
 

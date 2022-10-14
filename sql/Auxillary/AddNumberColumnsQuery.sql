@@ -1,4 +1,4 @@
-alter table CatchingStaff add Number nvarchar(MAX);
-alter table Infielders add Number nvarchar(MAX);
-alter table Outfielders add Number nvarchar(MAX);
-alter table PitchingStaff add Number nvarchar(MAX);
+ALTER TABLE CatchingStaff ADD Number nvarchar(MAX);
+ALTER TABLE Infielders ADD Number nvarchar(MAX);
+ALTER TABLE Outfielders ADD Number nvarchar(MAX);
+ALTER TABLE PitchingStaff ADD Number nvarchar(MAX);

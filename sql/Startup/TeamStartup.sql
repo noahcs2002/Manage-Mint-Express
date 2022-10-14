@@ -1,8 +1,8 @@
-drop table Teams;
+DROP TABLE Teams;
 
-create table Teams (
+CREATE TABLE Teams (
 	Name nvarchar(MAX),
 	Rank decimal(18, 0)
 )
 
-insert into Teams values ('L.A. Dodgers', 1);
+INSERT INTO Teams VALUES ('L.A. Dodgers', 1);

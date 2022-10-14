@@ -1,20 +1,18 @@
 package Graphics;
 
-import javax.swing.*;
-
-import Controllers.SqlController;
-import MembersDTO.InfoCode;
 import Subscribers.ISubscribable;
+import Controllers.SqlController;
 import Subscribers.ISubscriber;
-
-import java.awt.*;
 import java.util.ArrayList;
+import MembersDTO.InfoCode;
+import javax.swing.*;
+import java.awt.*;
 
+@SuppressWarnings("unused")
 public class InfoBar extends JPanel implements ISubscriber, ISubscribable
 {
     private String team;
     private String pos;    
-
 
     private String managerName = "Noah";
     JLabel welcomeLabel = new JLabel("Welcome!");
@@ -26,7 +24,7 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
     ArrayList<ISubscriber> subscribers;
 
     /**
-     * 
+     * Construct a new information bar
      * @param team Default team
      * @param pos Default pos
      */
@@ -123,6 +121,8 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
             case TEAM_CHANGE :
                 this.team = (String) change;
             break;
+
+            default : break;
         }
     }
 
@@ -137,6 +137,4 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
     {
         subscribable.removeSubscriber(this);
     }
-
-   
 }

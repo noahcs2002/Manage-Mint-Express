@@ -41,16 +41,27 @@ public class Startup
     {
         try(Statement sql = conn.createStatement())
         {
+            String sqlString;
             if(!driver.isDbScaffolded())
             {
-                for (String path : paths) 
+                try
                 {
-                    String sqlString = SqlUtilityTool.extractSqlStringFromFile(new File(path));
+                    sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\Startup\\ResetQuery.sql"));
+                    System.out.println(sqlString);
                     sql.executeUpdate(sqlString);
-                }
+                    System.out.println("Line one ran");
 
-                System.out.println("DB SCAFFOLDED");
-                driver.scaffoldDb();
+                    sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\Startup\\TeamStartup.sql"));
+                    System.out.println(sqlString);
+                    sql.executeUpdate(sqlString);
+                    System.out.println("Line two ran");
+
+                    driver.scaffoldDb();
+                }
+                catch(Exception ex)
+                {
+                    System.out.println("Exception handled \n" + ex.getMessage());
+                }
             }
         } 
         catch (Exception ex)

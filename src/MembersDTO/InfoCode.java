@@ -7,5 +7,5 @@ public enum InfoCode
     NEW_PITCHER,
     NEW_CATCHER,
     NEW_INFIELDER,
-    NEW_OUTFIELDER
+    NEW_OUTFIELDER,
 }

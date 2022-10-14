@@ -50,7 +50,7 @@ public class AddPlayerDialog extends JDialog implements ISubscribable
 
     private final String[] catchingTableColumnNames = 
     {
-        "Player",
+        "Name",
         "GP",
         "GS",
         "IP",
@@ -63,7 +63,6 @@ public class AddPlayerDialog extends JDialog implements ISubscribable
         "Injury",
         "Sus.",
         "Suspension Reason",
-        "Pos.",
         "Number"
     };
 
@@ -191,6 +190,121 @@ public class AddPlayerDialog extends JDialog implements ISubscribable
 
                 connectionDriver.makePitcher(pitcher);
                 this.alert(pitcher, InfoCode.NEW_PITCHER);
+
+                this.dispose();
+            }
+
+            if(this.position.equals("Catchers"))
+            {
+                var name = emptyTable.getModel().getValueAt(1, 0).toString();
+                var gamesPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 1).toString());
+                var gamesStarted = Double.parseDouble(emptyTable.getModel().getValueAt(1, 2).toString());
+                var inningsPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 3).toString());
+                var totalChances = Double.parseDouble(emptyTable.getModel().getValueAt(1, 4).toString());
+                var putOuts = Double.parseDouble(emptyTable.getModel().getValueAt(1, 5).toString());
+                var assists = Double.parseDouble(emptyTable.getModel().getValueAt(1, 6).toString());
+                var errors = Double.parseDouble(emptyTable.getModel().getValueAt(1, 7).toString());
+                var doublePlaysTurned = Double.parseDouble(emptyTable.getModel().getValueAt(1, 8).toString());
+                var isInjured = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 9).toString());
+                var injury = emptyTable.getModel().getValueAt(1, 10).toString();
+                var isSuspended = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 11).toString());
+                var suspension = emptyTable.getModel().getValueAt(1, 12).toString();
+                var number = emptyTable.getModel().getValueAt(1, 13).toString();
+
+                int isInjuredBit = 0;
+                int isSuspendedBit = 0;
+
+                if(isInjured == true)
+                    isInjuredBit = 1;
+                if(isSuspended == true)
+                    isSuspendedBit = 1;    
+
+                catcher = new Catcher(
+                    name, this.teamChoice, gamesPlayed, gamesStarted,
+                    inningsPlayed, totalChances, putOuts, assists, errors,
+                    doublePlaysTurned, isInjuredBit, injury, isSuspendedBit, suspension,
+                    number
+                );
+
+                connectionDriver.makeCatcher(catcher);
+                this.alert(catcher, InfoCode.NEW_CATCHER);
+
+                this.dispose();
+            }
+            
+            if(this.position.equals("Infielders"))
+            {
+                var name = emptyTable.getModel().getValueAt(1, 0).toString();
+                var gamesPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 1).toString());
+                var gamesStarted = Double.parseDouble(emptyTable.getModel().getValueAt(1, 2).toString());
+                var inningsPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 3).toString());
+                var totalChances = Double.parseDouble(emptyTable.getModel().getValueAt(1, 4).toString());
+                var putOuts = Double.parseDouble(emptyTable.getModel().getValueAt(1, 5).toString());
+                var assists = Double.parseDouble(emptyTable.getModel().getValueAt(1, 6).toString());
+                var errors = Double.parseDouble(emptyTable.getModel().getValueAt(1, 7).toString());
+                var doublePlaysTurned = Double.parseDouble(emptyTable.getModel().getValueAt(1, 8).toString());
+                var isInjured = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 9).toString());
+                var injury = emptyTable.getModel().getValueAt(1, 10).toString();
+                var isSuspended = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 11).toString());
+                var suspension = emptyTable.getModel().getValueAt(1, 12).toString();
+                var pos = emptyTable.getModel().getValueAt(1, 13).toString();
+                var number = emptyTable.getModel().getValueAt(1, 14).toString();
+
+                int isInjuredBit = 0;
+                int isSuspendedBit = 0;
+
+                if(isInjured == true)
+                    isInjuredBit = 1;
+                if(isSuspended == true)
+                    isSuspendedBit = 1;    
+
+                infielder = new Infielder(
+                    name, this.teamChoice, gamesPlayed, gamesStarted,
+                    inningsPlayed, totalChances, putOuts, assists, errors,
+                    doublePlaysTurned, isInjuredBit, injury, isSuspendedBit,
+                    suspension, pos, number
+                );
+
+                connectionDriver.makeInfielder(infielder);
+                this.alert(infielder, InfoCode.NEW_INFIELDER);
+
+                this.dispose();
+            }
+            if(this.position.equals("Outfielders"))
+            {
+                var name = emptyTable.getModel().getValueAt(1, 0).toString();
+                var gamesPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 1).toString());
+                var gamesStarted = Double.parseDouble(emptyTable.getModel().getValueAt(1, 2).toString());
+                var inningsPlayed = Double.parseDouble(emptyTable.getModel().getValueAt(1, 3).toString());
+                var totalChances = Double.parseDouble(emptyTable.getModel().getValueAt(1, 4).toString());
+                var putOuts = Double.parseDouble(emptyTable.getModel().getValueAt(1, 5).toString());
+                var assists = Double.parseDouble(emptyTable.getModel().getValueAt(1, 6).toString());
+                var errors = Double.parseDouble(emptyTable.getModel().getValueAt(1, 7).toString());
+                var doublePlaysTurned = Double.parseDouble(emptyTable.getModel().getValueAt(1, 8).toString());
+                var isInjured = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 9).toString());
+                var injury = emptyTable.getModel().getValueAt(1, 10).toString();
+                var isSuspended = Boolean.parseBoolean(emptyTable.getModel().getValueAt(1, 11).toString());
+                var suspension = emptyTable.getModel().getValueAt(1, 12).toString();
+                var pos = emptyTable.getModel().getValueAt(1, 13).toString();
+                var number = emptyTable.getModel().getValueAt(1, 14).toString();
+
+                int isInjuredBit = 0;
+                int isSuspendedBit = 0;
+
+                if(isInjured == true)
+                    isInjuredBit = 1;
+                if(isSuspended == true)
+                    isSuspendedBit = 1;    
+
+                outfielder = new Outfielder(
+                    name, this.teamChoice, gamesPlayed, gamesStarted,
+                    inningsPlayed, totalChances, putOuts, assists, errors,
+                    doublePlaysTurned, isInjuredBit, injury, isSuspendedBit,
+                    suspension, pos, number
+                );
+
+                connectionDriver.makeOutfielder(outfielder);
+                this.alert(outfielder, InfoCode.NEW_OUTFIELDER);
 
                 this.dispose();
             }
