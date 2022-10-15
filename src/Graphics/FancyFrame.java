@@ -2,7 +2,6 @@ package Graphics;
 
 import java.awt.*;
 import javax.swing.*;
-
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -67,7 +66,4 @@ public class FancyFrame extends JFrame implements ISubscriber
     {
         subscribable.removeSubscriber(this);
     }
-
-
-   
 }
