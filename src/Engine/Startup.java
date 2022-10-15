@@ -8,12 +8,6 @@ import java.sql.DriverManager;
 
 public class Startup 
 {
-    private final String[] paths = 
-    {
-        "sql\\Startup\\TeamStartup.sql",
-        "sql\\Startup\\ResetQuery.sql"
-    };
-
     ConfigurationDriver driver = new ConfigurationDriver();
 
     private final String connectionString =  
@@ -21,8 +15,11 @@ public class Startup
 
     private Connection conn ;
 
-    public Startup()
+    private String teamOpt ;
+
+    public Startup(String teamName)
     {
+        teamOpt = teamName;
         try
         {
             conn = DriverManager.getConnection(connectionString);
@@ -36,6 +33,7 @@ public class Startup
         this.scaffoldDb();
         this.dispose();
     }
+
 
     public void scaffoldDb()
     {
@@ -51,7 +49,10 @@ public class Startup
                     sql.executeUpdate(sqlString);
                     System.out.println("Line one ran");
 
-                    sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\Startup\\TeamStartup.sql"));
+                    sqlString = "drop table Teams;" 
+                    + "create table Teams (Name nvarchar(MAX), Rank decimal(18,0) )"
+                    + "insert into Teams values ('" + teamOpt + "', 1);";
+
                     System.out.println(sqlString);
                     sql.executeUpdate(sqlString);
                     System.out.println("Line two ran");
