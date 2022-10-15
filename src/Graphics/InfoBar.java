@@ -19,8 +19,6 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
     JLabel welcomeLabel = new JLabel("Welcome!");
     JComboBox<String> teamChoice = new JComboBox<>();
     JComboBox<String> positionChoice = new JComboBox<>();
-    JLabel managerNameLabel = new JLabel("Current User: " + managerName);
-    JLabel currentTeamLabel = new JLabel("Currently Managing: ");
     SqlController connector;
     ArrayList<ISubscriber> subscribers;
 
@@ -59,7 +57,6 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
             System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n"+ex.getLocalizedMessage());
         }
 
-        currentTeamLabel.setText(currentTeamLabel.getText() + teamChoice.getSelectedItem().toString());
 
         positionChoice.addActionListener(e -> 
         {
@@ -81,8 +78,6 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
 
         this.add(centerRegionPanel, BorderLayout.CENTER);
 
-        this.add(managerNameLabel, BorderLayout.WEST);
-        this.add(currentTeamLabel, BorderLayout.NORTH);
     }
 
     @Override

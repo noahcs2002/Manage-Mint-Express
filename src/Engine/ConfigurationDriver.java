@@ -52,9 +52,5 @@ public class ConfigurationDriver
     public boolean isDbScaffolded()
     {
         return configLines.contains("startup_ran : true");
-    }
-
-
-
-    
+    }    
 }

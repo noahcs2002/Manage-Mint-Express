@@ -50,7 +50,7 @@ public class Startup
                     System.out.println("Line one ran");
 
                     sqlString = "drop table Teams;" 
-                    + "create table Teams (Name nvarchar(MAX), Rank decimal(18,0) )"
+                    + "create table Teams (Name nvarchar(MAX), Rank decimal(18,0) );"
                     + "insert into Teams values ('" + teamOpt + "', 1);";
 
                     System.out.println(sqlString);

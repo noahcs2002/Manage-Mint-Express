@@ -10,15 +10,18 @@ import Subscribers.ISubscriber;
 public class FancyFrame extends JFrame implements ISubscriber
 {
     JPanel mainPanel = new JPanel();
-    InfoBar infoBar = new InfoBar("L.A. Dodgers", "Pitchers");
-    Navbar navbar = new Navbar("L.A. Dodgers");    
+    InfoBar infoBar;
+    Navbar navbar; 
     
-    public FancyFrame()
+    public FancyFrame(String team)
     {
+        System.out.println(team);
         mainPanel.setLayout(new BorderLayout());
+        InformationPanel infoPanel = new InformationPanel(team);
+        infoBar = new InfoBar(team, "Pitchers");
+        navbar = new Navbar(team);
+        
         mainPanel.add(infoBar, BorderLayout.NORTH);
-        InformationPanel infoPanel = new InformationPanel("L.A. Dodgers");
-
         infoBar.subscribe(navbar);
         navbar.subscribe(infoBar);
         

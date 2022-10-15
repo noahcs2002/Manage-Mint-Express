@@ -105,7 +105,7 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
     public InformationPanel(String teamName)
     {
         currentPositionSelection = "Pitchers";
-        currentTeamSelection = "L.A. Dodgers";
+        currentTeamSelection = teamName;
         try
         {
             DefaultTableModel tableModel = new DefaultTableModel(pitchingTableColumnNames, 0);

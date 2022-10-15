@@ -3,6 +3,8 @@ import Graphics.*;
 import Graphics.Startup.StartupDialog;
 import java.awt.event.*;
 
+import Controllers.SqlController;
+
 /**
  * Main Driver class for Manage-Mint Express
  */
@@ -20,14 +22,14 @@ public class Driver
                 public void windowClosed(WindowEvent we)
                 {
                     new Startup(d.team);
-                    new FancyFrame();
+                    new FancyFrame(d.team);
                 }
             });
         }
 
         else
         {
-            new FancyFrame();
+            new FancyFrame(SqlController.getTeam());
         }
         
     }

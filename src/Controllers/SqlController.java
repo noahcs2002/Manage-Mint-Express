@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import MembersDTO.Catcher;
 import MembersDTO.Infielder;
 import MembersDTO.Outfielder;
@@ -372,6 +371,33 @@ public class SqlController
         {
             System.out.println("Exception making new Catcher\n" + ex.getMessage());
         }
+    }
+
+    public static String getTeam()
+    {
+            String connectionString = 
+            "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
+
+            try(Connection conn = DriverManager.getConnection(connectionString);
+                Statement statement = conn.createStatement();)
+            {
+                final String sqlString = "SELECT * FROM Teams";
+
+                ResultSet set = statement.executeQuery(sqlString);
+
+                String s = "";
+
+                if(set.next())
+                    s = set.getString("Name");
+
+                return s;
+            }
+            catch(Exception ex)
+            {
+                System.out.println("Exception getting team");
+                return null;
+            }
+
     }
 
     
