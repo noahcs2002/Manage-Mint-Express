@@ -60,21 +60,116 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         scheduling.add(scheduleGameItem);
         scheduling.add(viewScheduleItem);
 
-        teamManagement.add(addTeam);
-        teamManagement.add(removeTeam);
 
         this.add(help);
         this.add(addPlayer);
         this.add(scheduling);
         this.add(trading);
-        this.add(teamManagement);
 
-        addTeam.addActionListener(e -> 
-        {   
-            AddTeamDialog dialog = new AddTeamDialog();
+        faq.addActionListener(e -> 
+        {
+            JDialog faqDialog = new JDialog();
+            faqDialog.setTitle("FAQ's");
 
-            this.subscribe(dialog);
+            final String[] faqs = 
+            {
+                "Q. Who developed this? A. Noah Sternberg, a student at Murray State University.",
+                "Q. What was this developed for? A. A final project for an Advance Objects class.",
+                "Q. How long did this take? A. Too long.",
+                "Q. Will this ever get more features? A. I don't know.",
+                "Q. Why did you make ___ design choice? A. Because I'm bad at graphic design.",
+            };
+
+            JList<String> list = new JList<>(faqs);
+
+            faqDialog.add(list);
+
+            faqDialog.setLocationRelativeTo(null);
+            faqDialog.setSize(500,150);
+            faqDialog.setVisible(true);
         });
+
+        howToUse.addActionListener(e -> 
+        {
+
+        });
+
+        documentation.addActionListener(e -> 
+        {
+            if(Desktop.isDesktopSupported())
+            {
+                Desktop desktop = Desktop.getDesktop();
+                try
+                {
+                    desktop.browse(new URI(uri));
+                }
+                catch(Exception ex)
+                {
+                    System.out.println("EXCEPTION HANDLED BROWSING INTERNET: \n" + ex.getLocalizedMessage());
+                }
+            }
+        });
+
+        pitcher.addActionListener(e -> 
+        {
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Pitchers");
+            
+            this.subscribe(dialog);
+
+            System.out.println(this.currentTeam);
+        });
+
+        catcher.addActionListener(e -> 
+        {
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Catchers");
+            
+            this.subscribe(dialog);
+
+            System.out.println(this.currentTeam);
+        });
+
+        infielder.addActionListener(e -> 
+        {
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Infielders");
+            
+            this.subscribe(dialog);
+
+            System.out.println(this.currentTeam);
+        });
+
+        outfielder.addActionListener(e -> 
+        {
+            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
+            this.subscribe(dialog);
+
+            System.out.println(this.currentTeam);
+        });
+    }
+
+    public Navbar()
+    {
+        subs = new ArrayList<>();
+
+        addPlayer.add(pitcher);
+        addPlayer.add(catcher);
+        addPlayer.add(outfielder);
+        addPlayer.add(infielder);
+
+        help.add(faq);
+        help.add(howToUse);
+        help.add(documentation);
+
+        trading.add(offerTrade);
+        trading.add(manageTradesItem);
+
+        scheduling.add(scheduleGameItem);
+        scheduling.add(viewScheduleItem);
+
+
+        this.add(help);
+        this.add(addPlayer);
+        this.add(scheduling);
+        this.add(trading);
 
         faq.addActionListener(e -> 
         {

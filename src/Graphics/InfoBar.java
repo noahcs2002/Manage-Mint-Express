@@ -67,21 +67,11 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
             alert(this.pos, InfoCode.POSITION_CHANGE);
         });
 
-        teamChoice.addActionListener(e -> 
-        {
-            currentTeamLabel.setText("Currently Managing: " + teamChoice.getSelectedItem().toString());
-            this.team = teamChoice.getSelectedItem().toString();
-            alert(this.teamChoice.getSelectedItem().toString(), InfoCode.TEAM_CHANGE);
-        });
-        
-        
-
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
         // flowPanel.add(addPlayerButton);
         flowPanel.add(positionChoice);
-        flowPanel.add(teamChoice);
         
         this.add(flowPanel, BorderLayout.EAST);
 
