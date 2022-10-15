@@ -3,7 +3,7 @@ package Graphics;
 import java.awt.*;
 import javax.swing.*;
 
-import MembersDTO.InfoCode;
+import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 

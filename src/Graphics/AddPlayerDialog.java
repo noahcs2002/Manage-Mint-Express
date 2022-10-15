@@ -8,9 +8,9 @@ import javax.swing.table.DefaultTableModel;
 import Controllers.SqlController;
 import MembersDTO.Catcher;
 import MembersDTO.Infielder;
-import MembersDTO.InfoCode;
 import MembersDTO.Outfielder;
 import MembersDTO.Pitcher;
+import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 

@@ -2,9 +2,10 @@ package Graphics;
 
 import Subscribers.ISubscribable;
 import Controllers.SqlController;
+import Misc.InfoCode;
 import Subscribers.ISubscriber;
 import java.util.ArrayList;
-import MembersDTO.InfoCode;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -72,7 +73,9 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
             this.team = teamChoice.getSelectedItem().toString();
             alert(this.teamChoice.getSelectedItem().toString(), InfoCode.TEAM_CHANGE);
         });
-       
+        
+        
+
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
@@ -120,6 +123,14 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
         {
             case TEAM_CHANGE :
                 this.team = (String) change;
+            break;
+
+            case NEW_TEAM :
+                
+                teamChoice.addItem((String) change);
+
+                teamChoice.revalidate();
+                teamChoice.repaint();
             break;
 
             default : break;

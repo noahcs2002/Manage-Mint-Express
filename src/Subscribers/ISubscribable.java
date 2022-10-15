@@ -1,6 +1,6 @@
 package Subscribers;
 
-import MembersDTO.InfoCode;
+import Misc.InfoCode;
 
 public interface ISubscribable
 {

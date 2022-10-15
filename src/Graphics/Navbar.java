@@ -1,7 +1,8 @@
 package Graphics;
 
 import javax.swing.*;
-import MembersDTO.InfoCode;
+
+import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 import java.awt.*;
@@ -15,7 +16,19 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     
     JMenu help = new JMenu("Help");
     JMenu addPlayer = new JMenu("Add Player");
+    JMenu trading = new JMenu("Trading");
+    JMenu scheduling = new JMenu("Scheduling");
+    JMenu teamManagement = new JMenu("Manage Teams");
+    JMenu pitchingStaff = new JMenu("Pitching Staff");
+
     JMenuItem addTeam = new JMenuItem("Add Team");
+    JMenuItem removeTeam = new JMenuItem("Delete Team");
+
+    JMenuItem viewScheduleItem = new JMenuItem("View Schedule");
+    JMenuItem scheduleGameItem = new JMenuItem("Schedule Game");
+
+    JMenuItem manageTradesItem = new JMenuItem("Manage Trades");
+    JMenuItem offerTrade = new JMenuItem("Offer Trade");
 
     JMenuItem pitcher = new JMenuItem("Pitcher");
     JMenuItem catcher = new JMenuItem("Catcher");
@@ -41,13 +54,26 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         help.add(howToUse);
         help.add(documentation);
 
+        trading.add(offerTrade);
+        trading.add(manageTradesItem);
+
+        scheduling.add(scheduleGameItem);
+        scheduling.add(viewScheduleItem);
+
+        teamManagement.add(addTeam);
+        teamManagement.add(removeTeam);
+
         this.add(help);
         this.add(addPlayer);
-        this.add(addTeam);
+        this.add(scheduling);
+        this.add(trading);
+        this.add(teamManagement);
 
         addTeam.addActionListener(e -> 
         {   
-            
+            AddTeamDialog dialog = new AddTeamDialog();
+
+            this.subscribe(dialog);
         });
 
         faq.addActionListener(e -> 

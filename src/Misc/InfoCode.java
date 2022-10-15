@@ -1,4 +1,4 @@
-package MembersDTO;
+package Misc;
 
 public enum InfoCode 
 {
@@ -8,4 +8,5 @@ public enum InfoCode
     NEW_CATCHER,
     NEW_INFIELDER,
     NEW_OUTFIELDER,
+    NEW_TEAM
 }

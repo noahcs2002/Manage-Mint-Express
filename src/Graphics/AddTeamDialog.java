@@ -3,13 +3,15 @@ package Graphics;
 import javax.swing.*;
 
 import Controllers.SqlController;
+import Misc.InfoCode;
+import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class AddTeamDialog extends JDialog
+public class AddTeamDialog extends JDialog implements ISubscribable
 {
 
     JPanel panel = new JPanel();
@@ -18,11 +20,9 @@ public class AddTeamDialog extends JDialog
 
     ArrayList<ISubscriber> subs;
 
-    public AddTeamDialog(ISubscriber sub)
+    public AddTeamDialog()
     {
         subs = new ArrayList<>();
-        subs.add(sub);
-
         
 
         this.setTitle("Team Creation Wizard");
@@ -85,6 +85,7 @@ public class AddTeamDialog extends JDialog
 
                     String update = teamName;
                     System.out.println(update);
+                    alert(update, InfoCode.NEW_TEAM);
                     dispose();
                 }
                 catch(Exception ex)
@@ -102,6 +103,25 @@ public class AddTeamDialog extends JDialog
     public String getNewTeamName()
     {
         return this.newTeamName;
+    }
+
+    @Override
+    public void alert(Object change, InfoCode infoCode) 
+    {
+        for (ISubscriber sub : subs) 
+            sub.getAlert(change, infoCode);
+    }
+
+    @Override
+    public void addSubsriber(ISubscriber subscriber) 
+    {
+        this.subs.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) 
+    {
+        this.subs.remove(subscriber);
     }
 
     
