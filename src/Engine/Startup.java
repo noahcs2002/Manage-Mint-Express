@@ -45,17 +45,13 @@ public class Startup
                 try
                 {
                     sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\Startup\\ResetQuery.sql"));
-                    System.out.println(sqlString);
                     sql.executeUpdate(sqlString);
-                    System.out.println("Line one ran");
 
                     sqlString = "drop table Teams;" 
                     + "create table Teams (Name nvarchar(MAX), Rank decimal(18,0) );"
                     + "insert into Teams values ('" + teamOpt + "', 1);";
 
-                    System.out.println(sqlString);
                     sql.executeUpdate(sqlString);
-                    System.out.println("Line two ran");
 
                     driver.scaffoldDb();
                 }

@@ -1,4 +1,4 @@
-package Graphics.Startup;
+package Graphics;
 
 import javax.swing.*;
 import Controllers.SqlController;
@@ -50,7 +50,7 @@ public class StartupDialog extends JDialog
         this.setTitle("Welcome to MME");
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(400, 200);
+        this.setSize(400, 00);
         this.setLocationRelativeTo(null);
 
         this.setLayout(new BorderLayout());
@@ -61,6 +61,7 @@ public class StartupDialog extends JDialog
         // panel.setLayout(layout);
 
         this.add(panel, BorderLayout.CENTER);
+        this.pack();
         
 
         addTeamButton.addActionListener(new ActionListener()

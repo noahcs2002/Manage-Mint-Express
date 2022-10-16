@@ -15,6 +15,9 @@ IF object_id ('PitchingStaff' , 'U') IS NOT NULL
 IF object_id ('Teams' , 'U') IS NOT NULL
 	DROP TABLE Teams;
 
+IF object_id ('Games' , 'U') IS NOT NULL
+	DROP TABLE Teams;
+
 CREATE TABLE CatchingStaff (
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
@@ -96,3 +99,13 @@ CREATE TABLE Teams (
 	Name nvarchar(MAX),
 	Rank decimal(18, 0)
 );
+
+CREATE TABLE Games (
+	Time nvarchar(MAX) NOT NULL,
+	Versus nvarchar(MAX) NOT NULL,
+	Win bit,
+	YourScore decimal(18,0),
+	OppScore decimal(18,0),
+	Hits decimal(18,0),
+	Errors decimal(18,0),
+)

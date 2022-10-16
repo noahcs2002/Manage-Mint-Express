@@ -5,7 +5,6 @@ import Controllers.SqlController;
 import Misc.InfoCode;
 import Subscribers.ISubscriber;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -67,14 +66,11 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
-        // flowPanel.add(addPlayerButton);
         flowPanel.add(positionChoice);
         
         this.add(flowPanel, BorderLayout.EAST);
 
         JPanel centerRegionPanel = new JPanel();
-
-        // centerRegionPanel.add(addTeamButton);
 
         this.add(centerRegionPanel, BorderLayout.CENTER);
 
@@ -108,14 +104,6 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
         {
             case TEAM_CHANGE :
                 this.team = (String) change;
-            break;
-
-            case NEW_TEAM :
-                
-                teamChoice.addItem((String) change);
-
-                teamChoice.revalidate();
-                teamChoice.repaint();
             break;
 
             default : break;

@@ -1,6 +1,6 @@
 package Engine;
 import Graphics.*;
-import Graphics.Startup.StartupDialog;
+
 import java.awt.event.*;
 
 import Controllers.SqlController;
@@ -29,7 +29,17 @@ public class Driver
 
         else
         {
-            new FancyFrame(SqlController.getTeam());
+            try
+            {
+                Loading l = new Loading();
+                l.loading();
+                new FancyFrame(SqlController.getTeam());
+                l.dispose();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         
     }

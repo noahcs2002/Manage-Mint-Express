@@ -17,15 +17,15 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     JMenu help = new JMenu("Help");
     JMenu addPlayer = new JMenu("Add Player");
     JMenu trading = new JMenu("Trading");
-    JMenu scheduling = new JMenu("Scheduling");
     JMenu teamManagement = new JMenu("Manage Teams");
     JMenu pitchingStaff = new JMenu("Pitching Staff");
+    JMenu gameDayMenu = new JMenu("Enter Game Day");
+
+    JMenuItem pastGames = new JMenuItem("Past Games");
+    JMenuItem upcomingGames = new JMenuItem("Upcoming Games");
 
     JMenuItem addTeam = new JMenuItem("Add Team");
     JMenuItem removeTeam = new JMenuItem("Delete Team");
-
-    JMenuItem viewScheduleItem = new JMenuItem("View Schedule");
-    JMenuItem scheduleGameItem = new JMenuItem("Schedule Game");
 
     JMenuItem manageTradesItem = new JMenuItem("Manage Trades");
     JMenuItem offerTrade = new JMenuItem("Offer Trade");
@@ -45,6 +45,9 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         this.currentTeam = currentTeam;
         subs = new ArrayList<>();
 
+        gameDayMenu.add(pastGames);
+        gameDayMenu.add(upcomingGames);
+
         addPlayer.add(pitcher);
         addPlayer.add(catcher);
         addPlayer.add(outfielder);
@@ -54,17 +57,9 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         help.add(howToUse);
         help.add(documentation);
 
-        trading.add(offerTrade);
-        trading.add(manageTradesItem);
-
-        scheduling.add(scheduleGameItem);
-        scheduling.add(viewScheduleItem);
-
-
         this.add(help);
         this.add(addPlayer);
-        this.add(scheduling);
-        this.add(trading);
+        this.add(gameDayMenu);
 
         faq.addActionListener(e -> 
         {
@@ -146,110 +141,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         });
     }
 
-    public Navbar()
-    {
-        subs = new ArrayList<>();
-
-        addPlayer.add(pitcher);
-        addPlayer.add(catcher);
-        addPlayer.add(outfielder);
-        addPlayer.add(infielder);
-
-        help.add(faq);
-        help.add(howToUse);
-        help.add(documentation);
-
-        trading.add(offerTrade);
-        trading.add(manageTradesItem);
-
-        scheduling.add(scheduleGameItem);
-        scheduling.add(viewScheduleItem);
-
-
-        this.add(help);
-        this.add(addPlayer);
-        this.add(scheduling);
-        this.add(trading);
-
-        faq.addActionListener(e -> 
-        {
-            JDialog faqDialog = new JDialog();
-            faqDialog.setTitle("FAQ's");
-
-            final String[] faqs = 
-            {
-                "Q. Who developed this? A. Noah Sternberg, a student at Murray State University.",
-                "Q. What was this developed for? A. A final project for an Advance Objects class.",
-                "Q. How long did this take? A. Too long.",
-                "Q. Will this ever get more features? A. I don't know.",
-                "Q. Why did you make ___ design choice? A. Because I'm bad at graphic design.",
-            };
-
-            JList<String> list = new JList<>(faqs);
-
-            faqDialog.add(list);
-
-            faqDialog.setLocationRelativeTo(null);
-            faqDialog.setSize(500,150);
-            faqDialog.setVisible(true);
-        });
-
-        howToUse.addActionListener(e -> 
-        {
-
-        });
-
-        documentation.addActionListener(e -> 
-        {
-            if(Desktop.isDesktopSupported())
-            {
-                Desktop desktop = Desktop.getDesktop();
-                try
-                {
-                    desktop.browse(new URI(uri));
-                }
-                catch(Exception ex)
-                {
-                    System.out.println("EXCEPTION HANDLED BROWSING INTERNET: \n" + ex.getLocalizedMessage());
-                }
-            }
-        });
-
-        pitcher.addActionListener(e -> 
-        {
-            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Pitchers");
-            
-            this.subscribe(dialog);
-
-            System.out.println(this.currentTeam);
-        });
-
-        catcher.addActionListener(e -> 
-        {
-            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Catchers");
-            
-            this.subscribe(dialog);
-
-            System.out.println(this.currentTeam);
-        });
-
-        infielder.addActionListener(e -> 
-        {
-            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Infielders");
-            
-            this.subscribe(dialog);
-
-            System.out.println(this.currentTeam);
-        });
-
-        outfielder.addActionListener(e -> 
-        {
-            AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
-            this.subscribe(dialog);
-
-            System.out.println(this.currentTeam);
-        });
-    }
+    
 
     @Override
     public void alert(Object change, InfoCode infoCode) 
@@ -295,6 +187,4 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     {
         subscribable.addSubsriber(this);
     }
-
-    
 }
