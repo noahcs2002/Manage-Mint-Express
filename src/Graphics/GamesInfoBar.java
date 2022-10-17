@@ -4,11 +4,11 @@ import Controllers.SqlController;
 import javax.swing.*;
 import java.awt.*;
 
-public class PastGamesInfoBar extends JPanel
+public class GamesInfoBar extends JPanel
 {
     SqlController controller;
 
-    public PastGamesInfoBar()
+    public GamesInfoBar()
     {
         controller = new SqlController();
 

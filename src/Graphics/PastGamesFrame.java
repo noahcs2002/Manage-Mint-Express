@@ -39,7 +39,7 @@ public class PastGamesFrame extends JFrame
         JTable table = new JTable(tableModel);
         panel.setLayout(new BorderLayout());
         panel.add(table, BorderLayout.CENTER);
-        panel.add(new PastGamesInfoBar(), BorderLayout.NORTH);
+        panel.add(new GamesInfoBar(), BorderLayout.NORTH);
         this.add(panel);
 
         
