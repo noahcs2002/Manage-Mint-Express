@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 @SuppressWarnings("unused")
-public class InfoBar extends JPanel implements ISubscriber, ISubscribable
+public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribable
 {
     private String team;
     private String pos;    
@@ -26,7 +26,7 @@ public class InfoBar extends JPanel implements ISubscriber, ISubscribable
      * @param team Default team
      * @param pos Default pos
      */
-    public InfoBar(String team, String pos)
+    public MainPanelInfoBar(String team, String pos)
     {
         this.team = team;
         this.pos = pos;

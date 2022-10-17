@@ -32,7 +32,7 @@ public class Driver
             try
             {
                 Loading l = new Loading();
-                l.loading();
+                // l.loading();
                 new FancyFrame(SqlController.getTeam());
                 l.dispose();
             }

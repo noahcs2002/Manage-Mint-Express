@@ -9,7 +9,7 @@ import Subscribers.ISubscriber;
 public class FancyFrame extends JFrame implements ISubscriber
 {
     JPanel mainPanel = new JPanel();
-    InfoBar infoBar;
+    MainPanelInfoBar infoBar;
     Navbar navbar; 
     
     public FancyFrame(String team)
@@ -17,7 +17,7 @@ public class FancyFrame extends JFrame implements ISubscriber
         System.out.println(team);
         mainPanel.setLayout(new BorderLayout());
         InformationPanel infoPanel = new InformationPanel(team);
-        infoBar = new InfoBar(team, "Pitchers");
+        infoBar = new MainPanelInfoBar(team, "Pitchers");
         navbar = new Navbar(team);
         
         mainPanel.add(infoBar, BorderLayout.NORTH);

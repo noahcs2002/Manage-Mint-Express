@@ -16,7 +16,7 @@ would be able to add new players, send players to the IL/SL, plan games, plan st
 
 ## Feature Suite
 
-A comprehensive list of features to be added to the software is as follows:
+A comprehensive list of features to be added to the software (for now) is as follows:
 
 ### Game Day Management:
 The manager will also be able to manage game-day information, such as a starting lineup, planned pitching relief, and 

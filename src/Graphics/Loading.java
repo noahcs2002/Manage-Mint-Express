@@ -1,6 +1,5 @@
 package Graphics;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ public class Loading extends JFrame
     
     public Loading()
     {
-        ImageIcon icon = new ImageIcon("assets\\loading.gif");
 
         JLabel loadingLabel = new JLabel("Loading ...");
 
@@ -26,7 +24,7 @@ public class Loading extends JFrame
         progressBar.setBounds(40,40,160,30);
         compsInitLabel = new JLabel("Components Initialising");
 
-        panel.add(loadingLabel, icon);
+        panel.add(loadingLabel);
         panel.add(progressBar);
         panel.add(compsInitLabel);
 
@@ -46,7 +44,7 @@ public class Loading extends JFrame
 
             try
             {
-                Thread.sleep(200);
+                Thread.sleep(150);
             }
             catch(Exception exc)
             {

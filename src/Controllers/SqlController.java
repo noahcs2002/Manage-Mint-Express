@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import MembersDTO.Catcher;
@@ -13,8 +14,6 @@ import MembersDTO.Pitcher;
 
 public class SqlController 
 {
-    //  jdbc:sqlserver://localhost;encrypt=true;databaseName=AdventureWorks;integratedSecurity=true;
-    // url = "jdbc:sqlserver://" +serverName + ":1433;DatabaseName=" + dbName + ";encrypt=true;trustServerCertificate=true;
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
@@ -375,30 +374,158 @@ public class SqlController
 
     public static String getTeam()
     {
-            String connectionString = 
-            "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
+        String connectionString = 
+        "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
-            try(Connection conn = DriverManager.getConnection(connectionString);
-                Statement statement = conn.createStatement();)
+        try(Connection conn = DriverManager.getConnection(connectionString);
+            Statement statement = conn.createStatement();)
+        {
+            final String sqlString = "SELECT * FROM Teams";
+
+            ResultSet set = statement.executeQuery(sqlString);
+
+            String s = "";
+
+            if(set.next())
+                s = set.getString("Name");
+
+            return s;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception getting team");
+            return null;
+        }
+    }   
+
+    public ArrayList<Object[]> getPastGames()
+    {
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        final String sqlString = "SELECT * FROM Games;";
+
+        try
+        {
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sqlString);
+
+            while(set.next())
             {
-                final String sqlString = "SELECT * FROM Teams";
-
-                ResultSet set = statement.executeQuery(sqlString);
-
-                String s = "";
-
-                if(set.next())
-                    s = set.getString("Name");
-
-                return s;
+                list.add(new Object[]
+                {
+                    set.getString("Time"),
+                    set.getString("Versus"),
+                    set.getBoolean("Win"),
+                    set.getDouble("YourScore"),
+                    set.getDouble("OppScore"),
+                    set.getDouble("Hits"),
+                    set.getDouble("Errors")
+                });
             }
-            catch(Exception ex)
+
+            ArrayList<Object[]> newArray = new ArrayList<>();
+           
+            for (Object[] objects : list) 
             {
-                System.out.println("Exception getting team");
-                return null;
+                if(LocalDate.parse((String) objects[0]).isBefore(LocalDate.now()))
+                    newArray.add(objects);
             }
 
+            return newArray;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            return null;
+        }
     }
 
-    
+    public ArrayList<Object[]> getFutureGames()
+    {
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        final String sqlString = "SELECT * FROM Games;";
+
+        try
+        {
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sqlString);
+
+            while(set.next())
+            {
+                list.add(new Object[]
+                {
+                    set.getString("Time"),
+                    set.getString("Versus"),
+                    set.getBoolean("Win"),
+                    set.getDouble("YourScore"),
+                    set.getDouble("OppScore"),
+                    set.getDouble("Hits"),
+                    set.getDouble("Errors")
+                });
+            }
+
+            for (Object[] objects : list) 
+            {
+                if(LocalDate.parse((String) objects[0]).isBefore(LocalDate.now()))
+                    list.remove(objects);
+            }
+
+            return list;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            return null;
+        }
+    }
+
+    public double[] getRecord()
+    {
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        final String sqlString = "SELECT * FROM Games;";
+
+        try
+        {
+            Statement statement = conn.createStatement();
+
+            ResultSet set = statement.executeQuery(sqlString);
+
+            while(set.next())
+            {
+                list.add(new Object[]
+                {
+                    set.getString("Time"),
+                    set.getString("Versus"),
+                    set.getBoolean("Win"),
+                    set.getDouble("YourScore"),
+                    set.getDouble("OppScore"),
+                    set.getDouble("Hits"),
+                    set.getDouble("Errors")
+                });
+            }
+
+            double[] record = new double[2];
+
+            for (Object[] objects : list) 
+            {
+                if ((Boolean) objects[2] == true)
+                    record[0] += 1;
+                
+                else
+                    record[1] += 1;
+            }
+
+            return record;
+        }
+        
+        catch(Exception ex)
+        {
+            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            return null;
+        }
+    }
 }

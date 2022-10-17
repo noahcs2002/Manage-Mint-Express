@@ -139,6 +139,11 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
             System.out.println(this.currentTeam);
         });
+
+        pastGames.addActionListener(e -> 
+        {
+            new PastGamesFrame();
+        });
     }
 
     
