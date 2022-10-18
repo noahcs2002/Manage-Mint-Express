@@ -1,13 +1,10 @@
 package Graphics;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import Engine.SQL.SqlController;
+import Controllers.SqlController;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -231,25 +228,19 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
     @Override
     public void alert(Object change, InfoCode infoCode) 
     {
-        for (ISubscriber sub : subs) 
+        for(ISubscriber sub : subs)
             sub.getAlert(change, infoCode);
     }
 
     @Override
     public void addSubsriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(!subs.contains(subscriber))
-            subs.add(subscriber);
+        this.subs.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(subs.contains(subscriber))
-            subs.remove(subscriber);    
+        this.subs.remove(subscriber);
     }
 }

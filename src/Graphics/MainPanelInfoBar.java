@@ -1,19 +1,12 @@
 package Graphics;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.Objects;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import Engine.SQL.SqlController;
-import Misc.InfoCode;
 import Subscribers.ISubscribable;
+import Controllers.SqlController;
+import Misc.InfoCode;
 import Subscribers.ISubscriber;
+import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("unused")
 public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribable
@@ -25,7 +18,7 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
     JLabel welcomeLabel = new JLabel("Welcome!");
     JComboBox<String> positionChoice = new JComboBox<>();
     SqlController connector;
-    ArrayList<ISubscriber> subs;
+    ArrayList<ISubscriber> subscribers;
 
     /**
      * Construct a new information bar
@@ -37,7 +30,7 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
         this.team = team;
         this.pos = pos;
 
-        subs = new ArrayList<>();
+        subscribers = new ArrayList<>();
         connector = new SqlController();
         String[] positions = 
         {
@@ -83,26 +76,22 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
     @Override
     public void alert(Object change, InfoCode infoCode) 
     {
-        for (ISubscriber sub : subs) 
-            sub.getAlert(change, infoCode);
+        for (ISubscriber sub : subscribers) 
+        {
+            sub.getAlert(change, infoCode);    
+        }
     }
 
     @Override
     public void addSubsriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(!subs.contains(subscriber))
-            subs.add(subscriber);
+        subscribers.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(subs.contains(subscriber))
-            subs.remove(subscriber);    
+        subscribers.remove(subscriber);
     }
 
     @Override

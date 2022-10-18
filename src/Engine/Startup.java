@@ -1,17 +1,15 @@
 package Engine;
 
 import java.sql.Statement;
-
-import Engine.Configuration.ConfigurationDriver;
-import Engine.ErrorHandler.ErrorHandler;
-import Engine.SQL.SqlUtilityTool;
-import java.sql.DriverManager;
-import java.sql.Connection;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 
 public class Startup 
 {
+    ConfigurationDriver driver = new ConfigurationDriver();
+
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
@@ -29,7 +27,7 @@ public class Startup
         }
         catch(Exception ex)
         {
-            ErrorHandler.handle(ex.getMessage());
+            System.out.println("<DEBUG>: EXCEPTION THROWN\n" + ex.getLocalizedMessage());
         }
 
         this.scaffoldDb();
@@ -42,7 +40,7 @@ public class Startup
         try(Statement sql = conn.createStatement())
         {
             String sqlString;
-            if(!ConfigurationDriver.isDbScaffolded())
+            if(!driver.isDbScaffolded())
             {
                 try
                 {
@@ -55,17 +53,17 @@ public class Startup
 
                     sql.executeUpdate(sqlString);
 
-                    ConfigurationDriver.scaffoldDb();
+                    driver.scaffoldDb();
                 }
                 catch(Exception ex)
                 {
-                    ErrorHandler.handle(ex.getMessage());
+                    System.out.println("Exception handled \n" + ex.getMessage());
                 }
             }
         } 
         catch (Exception ex)
         {
-            ErrorHandler.handle(ex.getMessage());
+            System.out.println("Exception handled: " + ex.getMessage());
         }
     }
 
@@ -75,9 +73,9 @@ public class Startup
         {
             conn.close();
         } 
-        catch (Exception ex) 
+        catch (Exception e) 
         {
-            ErrorHandler.handle(ex.getMessage());
+            System.out.println("Exception thrown on dispose:\n" + e.getMessage());
         }
     }
 }

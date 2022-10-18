@@ -5,8 +5,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import Engine.ErrorHandler.ErrorHandler;
-
 public class Loading extends JFrame
 {
     private JProgressBar progressBar;
@@ -50,7 +48,7 @@ public class Loading extends JFrame
             }
             catch(Exception exc)
             {
-                ErrorHandler.handle(exc.getMessage());
+
             }
         }
     }

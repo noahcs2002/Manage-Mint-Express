@@ -1,6 +1,10 @@
 package DTOs;
 
-public final class Catcher
+import Interfaces.Pitcher;
+import java.util.List;
+import Misc.Stat;
+
+public class Catcher implements Pitcher
 {
     public String name;
     public String team;
@@ -54,4 +58,33 @@ public final class Catcher
         this.suspension = suspension;
         this.number = number;
     }
+
+    @Override
+    public void recordGame(List<Stat> stats) 
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setup() 
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void putOnInjuredList(String message) 
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void putOnSuspensionList(String message) 
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
 }
