@@ -7,22 +7,42 @@ This is a mock project for CSC325 : Advanced Object Oriented Programming
 ### Big Picture: 
 An all in one management suite for baseball teams.
 
-### In Depth:
+### Feature Accomplishment List
 
-I want to make a mock management software for a baseball team. On first time startup, it would have 
-the user configure a team and a name, as well as some basic information, such as active members of the ball
-club, yearly budget, previous rankings etc. All of this would be saved in a **settings** file. Then, the manager 
-would be able to add new players, send players to the IL/SL, plan games, plan starters, negotiate contracts etc.
+This project game with a list of topics from our course that I needed to cover in this project. This section will explain, in depth, how I accomplished this task.
 
-## Feature Suite
+#### Inheritance
+Several of my graphics components inherit from, or extend the functionality of, several existing `Swing` components, such as `JFrame, JPanel, JDialog, JMenuBar` etc. 
 
-A comprehensive list of features to be added to the software (for now) is as follows:
+#### Interfaces
+Interfaces are used *extensively* throughout this project. For instance, I have a pair of custom interfaces, `ISubscriber` and `ISubscribable` that create an `Obvserver-Observable` relationship. Throughout several points in the project, several GUI components implement `ISubscriber` to receive updates from `ISubscribable` objects. Additionally, a list of `ISubscribers` is kept throughout program duration.
 
-### Game Day Management:
-The manager will also be able to manage game-day information, such as a starting lineup, planned pitching relief, and 
-designated hitters. Also, the manager will have access to stats on every player, so they can make a well-informed decision at a game.
+#### GUI Components
+This is self explanatory. I made several custom GUI components, a full list of which is below.
 
-### Game Management:
-The maneger will be able to see statistics regarding games, and will be able to make internal notes regarding a game.
-This ties hand in hand with **Game Day Management**
+##### GUI Components List
+- `AddPlayerDialog.java`
+- `AddGameDialog.java`
+- `FancyFrame.java`
+- `FAQDialog.java`
+- `InformationPanel.java`
+- `Loading.java`
+- `MainPanelInfoBar.java`
+- `Navbar.java`
+- `PastGamesDialog.java`
+- `RecordGameDialog.java`
+- `ScheduleDialog.java`
+- `StartupDialog.java`
+- `UpcomingGamesDialog.java`
 
+#### Graphics and Animation
+The program opens with a loading bar, to allow the program to establish connection to the SQL server. Beyond this, graphics are minimal.
+
+#### Networking
+The user can click a prompt in the navbar to be directed to the GitHub page for this project, serving as some form of 'documentation.'
+
+#### Databases
+This project relies heavily on databases, and uses them to process and store all data, such as players and games.
+
+#### Lambda Expressions
+I used lambda expressions for any `ActionListener` objects. This was not stated in the requirements for the project, but I did so anyway.
