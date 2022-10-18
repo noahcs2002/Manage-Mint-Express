@@ -11,18 +11,19 @@ public class FAQDialog extends JDialog
 
         final String[] faqs = 
         {
-            "Q. Who developed this? A. Noah Sternberg, a student at Murray State University.",
-            "Q. What was this developed for? A. A final project for an Advance Objects class.",
-            "Q. How long did this take? A. Too long.",
-            "Q. Will this ever get more features? A. I don't know.",
-            "Q. Why did you make ___ design choice? A. Because I'm bad at graphic design.",
+            "1. To add a player, click 'Add Player' in the navbar, then select your type. " +
+            "Then, fill in ALL THE FIELDS, and hit tab one time after entering the last value, then hit confirm.",
+            "2. Hitting 'Clear All' will clear all entries OF THAT SPECIFIC POSITION. Clear All while on pitchers clears pitchers etc.",
+            "3. To record a game, simply open the past games dialog and enter in the team you played against, and the date of the game. (Note: "
+            + "You cannot record a game that was not scheduled. To do this, schedule the game, then record it).",
+            "4. If you have issues adding a player, make sure all values are full, and then go to the last column and hit tab, then the confirm button."
         };
 
         JList<String> list = new JList<>(faqs);
 
         this.add(list);
-        this.setLocationRelativeTo(null);
-        this.setSize(500,150);
+        this.setLocation(200,300);
+        this.setSize(1400,150);
         this.setVisible(true);
     }
 }

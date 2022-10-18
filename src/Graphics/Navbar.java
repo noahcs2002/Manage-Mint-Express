@@ -65,25 +65,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
         faq.addActionListener(e -> 
         {
-            JDialog faqDialog = new JDialog();
-            faqDialog.setTitle("FAQ's");
-
-            final String[] faqs = 
-            {
-                "Q. Who developed this? A. Noah Sternberg, a student at Murray State University.",
-                "Q. What was this developed for? A. A final project for an Advance Objects class.",
-                "Q. How long did this take? A. Too long.",
-                "Q. Will this ever get more features? A. I don't know.",
-                "Q. Why did you make ___ design choice? A. Because I'm bad at graphic design.",
-            };
-
-            JList<String> list = new JList<>(faqs);
-
-            faqDialog.add(list);
-
-            faqDialog.setLocationRelativeTo(null);
-            faqDialog.setSize(500,150);
-            faqDialog.setVisible(true);
+            new FAQDialog();
         });
 
         howToUse.addActionListener(e -> 

@@ -205,7 +205,7 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
                 updateInformation(currentTeamSelection, (String) change);
             break;
 
-            case NEW_PITCHER, NEW_CATCHER, NEW_INFIELDER, NEW_OUTFIELDER :
+            case NEW_PITCHER, NEW_CATCHER, NEW_INFIELDER, NEW_OUTFIELDER, CLEARED_DATA :
                 updateInformation(currentTeamSelection, currentPositionSelection);
             break;
 

@@ -16,14 +16,13 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
 
     private String managerName = "Noah";
     JLabel welcomeLabel = new JLabel("Welcome!");
-    JComboBox<String> teamChoice = new JComboBox<>();
     JComboBox<String> positionChoice = new JComboBox<>();
     SqlController connector;
     ArrayList<ISubscriber> subscribers;
 
     /**
      * Construct a new information bar
-     * @param team Default team
+     * @param team Team in question
      * @param pos Default pos
      */
     public MainPanelInfoBar(String team, String pos)
@@ -44,18 +43,6 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
         for(String p : positions)
             positionChoice.addItem(p);
 
-        try
-        {
-            String[] teams = connector.getTeams();
-
-            for(String s : teams)
-                teamChoice.addItem(s);
-        }
-        catch(Exception ex)
-        {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n"+ex.getLocalizedMessage());
-        }
-
 
         positionChoice.addActionListener(e -> 
         {
@@ -63,10 +50,20 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
             alert(this.pos, InfoCode.POSITION_CHANGE);
         });
 
+        JButton clearAllButton = new JButton("Clear all");
+
+        clearAllButton.addActionListener(e -> 
+        {
+            connector.clearData(positionChoice.getSelectedItem().toString());
+            alert(null, InfoCode.CLEARED_DATA);
+        });
+
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
+        flowPanel.add(clearAllButton);
         flowPanel.add(positionChoice);
+
         
         this.add(flowPanel, BorderLayout.EAST);
 

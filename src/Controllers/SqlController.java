@@ -1,10 +1,10 @@
 package Controllers;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +12,7 @@ import DTOs.Catcher;
 import DTOs.Infielder;
 import DTOs.Outfielder;
 import DTOs.Pitcher;
+import Engine.SqlUtilityTool;
 
 public class SqlController 
 {
@@ -493,6 +494,42 @@ public class SqlController
         catch(Exception ex)
         {
             System.out.println("Exception making new Game\n" + ex.getMessage());
+        }
+    }
+
+    public void clearData(String positionToClear)
+    {
+        try
+        {
+            String sqlString = "";
+
+            switch(positionToClear)
+            {
+                case "Pitchers" :
+                    sqlString = "DELETE FROM PitchingStaff;";
+                break;
+
+                case "Catchers" :
+                    sqlString = "DELETE FROM CatchingStaff;";
+                break;
+
+                case "Infielders" :
+                    sqlString = "DELETE FROM Infielders;";
+                break;
+
+                case "Outfielders" :
+                    sqlString = "DELETE FROM Outfielders;";
+                break;
+            }
+
+            try(Statement statement = conn.createStatement())
+            {
+                statement.executeUpdate(sqlString);
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception in clearData(*)");
         }
     }
 

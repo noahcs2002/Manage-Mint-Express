@@ -10,5 +10,6 @@ public enum InfoCode
     NEW_OUTFIELDER,
     NEW_TEAM,
     NEW_GAME,
+    CLEARED_DATA,
     TERMINATE
 }
