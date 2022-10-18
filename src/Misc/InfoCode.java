@@ -8,5 +8,7 @@ public enum InfoCode
     NEW_CATCHER,
     NEW_INFIELDER,
     NEW_OUTFIELDER,
-    NEW_TEAM
+    NEW_TEAM,
+    NEW_GAME,
+    TERMINATE
 }

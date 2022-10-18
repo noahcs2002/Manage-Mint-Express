@@ -1,4 +1,4 @@
-package MembersDTO;
+package DTOs;
 
 import java.util.List;
 import Misc.Stat;

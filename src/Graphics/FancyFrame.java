@@ -40,7 +40,7 @@ public class FancyFrame extends JFrame implements ISubscriber
         this.setJMenuBar(navbar);
         
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setTitle("Manage-Mint Express");
@@ -50,9 +50,14 @@ public class FancyFrame extends JFrame implements ISubscriber
     @Override
     public void getAlert(Object change, InfoCode infoCode) 
     {
-        revalidate();
-        pack();
-        repaint();
+        if(infoCode == InfoCode.TERMINATE)
+            this.dispose();
+        else
+        {
+            revalidate();
+            pack();
+            repaint();
+        }
     }
 
     @Override

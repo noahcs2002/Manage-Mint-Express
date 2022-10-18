@@ -12,7 +12,7 @@ public class Driver
 {
     public static void main(String[] args) 
     {
-        if(!ConfigReader.hasStartupRan())
+        if(!ConfigIO.hasStartupRan())
         {
             StartupDialog d = new StartupDialog();
 

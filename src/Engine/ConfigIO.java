@@ -1,11 +1,13 @@
 package Engine;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class ConfigReader 
+public class ConfigIO 
 {
 
     public static boolean hasStartupRan()
@@ -27,6 +29,17 @@ public class ConfigReader
         catch(Exception ex)
         {
             return false;
+        }
+    }
+
+    public static void reset()
+    {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("config\\config.txt"))))
+        {
+            writer.write("startup_ran : false");
+        }
+        catch(Exception ex)
+        {
         }
     }
 

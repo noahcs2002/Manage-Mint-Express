@@ -7,10 +7,11 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import MembersDTO.Catcher;
-import MembersDTO.Infielder;
-import MembersDTO.Outfielder;
-import MembersDTO.Pitcher;
+
+import DTOs.Catcher;
+import DTOs.Infielder;
+import DTOs.Outfielder;
+import DTOs.Pitcher;
 
 public class SqlController 
 {
@@ -402,7 +403,7 @@ public class SqlController
     {
         ArrayList<Object[]> list = new ArrayList<>();
 
-        final String sqlString = "SELECT * FROM Games;";
+        final String sqlString = "SELECT * FROM Games WHERE HasBeenPlayed = 1;";
 
         try
         {
@@ -416,61 +417,7 @@ public class SqlController
                 {
                     set.getString("Time"),
                     set.getString("Versus"),
-                    set.getBoolean("Win"),
-                    set.getDouble("YourScore"),
-                    set.getDouble("OppScore"),
-                    set.getDouble("Hits"),
-                    set.getDouble("Errors")
                 });
-            }
-
-            ArrayList<Object[]> newArray = new ArrayList<>();
-           
-            for (Object[] objects : list) 
-            {
-                if(LocalDate.parse((String) objects[0]).isBefore(LocalDate.now()))
-                    newArray.add(objects);
-            }
-
-            return newArray;
-        }
-        catch(Exception ex)
-        {
-            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
-            return null;
-        }
-    }
-
-    public ArrayList<Object[]> getFutureGames()
-    {
-        ArrayList<Object[]> list = new ArrayList<>();
-
-        final String sqlString = "SELECT * FROM Games;";
-
-        try
-        {
-            Statement statement = conn.createStatement();
-
-            ResultSet set = statement.executeQuery(sqlString);
-
-            while(set.next())
-            {
-                list.add(new Object[]
-                {
-                    set.getString("Time"),
-                    set.getString("Versus"),
-                    set.getBoolean("Win"),
-                    set.getDouble("YourScore"),
-                    set.getDouble("OppScore"),
-                    set.getDouble("Hits"),
-                    set.getDouble("Errors")
-                });
-            }
-
-            for (Object[] objects : list) 
-            {
-                if(LocalDate.parse((String) objects[0]).isBefore(LocalDate.now()))
-                    list.remove(objects);
             }
 
             return list;
@@ -482,11 +429,12 @@ public class SqlController
         }
     }
 
-    public double[] getRecord()
+    //Sort these by date eventually
+    public ArrayList<Object[]> getFutureGames()
     {
         ArrayList<Object[]> list = new ArrayList<>();
 
-        final String sqlString = "SELECT * FROM Games;";
+        final String sqlString = "SELECT * FROM Games WHERE HasBeenPlayed = 0;";
 
         try
         {
@@ -500,32 +448,53 @@ public class SqlController
                 {
                     set.getString("Time"),
                     set.getString("Versus"),
-                    set.getBoolean("Win"),
-                    set.getDouble("YourScore"),
-                    set.getDouble("OppScore"),
-                    set.getDouble("Hits"),
-                    set.getDouble("Errors")
                 });
             }
 
-            double[] record = new double[2];
-
-            for (Object[] objects : list) 
-            {
-                if ((Boolean) objects[2] == true)
-                    record[0] += 1;
-                
-                else
-                    record[1] += 1;
-            }
-
-            return record;
+            return list;
         }
-        
         catch(Exception ex)
         {
             System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
             return null;
         }
     }
+
+    /**
+     * Schedule a game
+     * @param versus
+     * @param date
+     */
+    public void scheduleGame(String versus, String date)
+    {
+
+        String sqlString = "Insert into Games (Time, Versus, HasBeenPlayed) VALUES('";
+        sqlString += date + "','" + versus +"', 0);";
+
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new Game\n" + ex.getMessage());
+        }
+    }
+
+    public void recordGame(String versus, String date)
+    {
+        final String sqlString = "UPDATE Games SET HasBeenPlayed = 1"
+        + " WHERE Time = '" + date +"';";
+
+        try(Statement statement = conn.createStatement())
+        {
+            statement.executeUpdate(sqlString);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception making new Game\n" + ex.getMessage());
+        }
+    }
+
+
 }

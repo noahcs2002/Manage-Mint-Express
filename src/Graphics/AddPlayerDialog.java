@@ -6,10 +6,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.SqlController;
-import MembersDTO.Catcher;
-import MembersDTO.Infielder;
-import MembersDTO.Outfielder;
-import MembersDTO.Pitcher;
+import DTOs.Catcher;
+import DTOs.Infielder;
+import DTOs.Outfielder;
+import DTOs.Pitcher;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;

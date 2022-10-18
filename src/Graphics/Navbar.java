@@ -2,6 +2,7 @@ package Graphics;
 
 import javax.swing.*;
 
+import Engine.ConfigIO;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -16,19 +17,14 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     
     JMenu help = new JMenu("Help");
     JMenu addPlayer = new JMenu("Add Player");
-    JMenu trading = new JMenu("Trading");
-    JMenu teamManagement = new JMenu("Manage Teams");
-    JMenu pitchingStaff = new JMenu("Pitching Staff");
     JMenu gameDayMenu = new JMenu("Enter Game Day");
+    JMenu resetMenu = new JMenu("Reset");
+    JMenu confirmResetMenu = new JMenu("Confirm Reset");
+
+    JMenuItem confirmReset = new JMenuItem("Confirm Reset (Irreversible)");
 
     JMenuItem pastGames = new JMenuItem("Past Games");
     JMenuItem upcomingGames = new JMenuItem("Upcoming Games");
-
-    JMenuItem addTeam = new JMenuItem("Add Team");
-    JMenuItem removeTeam = new JMenuItem("Delete Team");
-
-    JMenuItem manageTradesItem = new JMenuItem("Manage Trades");
-    JMenuItem offerTrade = new JMenuItem("Offer Trade");
 
     JMenuItem pitcher = new JMenuItem("Pitcher");
     JMenuItem catcher = new JMenuItem("Catcher");
@@ -42,8 +38,13 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
     public Navbar(String currentTeam)
     {
+
         this.currentTeam = currentTeam;
         subs = new ArrayList<>();
+
+        confirmResetMenu.add(confirmReset);
+        resetMenu.add(confirmResetMenu);
+
 
         gameDayMenu.add(pastGames);
         gameDayMenu.add(upcomingGames);
@@ -60,6 +61,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         this.add(help);
         this.add(addPlayer);
         this.add(gameDayMenu);
+        this.add(resetMenu);
 
         faq.addActionListener(e -> 
         {
@@ -142,7 +144,18 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
         pastGames.addActionListener(e -> 
         {
-            new PastGamesFrame();
+            new PastGamesDialog();
+        });
+
+        upcomingGames.addActionListener(e ->
+        {
+            new UpcomingGamesDialog();
+        });
+
+        confirmReset.addActionListener(e -> 
+        {
+            ConfigIO.reset();
+            this.alert(null, InfoCode.TERMINATE);
         });
     }
 

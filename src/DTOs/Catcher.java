@@ -1,4 +1,4 @@
-package MembersDTO;
+package DTOs;
 
 import Interfaces.Pitcher;
 import java.util.List;
