@@ -1,15 +1,17 @@
 package Engine;
 
 import java.sql.Statement;
-import java.io.File;
-import java.sql.Connection;
+
+import Engine.Configuration.ConfigurationDriver;
+import Engine.ErrorHandler.ErrorHandler;
+import Engine.SQL.SqlUtilityTool;
 import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.File;
 
 
 public class Startup 
 {
-    ConfigurationDriver driver = new ConfigurationDriver();
-
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
@@ -27,7 +29,7 @@ public class Startup
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
 
         this.scaffoldDb();
@@ -40,7 +42,7 @@ public class Startup
         try(Statement sql = conn.createStatement())
         {
             String sqlString;
-            if(!driver.isDbScaffolded())
+            if(!ConfigurationDriver.isDbScaffolded())
             {
                 try
                 {
@@ -53,17 +55,17 @@ public class Startup
 
                     sql.executeUpdate(sqlString);
 
-                    driver.scaffoldDb();
+                    ConfigurationDriver.scaffoldDb();
                 }
                 catch(Exception ex)
                 {
-                    System.out.println("Exception handled \n" + ex.getMessage());
+                    ErrorHandler.handle(ex.getMessage());
                 }
             }
         } 
         catch (Exception ex)
         {
-            System.out.println("Exception handled: " + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -73,9 +75,9 @@ public class Startup
         {
             conn.close();
         } 
-        catch (Exception e) 
+        catch (Exception ex) 
         {
-            System.out.println("Exception thrown on dispose:\n" + e.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 }

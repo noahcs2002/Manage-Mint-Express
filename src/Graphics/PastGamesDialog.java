@@ -1,11 +1,18 @@
 package Graphics;
 
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import Controllers.SqlController;
+
+import Engine.SQL.SqlController;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -86,12 +93,16 @@ public class PastGamesDialog extends JDialog implements ISubscriber
     @Override
     public void subscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
+
         subscribable.addSubsriber(this);
     }
 
     @Override
     public void unsubscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
+
         subscribable.removeSubscriber(this);
     }
 

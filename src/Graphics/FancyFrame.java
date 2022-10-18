@@ -1,7 +1,12 @@
 package Graphics;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
+import java.util.Objects;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -63,12 +68,15 @@ public class FancyFrame extends JFrame implements ISubscriber
     @Override
     public void subscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
         subscribable.addSubsriber(this);
     }
 
     @Override
     public void unsubscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
+
         subscribable.removeSubscriber(this);
     }
 }

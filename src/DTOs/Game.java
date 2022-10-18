@@ -2,7 +2,7 @@ package DTOs;
 
 import java.time.LocalDate;
 
-public class Game 
+public final class Game 
 {
     public final LocalDate date;
     public final String versusWho;

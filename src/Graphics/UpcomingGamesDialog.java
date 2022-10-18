@@ -1,11 +1,18 @@
 package Graphics;
 
-import javax.swing.table.DefaultTableModel;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.*;
+import java.util.Objects;
 
-import Controllers.SqlController;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import Engine.SQL.SqlController;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -75,29 +82,16 @@ public class UpcomingGamesDialog extends JDialog implements ISubscriber
     @Override
     public void subscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
+
         subscribable.addSubsriber(this);
     }
 
     @Override
     public void unsubscribe(ISubscribable subscribable) 
     {
+        Objects.requireNonNull(subscribable);
+
         subscribable.removeSubscriber(this);
-    }
-
-    private void repaintAndRevalidate()
-    {
-        ArrayList<Object[]> games = connection.getFutureGames();
-        this.tableModel = new DefaultTableModel(columnHeaders, 0);
-        this.tableModel.addRow(columnHeaders);
-        
-        for (Object[] objects : games) 
-        {
-            this.tableModel.addRow(objects);
-        }
-        
-        this.table.setModel(tableModel);
-
-        this.revalidate();
-        this.repaint();
     }
 }

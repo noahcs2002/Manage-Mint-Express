@@ -1,10 +1,6 @@
 package DTOs;
 
-import java.util.List;
-import Interfaces.Pitcher;
-import Misc.Stat;
-
-public class Infielder implements Pitcher
+public class Infielder
 {   
     public String name;
     public String team;
@@ -46,25 +42,5 @@ public class Infielder implements Pitcher
         this.suspension = suspension ;
         this.position = position ;
         this.number = number ;
-    }
-
-    @Override
-    public void recordGame(List<Stat> stats) 
-    {
-    }
-
-    @Override
-    public void setup() 
-    {
-    }
-
-    @Override
-    public void putOnInjuredList(String message) 
-    {
-    }
-
-    @Override
-    public void putOnSuspensionList(String message) 
-    {
     }
 }

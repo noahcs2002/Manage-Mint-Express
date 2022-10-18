@@ -1,18 +1,16 @@
-package Controllers;
+package Engine.SQL;
 
-import java.io.File;
-import java.sql.Connection;
+import Engine.ErrorHandler.ErrorHandler;
 import java.sql.DriverManager;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import DTOs.Catcher;
-import DTOs.Infielder;
 import DTOs.Outfielder;
+import DTOs.Infielder;
+import java.util.List;
+import DTOs.Catcher;
 import DTOs.Pitcher;
-import Engine.SqlUtilityTool;
 
 public class SqlController 
 {
@@ -30,7 +28,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -56,16 +54,11 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
 
-    /**
-     * @apiNote Upper : Run executeUpdate
-     * @param teamName Team name to add
-     * @param rank Rank of the team
-     */
     public void makeTeam(String teamName, int rank)
     {
 
@@ -82,15 +75,10 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
     
-    /**
-     * @apiNote Downer : Run executeQuery
-     * @param dataNames
-     * @return result set of query results
-     */
     public ArrayList<Object[]> getPitchers(String teamName)
     {
         try
@@ -126,12 +114,11 @@ public class SqlController
                 });
             }
 
-            
             return results;
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG> : EXCPETION HANDLED : " + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
@@ -171,12 +158,11 @@ public class SqlController
                 });
             }
 
-        
             return results;
         }
         catch(Exception ex)
         {
-            System.out.println("Error in getCatchers:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
@@ -224,7 +210,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
@@ -270,7 +256,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
@@ -296,7 +282,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new pitcher\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -324,7 +310,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -347,7 +333,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -370,7 +356,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -395,7 +381,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception getting team");
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }   
@@ -425,7 +411,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
@@ -456,16 +442,11 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
             return null;
         }
     }
 
-    /**
-     * Schedule a game
-     * @param versus
-     * @param date
-     */
     public void scheduleGame(String versus, String date)
     {
 
@@ -478,7 +459,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Game\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -493,7 +474,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Game\n" + ex.getMessage());
+            ErrorHandler.handle(ex.getMessage());
         }
     }
 
@@ -529,9 +510,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception in clearData(*)");
+            ErrorHandler.handle(ex.getMessage());
         }
     }
-
-
 }

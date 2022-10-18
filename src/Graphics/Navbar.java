@@ -1,14 +1,18 @@
 package Graphics;
 
-import javax.swing.*;
+import java.awt.Desktop;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Objects;
 
-import Engine.ConfigIO;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import Engine.Configuration.ConfigurationDriver;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
-import java.awt.*;
-import java.net.URI;
-import java.util.ArrayList;
 
 public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 {
@@ -136,7 +140,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
         confirmReset.addActionListener(e -> 
         {
-            ConfigIO.reset();
+            ConfigurationDriver.reset();
             this.alert(null, InfoCode.TERMINATE);
         });
     }
@@ -147,21 +151,25 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     public void alert(Object change, InfoCode infoCode) 
     {
         for (ISubscriber sub : subs) 
-        {
-            sub.getAlert(change, infoCode);    
-        }    
+            sub.getAlert(change, infoCode);
     }
 
     @Override
     public void addSubsriber(ISubscriber subscriber) 
     {
-        subs.add(subscriber);
+        Objects.requireNonNull(subscriber);
+
+        if(!subs.contains(subscriber))
+            subs.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) 
     {
-        subs.remove(subscriber);
+        Objects.requireNonNull(subscriber);
+
+        if(subs.contains(subscriber))
+            subs.remove(subscriber);    
     }
 
     @Override

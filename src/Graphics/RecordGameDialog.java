@@ -1,15 +1,18 @@
 package Graphics;
 
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Objects;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.ArrayList;
 
-import Controllers.SqlController;
+import Engine.SQL.SqlController;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -78,28 +81,27 @@ public class RecordGameDialog extends JDialog implements ISubscribable
 
 
     @Override
-    public void alert(Object change, InfoCode infoCode)
+    public void alert(Object change, InfoCode infoCode) 
     {
-        for(ISubscriber sub : subs)
-        {
+        for (ISubscriber sub : subs) 
             sub.getAlert(change, infoCode);
-        }
     }
 
     @Override
-    public void addSubsriber(ISubscriber subscriber)
+    public void addSubsriber(ISubscriber subscriber) 
     {
-        this.subs.add(subscriber);
+        Objects.requireNonNull(subscriber);
+
+        if(!subs.contains(subscriber))
+            subs.add(subscriber);
     }
 
     @Override
-    public void removeSubscriber(ISubscriber subscriber)
+    public void removeSubscriber(ISubscriber subscriber) 
     {
-        this.subs.remove(subscriber);
+        Objects.requireNonNull(subscriber);
+
+        if(subs.contains(subscriber))
+            subs.remove(subscriber);    
     }
-
-    
-
-
-
 }

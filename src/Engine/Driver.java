@@ -1,9 +1,13 @@
 package Engine;
-import Graphics.*;
 
-import java.awt.event.*;
-
-import Controllers.SqlController;
+import Engine.Configuration.ConfigurationDriver;
+import Engine.ErrorHandler.ErrorHandler;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import Engine.SQL.SqlController;
+import Graphics.StartupDialog;
+import Graphics.FancyFrame;
+import Graphics.Loading;
 
 /**
  * Main Driver class for Manage-Mint Express
@@ -12,7 +16,7 @@ public class Driver
 {
     public static void main(String[] args) 
     {
-        if(!ConfigIO.hasStartupRan())
+        if(!ConfigurationDriver.hasStartupRan())
         {
             StartupDialog d = new StartupDialog();
 
@@ -32,13 +36,13 @@ public class Driver
             try
             {
                 Loading l = new Loading();
-                // l.loading();
+                l.loading();
                 new FancyFrame(SqlController.getTeam());
                 l.dispose();
             }
             catch(Exception ex)
             {
-
+                ErrorHandler.handle(ex.getMessage());
             }
         }
         
