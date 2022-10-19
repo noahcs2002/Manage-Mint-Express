@@ -1,18 +1,22 @@
 package Graphics;
 
-import Controllers.SqlController;
-import Subscribers.ISubscribable;
-import Subscribers.ISubscriber;
-import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import Controllers.SqlController;
 import Misc.InfoCode;
-import java.awt.*;
-import java.util.ArrayList;
+import Subscribers.ISubscribable;
+import Subscribers.ISubscriber;
 
+/**
+ * Add a new game. 
+ * Subscribable.
+ */
 public class AddGameDialog extends JDialog implements ISubscribable
 {
 
@@ -91,5 +95,4 @@ public class AddGameDialog extends JDialog implements ISubscribable
     {
         subs.remove(subscriber);
     }
-    
 }

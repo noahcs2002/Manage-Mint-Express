@@ -10,6 +10,9 @@ import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
+/**
+ * Dialog for working with past games
+ */
 public class PastGamesDialog extends JDialog implements ISubscriber
 {
 

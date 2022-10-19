@@ -7,9 +7,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import Engine.ErrorHandler.ErrorHandler;
+
+/**
+ * File IO with respect to the config file
+ */
 public class ConfigIO 
 {
 
+    /**
+     * Check if the startup procedure has been ran
+     * @return True if startup procedure has been ran, else false
+     */
     public static boolean hasStartupRan()
     {
         ArrayList<String> configLines = new ArrayList<>();
@@ -32,6 +41,9 @@ public class ConfigIO
         }
     }
 
+    /**
+     * Reset the data in the database from scratch
+     */
     public static void reset()
     {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("assets\\config.txt"))))
@@ -40,8 +52,7 @@ public class ConfigIO
         }
         catch(Exception ex)
         {
+            ErrorHandler.handle(ex.getMessage());
         }
     }
-
-    
 }

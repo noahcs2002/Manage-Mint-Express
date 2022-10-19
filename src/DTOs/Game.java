@@ -2,6 +2,9 @@ package DTOs;
 
 import java.time.LocalDate;
 
+/**
+ * Game DTO
+ */
 public class Game 
 {
     public final LocalDate date;

@@ -14,6 +14,9 @@ import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
+/**
+ * Dialog for recording of a game.
+ */
 public class RecordGameDialog extends JDialog implements ISubscribable
 {
 

@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
 import DTOs.Catcher;
 import DTOs.Infielder;
 import DTOs.Outfielder;
@@ -20,6 +18,9 @@ public class SqlController
 
     private Connection conn ;
 
+    /**
+     * Serve as a middle man between the API and SQL
+     */
     public SqlController()
     {
         try
@@ -32,35 +33,8 @@ public class SqlController
         }
     }
 
-    public String[] getTeams()
-    {
-        try
-        {
-            Statement selectStatement = conn.createStatement();
-            List<String> res = new ArrayList<String>();
-
-            ResultSet set = selectStatement.executeQuery("SELECT * FROM Teams");
-
-            while(set.next())
-                res.add(set.getString("Name"));
-
-            String[] resArr = new String[res.size()];
-
-            for(int i =0; i < res.size(); i += 1)
-                resArr[i] = res.get(i);
-            
-            return resArr;
-
-        }
-        catch(Exception ex)
-        {
-            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
-            return null;
-        }
-    }
-
     /**
-     * @apiNote Upper : Run executeUpdate
+     * Create a team in the database
      * @param teamName Team name to add
      * @param rank Rank of the team
      */
@@ -85,9 +59,9 @@ public class SqlController
     }
     
     /**
-     * @apiNote Downer : Run executeQuery
+     * Fetch all pitchers from the database
      * @param dataNames
-     * @return result set of query results
+     * @return All pitchers
      */
     public ArrayList<Object[]> getPitchers(String teamName)
     {
@@ -124,7 +98,6 @@ public class SqlController
                 });
             }
 
-            
             return results;
         }
         catch(Exception ex)
@@ -134,6 +107,11 @@ public class SqlController
         }
     }
 
+    /**
+     * Fetch all catchers from the database
+     * @param teamName Team to fetch all catchers from
+     * @return All catchers
+     */
     public ArrayList<Object[]> getCatchers(String teamName)
     {
         try
@@ -179,6 +157,11 @@ public class SqlController
         }
     }
 
+    /**
+     * Get all infielders
+     * @param teamName The team to pull infielders from
+     * @return All infielders
+     */
     public ArrayList<Object[]> getInfielders(String teamName)
     {
         try
@@ -227,6 +210,11 @@ public class SqlController
         }
     }
 
+    /**
+     * Get all outfielders
+     * @param teamName Team to pull outfielders from
+     * @return All outfielders
+     */
     public ArrayList<Object[]> getOutfielders(String teamName)
     {
         try
@@ -263,7 +251,6 @@ public class SqlController
                 });
             }
 
-        
             return results;
         }
         catch(Exception ex)
@@ -273,6 +260,10 @@ public class SqlController
         }
     }
 
+    /**
+     * Create a pitcher
+     * @param pitcher Pitcher DTO to mock for creation
+     */
     public void makePitcher(Pitcher pitcher)
     {
         final String sqlString = "INSERT INTO PitchingStaff VALUES ('" 
@@ -298,6 +289,10 @@ public class SqlController
         }
     }
 
+    /**
+     * Create a catcher
+     * @param catcher Catcher DTO to mock for creation
+     */
     public void makeCatcher(Catcher catcher)
     {
         final String sqlString = "INSERT INTO CatchingStaff ("
@@ -326,6 +321,10 @@ public class SqlController
         }
     }
 
+    /**
+     * Create an infielder
+     * @param infielder Infielder DTO to mock for creation
+     */
     public void makeInfielder(Infielder infielder)
     {
         final String sqlString = "INSERT INTO Infielders VALUES('"
@@ -349,15 +348,19 @@ public class SqlController
         }
     }
 
-    public void makeOutfielder(Outfielder infielder)
+    /**
+     * Create an outfielder
+     * @param outfielder Outfielder DTO to mock for creation
+     */
+    public void makeOutfielder(Outfielder outfielder)
     {
         final String sqlString = "INSERT INTO Outfielders VALUES('"
-        + infielder.name + "', '" + infielder.team + "', " + infielder.gamesPlayed
-        + ", " + infielder.gamesStarted + ", " + infielder.inningsPlayed 
-        + ", " + infielder.totalChances + ", " + infielder.putOuts + ", " + infielder.assists
-        + ", " + infielder.errors + ", " + infielder.doublePlaysTurned + ", " + infielder.isInjured
-        + ", '" + infielder.injury + "', " + infielder.isSuspended + ", '" + infielder.suspension 
-        + "', '" + infielder.position + "', " + infielder.number
+        + outfielder.name + "', '" + outfielder.team + "', " + outfielder.gamesPlayed
+        + ", " + outfielder.gamesStarted + ", " + outfielder.inningsPlayed 
+        + ", " + outfielder.totalChances + ", " + outfielder.putOuts + ", " + outfielder.assists
+        + ", " + outfielder.errors + ", " + outfielder.doublePlaysTurned + ", " + outfielder.isInjured
+        + ", '" + outfielder.injury + "', " + outfielder.isSuspended + ", '" + outfielder.suspension 
+        + "', '" + outfielder.position + "', " + outfielder.number
         + ");";
 
         ErrorHandler.handle(sqlString);
@@ -372,6 +375,10 @@ public class SqlController
         }
     }
 
+    /**
+     * Fetch the current team from the database
+     * @return The current team
+     */
     public static String getTeam()
     {
         String connectionString = 
@@ -398,6 +405,10 @@ public class SqlController
         }
     }   
 
+    /**
+     * Get all past games
+     * @return all past games
+     */
     public ArrayList<Object[]> getPastGames()
     {
         ArrayList<Object[]> list = new ArrayList<>();
@@ -428,7 +439,10 @@ public class SqlController
         }
     }
 
-    //Sort these by date eventually
+    /**
+     * Get all upcoming games
+     * @return all upcoming games
+     */
     public ArrayList<Object[]> getFutureGames()
     {
         ArrayList<Object[]> list = new ArrayList<>();
@@ -461,8 +475,8 @@ public class SqlController
 
     /**
      * Schedule a game
-     * @param versus
-     * @param date
+     * @param versus who to play against
+     * @param date when to play the game
      */
     public void scheduleGame(String versus, String date)
     {
@@ -480,6 +494,11 @@ public class SqlController
         }
     }
 
+    /**
+     * Record a game as complete
+     * @param versus opponent
+     * @param date who they played against
+     */
     public void recordGame(String versus, String date)
     {
         final String sqlString = "UPDATE Games SET HasBeenPlayed = 1"
@@ -495,6 +514,10 @@ public class SqlController
         }
     }
 
+    /**
+     * Clear all data
+     * @param positionToClear what position to clear data from
+     */
     public void clearData(String positionToClear)
     {
         try
@@ -530,6 +553,4 @@ public class SqlController
             ErrorHandler.handle("Exception in clearData(*)");
         }
     }
-
-
 }

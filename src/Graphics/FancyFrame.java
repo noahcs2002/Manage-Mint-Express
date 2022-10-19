@@ -8,6 +8,10 @@ import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
+/**
+ * Main frame.
+ * Subscriber.
+ */
 public class FancyFrame extends JFrame implements ISubscriber
 {
     JPanel mainPanel = new JPanel();

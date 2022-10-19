@@ -1,5 +1,8 @@
 package DTOs;
 
+/**
+ * Catcher DTO
+ */
 public class Catcher
 {
     public String name;

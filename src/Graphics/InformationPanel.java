@@ -11,6 +11,11 @@ import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
 
+/**
+ * Main information panel.
+ * Subscriber.
+ * Subscribable.
+ */
 public class InformationPanel extends JPanel implements ISubscribable, ISubscriber
 {
     JTable informationTable;
@@ -130,9 +135,12 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
         }
     }
 
-   
-
-    public void updateInformation(String team, String position)
+    /**
+     * Update current information
+     * @param team Team to update with.
+     * @param position Position to update with.
+     */
+    private void updateInformation(String team, String position)
     {
         DefaultTableModel tableModel ;
         ArrayList<Object[]> results ;

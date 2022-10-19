@@ -1,10 +1,12 @@
 package Graphics;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import Controllers.SqlController;
 import DTOs.Catcher;
 import DTOs.Infielder;
@@ -15,8 +17,10 @@ import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
-import java.awt.*;
-
+/**
+ * Add a player.
+ * Subscribable
+ */
 public class AddPlayerDialog extends JDialog implements ISubscribable
 {
     private String position;
@@ -324,26 +328,6 @@ public class AddPlayerDialog extends JDialog implements ISubscribable
         helperPanel.add(confButton);
 
         this.add(helperPanel, BorderLayout.SOUTH);
-    }
-
-    public Pitcher getPitcher()
-    {
-        return this.pitcher;
-    }
-
-    public Catcher getCatcher()
-    {
-        return this.catcher;
-    }
-
-    public Infielder getInfielder()
-    {
-        return this.infielder;
-    }
-
-    public Outfielder getOutfielder()
-    {
-        return this.outfielder;
     }
 
     @Override

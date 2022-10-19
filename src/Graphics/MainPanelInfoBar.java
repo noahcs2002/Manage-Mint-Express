@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Main panel information bar, for changing drop downs and clearing data etc.
+ */
 @SuppressWarnings("unused")
 public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribable
 {
@@ -43,7 +46,6 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
         for(String p : positions)
             positionChoice.addItem(p);
 
-
         positionChoice.addActionListener(e -> 
         {
             this.pos = positionChoice.getSelectedItem().toString();
@@ -70,7 +72,6 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
         JPanel centerRegionPanel = new JPanel();
 
         this.add(centerRegionPanel, BorderLayout.CENTER);
-
     }
 
     @Override

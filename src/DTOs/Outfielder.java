@@ -1,5 +1,8 @@
 package DTOs;
 
+/**
+ * Outfielder DTO
+ */
 public class Outfielder
 {
     public String name;

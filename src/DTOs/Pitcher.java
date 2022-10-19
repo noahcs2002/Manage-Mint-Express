@@ -1,9 +1,8 @@
 package DTOs;
 
-import java.util.List;
-import Misc.Stat;
-
-@SuppressWarnings("unused")
+/**
+ * Pitcher DTO
+ */
 public class Pitcher
 {
     public String name;

@@ -10,6 +10,9 @@ import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
 
+/**
+ * Schedule a game.
+ */
 public class UpcomingGamesDialog extends JDialog implements ISubscriber
 {
 

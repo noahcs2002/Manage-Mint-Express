@@ -11,6 +11,9 @@ import java.awt.*;
 import java.net.URI;
 import java.util.ArrayList;
 
+/**
+ * Navbar for MME
+ */
 public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 {
     ArrayList<ISubscriber> subs;
@@ -102,27 +105,19 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         catcher.addActionListener(e -> 
         {
             AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Catchers");
-            
             this.subscribe(dialog);
-
-            ErrorHandler.handle(this.currentTeam);
         });
 
         infielder.addActionListener(e -> 
         {
             AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Infielders");
-            
             this.subscribe(dialog);
-
-            ErrorHandler.handle(this.currentTeam);
         });
 
         outfielder.addActionListener(e -> 
         {
             AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
             this.subscribe(dialog);
-
-            ErrorHandler.handle(this.currentTeam);
         });
 
         pastGames.addActionListener(e -> 
@@ -141,8 +136,6 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
             this.alert(null, InfoCode.TERMINATE);
         });
     }
-
-    
 
     @Override
     public void alert(Object change, InfoCode infoCode) 

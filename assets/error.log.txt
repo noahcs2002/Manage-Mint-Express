@@ -40,3 +40,12 @@ aTeam
 
 aTeam
 
+Beginning query
+
+Query ran
+
+aaa
+
+aaa
+
+aaa

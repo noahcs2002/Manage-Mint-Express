@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import Engine.ErrorHandler.ErrorHandler;
 
+/**
+ * Handle startup tasks in the config file
+ */
 public class ConfigurationDriver 
 {
     ArrayList<String> configLines = new ArrayList<>();
@@ -31,6 +34,9 @@ public class ConfigurationDriver
         }
     }
 
+    /**
+     * Mark the database as scaffolded
+     */
     public void scaffoldDb()
     {
 
@@ -51,6 +57,10 @@ public class ConfigurationDriver
         }
     }
 
+    /**
+     * Check if the database has been scaffolded.
+     * @return True if database has been scaffolded, false else.
+     */
     public boolean isDbScaffolded()
     {
         return configLines.contains("startup_ran : true");

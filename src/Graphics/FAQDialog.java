@@ -3,6 +3,9 @@ package Graphics;
 import javax.swing.JDialog;
 import javax.swing.JList;
 
+/**
+ * FAQs
+ */
 public class FAQDialog extends JDialog
 {
     public FAQDialog()

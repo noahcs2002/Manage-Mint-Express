@@ -5,6 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import Engine.ErrorHandler.ErrorHandler;
+
+/**
+ * Loading frame. Made to buy database time to connect without appearing laggy.
+ */
 public class Loading extends JFrame
 {
     private JProgressBar progressBar;
@@ -36,6 +41,9 @@ public class Loading extends JFrame
         this.setVisible(true);
     }
 
+    /**
+     * Begin loading proc.
+     */
     public void loading()
     {
         for(int i = 0; i <= 2000; i += 50)
@@ -48,7 +56,7 @@ public class Loading extends JFrame
             }
             catch(Exception exc)
             {
-
+                ErrorHandler.handle(exc.getMessage());
             }
         }
     }

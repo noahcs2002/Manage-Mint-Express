@@ -7,6 +7,9 @@ import Engine.ErrorHandler.ErrorHandler;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Dialog for project start up procs.
+ */
 public class StartupDialog extends JDialog
 {
     public String team;
@@ -15,9 +18,6 @@ public class StartupDialog extends JDialog
     {
         SqlController connection = new SqlController();
         JPanel panel = new JPanel();
-
-
-        
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
@@ -54,13 +54,7 @@ public class StartupDialog extends JDialog
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(400, 00);
         this.setLocationRelativeTo(null);
-
         this.setLayout(new BorderLayout());
-
-        // GroupLayout layout = new GroupLayout(panel);
-        // layout.setAutoCreateGaps(true);
-        // layout.setAutoCreateContainerGaps(true);
-        // panel.setLayout(layout);
 
         this.add(panel, BorderLayout.CENTER);
         this.pack();
