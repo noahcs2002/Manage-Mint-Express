@@ -1,6 +1,9 @@
 package Engine;
 
 import java.sql.Statement;
+
+import Engine.ErrorHandler.ErrorHandler;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,11 +26,11 @@ public class Startup
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            System.out.println("Connection Established");
+            ErrorHandler.handle("Connection Established");
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n" + ex.getLocalizedMessage());
         }
 
         this.scaffoldDb();
@@ -57,13 +60,13 @@ public class Startup
                 }
                 catch(Exception ex)
                 {
-                    System.out.println("Exception handled \n" + ex.getMessage());
+                    ErrorHandler.handle("Exception handled \n" + ex.getMessage());
                 }
             }
         } 
         catch (Exception ex)
         {
-            System.out.println("Exception handled: " + ex.getMessage());
+            ErrorHandler.handle("Exception handled: " + ex.getMessage());
         }
     }
 
@@ -75,7 +78,7 @@ public class Startup
         } 
         catch (Exception e) 
         {
-            System.out.println("Exception thrown on dispose:\n" + e.getMessage());
+            ErrorHandler.handle("Exception thrown on dispose:\n" + e.getMessage());
         }
     }
 }

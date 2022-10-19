@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import Engine.ErrorHandler.ErrorHandler;
+
 public class ConfigurationDriver 
 {
     ArrayList<String> configLines = new ArrayList<>();
@@ -25,7 +27,7 @@ public class ConfigurationDriver
         }
         catch(Exception ex)
         {
-            System.out.println("Error handled in Engine.ConfigurationDriver.CONSTRUCTOR: \n" + ex.getMessage() );
+            ErrorHandler.handle("Error handled in Engine.ConfigurationDriver.CONSTRUCTOR: \n" + ex.getMessage() );
         }
     }
 
@@ -44,7 +46,7 @@ public class ConfigurationDriver
             }
             catch(Exception ex)
             {
-                System.out.println("Exception handled in Engine.ConfigurationDriver.scaffoldDb(): \n" + ex.getMessage());
+                ErrorHandler.handle("Exception handled in Engine.ConfigurationDriver.scaffoldDb(): \n" + ex.getMessage());
             }
         }
     }

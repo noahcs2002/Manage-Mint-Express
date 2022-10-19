@@ -1,0 +1,20 @@
+Connection Established
+
+Beginning query
+
+Query ran
+
+Connection Established
+
+someTeam
+
+Connection Established
+
+Connection Established
+
+someTeam
+
+Connection Established
+
+Connection Established
+

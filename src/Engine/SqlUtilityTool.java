@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import Engine.ErrorHandler.ErrorHandler;
+
 public class SqlUtilityTool
 {
     public static String extractSqlStringFromFile(File file) throws FileNotFoundException
@@ -24,7 +26,7 @@ public class SqlUtilityTool
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: Exception Handled in Engine.SqlUtilityTool.java:\n" + ex.getMessage());
+            ErrorHandler.handle("<DEBUG>: Exception Handled in Engine.SqlUtilityTool.java:\n" + ex.getMessage());
             return ex.getMessage();
         }
     }

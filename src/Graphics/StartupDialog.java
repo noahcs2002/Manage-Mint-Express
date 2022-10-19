@@ -2,6 +2,8 @@ package Graphics;
 
 import javax.swing.*;
 import Controllers.SqlController;
+import Engine.ErrorHandler.ErrorHandler;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -81,7 +83,7 @@ public class StartupDialog extends JDialog
                 }
                 catch(Exception ex)
                 {
-                    System.out.println("<DEBUG>: Exception Handled\n\n\n" + ex.getLocalizedMessage());
+                    ErrorHandler.handle("<DEBUG>: Exception Handled\n\n\n" + ex.getLocalizedMessage());
                 }
             }
         });

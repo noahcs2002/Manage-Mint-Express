@@ -83,21 +83,4 @@ public class UpcomingGamesDialog extends JDialog implements ISubscriber
     {
         subscribable.removeSubscriber(this);
     }
-
-    private void repaintAndRevalidate()
-    {
-        ArrayList<Object[]> games = connection.getFutureGames();
-        this.tableModel = new DefaultTableModel(columnHeaders, 0);
-        this.tableModel.addRow(columnHeaders);
-        
-        for (Object[] objects : games) 
-        {
-            this.tableModel.addRow(objects);
-        }
-        
-        this.table.setModel(tableModel);
-
-        this.revalidate();
-        this.repaint();
-    }
 }

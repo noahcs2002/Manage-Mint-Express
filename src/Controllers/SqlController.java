@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import DTOs.Catcher;
 import DTOs.Infielder;
 import DTOs.Outfielder;
 import DTOs.Pitcher;
-import Engine.SqlUtilityTool;
+import Engine.ErrorHandler.ErrorHandler;
 
 public class SqlController 
 {
@@ -26,11 +25,11 @@ public class SqlController
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            System.out.println("Connection Established");
+            ErrorHandler.handle("Connection Established");
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
         }
     }
 
@@ -56,7 +55,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
             return null;
         }
     }
@@ -73,16 +72,16 @@ public class SqlController
 
         try
         {
-            System.out.println("Beginning query");
+            ErrorHandler.handle("Beginning query");
             Statement addStatement = conn.createStatement();
             addStatement.executeUpdate(query);
 
-            System.out.println("Query ran");
+            ErrorHandler.handle("Query ran");
 
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n\n\n" + ex.getLocalizedMessage());
         }
     }
     
@@ -131,7 +130,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG> : EXCPETION HANDLED : " + ex.getMessage());
+            ErrorHandler.handle("<DEBUG> : EXCPETION HANDLED : " + ex.getMessage());
             return null;
         }
     }
@@ -176,7 +175,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Error in getCatchers:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("Error in getCatchers:\n\n" + ex.getLocalizedMessage());
             return null;
         }
     }
@@ -224,7 +223,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
             return null;
         }
     }
@@ -270,7 +269,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
+            ErrorHandler.handle("Exception handled in getInfielders:\n\n" + ex.getLocalizedMessage());
             return null;
         }
     }
@@ -288,7 +287,7 @@ public class SqlController
             + pitcher.isSuspended + ", '" + pitcher.suspendedReason + "', "
             + pitcher.number + ");";
 
-        System.out.println(sqlString);
+        ErrorHandler.handle(sqlString);
 
         try(Statement statement = conn.createStatement())
         {
@@ -296,7 +295,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new pitcher\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new pitcher\n" + ex.getMessage());
         }
     }
 
@@ -316,7 +315,7 @@ public class SqlController
             + catcher.isSuspended + ", '" + catcher.suspension + "', "
             + catcher.number + ");";
 
-        System.out.println(sqlString);
+        ErrorHandler.handle(sqlString);
 
         try(Statement statement = conn.createStatement())
         {
@@ -324,7 +323,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new Catcher\n" + ex.getMessage());
         }
     }
 
@@ -339,7 +338,7 @@ public class SqlController
         + "', '" + infielder.position + "', " + infielder.number
         + ");";
 
-        System.out.println(sqlString);
+        ErrorHandler.handle(sqlString);
 
         try(Statement statement = conn.createStatement())
         {
@@ -347,7 +346,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new Catcher\n" + ex.getMessage());
         }
     }
 
@@ -362,7 +361,7 @@ public class SqlController
         + "', '" + infielder.position + "', " + infielder.number
         + ");";
 
-        System.out.println(sqlString);
+        ErrorHandler.handle(sqlString);
 
         try(Statement statement = conn.createStatement())
         {
@@ -370,7 +369,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Catcher\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new Catcher\n" + ex.getMessage());
         }
     }
 
@@ -395,7 +394,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception getting team");
+            ErrorHandler.handle("Exception getting team");
             return null;
         }
     }   
@@ -425,7 +424,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            ErrorHandler.handle("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
             return null;
         }
     }
@@ -456,7 +455,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
+            ErrorHandler.handle("Exception handled in SqlController.GetPastGames\n" + ex.getMessage());
             return null;
         }
     }
@@ -478,7 +477,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Game\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new Game\n" + ex.getMessage());
         }
     }
 
@@ -493,7 +492,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception making new Game\n" + ex.getMessage());
+            ErrorHandler.handle("Exception making new Game\n" + ex.getMessage());
         }
     }
 
@@ -529,7 +528,7 @@ public class SqlController
         }
         catch(Exception ex)
         {
-            System.out.println("Exception in clearData(*)");
+            ErrorHandler.handle("Exception in clearData(*)");
         }
     }
 

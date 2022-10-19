@@ -3,6 +3,7 @@ package Graphics;
 import javax.swing.*;
 
 import Engine.ConfigIO;
+import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -84,7 +85,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
                 }
                 catch(Exception ex)
                 {
-                    System.out.println("EXCEPTION HANDLED BROWSING INTERNET: \n" + ex.getLocalizedMessage());
+                    ErrorHandler.handle("EXCEPTION HANDLED BROWSING INTERNET: \n" + ex.getLocalizedMessage());
                 }
             }
         });
@@ -95,7 +96,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
             
             this.subscribe(dialog);
 
-            System.out.println(this.currentTeam);
+            ErrorHandler.handle(this.currentTeam);
         });
 
         catcher.addActionListener(e -> 
@@ -104,7 +105,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
             
             this.subscribe(dialog);
 
-            System.out.println(this.currentTeam);
+            ErrorHandler.handle(this.currentTeam);
         });
 
         infielder.addActionListener(e -> 
@@ -113,7 +114,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
             
             this.subscribe(dialog);
 
-            System.out.println(this.currentTeam);
+            ErrorHandler.handle(this.currentTeam);
         });
 
         outfielder.addActionListener(e -> 
@@ -121,7 +122,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
             AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
             this.subscribe(dialog);
 
-            System.out.println(this.currentTeam);
+            ErrorHandler.handle(this.currentTeam);
         });
 
         pastGames.addActionListener(e -> 
@@ -170,7 +171,7 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         if(infoCode == InfoCode.TEAM_CHANGE)
         {
             this.currentTeam = (String) change;
-            System.out.println(currentTeam);
+            ErrorHandler.handle(currentTeam);
         }
 
         alert(change, infoCode);

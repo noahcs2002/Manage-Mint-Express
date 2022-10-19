@@ -2,6 +2,8 @@ package Graphics;
 
 import java.awt.*;
 import javax.swing.*;
+
+import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -14,7 +16,7 @@ public class FancyFrame extends JFrame implements ISubscriber
     
     public FancyFrame(String team)
     {
-        System.out.println(team);
+        ErrorHandler.handle(team);
         mainPanel.setLayout(new BorderLayout());
         InformationPanel infoPanel = new InformationPanel(team);
         infoBar = new MainPanelInfoBar(team, "Pitchers");

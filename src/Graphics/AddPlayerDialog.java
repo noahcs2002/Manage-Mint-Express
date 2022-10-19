@@ -10,6 +10,7 @@ import DTOs.Catcher;
 import DTOs.Infielder;
 import DTOs.Outfielder;
 import DTOs.Pitcher;
+import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -150,7 +151,7 @@ public class AddPlayerDialog extends JDialog implements ISubscribable
         }
         catch(Exception ex)
         {
-            System.out.println("Exception Thrown in AddPlayerDialog");
+            ErrorHandler.handle("Exception Thrown in AddPlayerDialog");
         }
 
         confButton.addActionListener(e -> 

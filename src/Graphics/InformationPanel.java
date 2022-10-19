@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Controllers.SqlController;
+import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
@@ -125,7 +126,7 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
         }
         catch(Exception ex)
         {
-            System.out.println("<DEBUG> EXCEPTION HANDLED (PitchersPanel): " + ex.getMessage());
+            ErrorHandler.handle("<DEBUG> EXCEPTION HANDLED (PitchersPanel): " + ex.getMessage());
         }
     }
 
