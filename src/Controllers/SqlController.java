@@ -25,7 +25,6 @@ public class SqlController
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            ErrorHandler.handle("Connection Established");
         }
         catch(Exception ex)
         {
