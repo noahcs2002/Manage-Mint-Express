@@ -1,18 +1,17 @@
 package Graphics;
 
+import Controllers.SqlController;
 import Subscribers.ISubscribable;
-import Engine.SQL.SqlController;
 import Subscribers.ISubscriber;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.util.Objects;
 import Misc.InfoCode;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class AddGameDialog extends JDialog implements ISubscribable
 {
@@ -84,19 +83,13 @@ public class AddGameDialog extends JDialog implements ISubscribable
     @Override
     public void addSubsriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(!subs.contains(subscriber))
-            subs.add(subscriber);
+        subs.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) 
     {
-        Objects.requireNonNull(subscriber);
-
-        if(subs.contains(subscriber))
-            subs.remove(subscriber);    
+        subs.remove(subscriber);
     }
     
 }

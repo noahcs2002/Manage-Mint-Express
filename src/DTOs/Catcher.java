@@ -1,6 +1,6 @@
 package DTOs;
 
-public final class Catcher
+public class Catcher
 {
     public String name;
     public String team;
@@ -54,4 +54,7 @@ public final class Catcher
         this.suspension = suspension;
         this.number = number;
     }
+
+    
+    
 }

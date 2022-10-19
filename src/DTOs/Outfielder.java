@@ -1,6 +1,6 @@
 package DTOs;
 
-public final class Outfielder
+public class Outfielder
 {
     public String name;
     public String team;
@@ -42,5 +42,5 @@ public final class Outfielder
         this.suspension = suspension ;
         this.position = position ;
         this.number = number ;
-    }    
+    }
 }

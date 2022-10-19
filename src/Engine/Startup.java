@@ -2,16 +2,17 @@ package Engine;
 
 import java.sql.Statement;
 
-import Engine.Configuration.ConfigurationDriver;
 import Engine.ErrorHandler.ErrorHandler;
-import Engine.SQL.SqlUtilityTool;
-import java.sql.DriverManager;
-import java.sql.Connection;
+
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 
 public class Startup 
 {
+    ConfigurationDriver driver = new ConfigurationDriver();
+
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
@@ -25,11 +26,11 @@ public class Startup
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            System.out.println("Connection Established");
+            ErrorHandler.handle("Connection Established");
         }
         catch(Exception ex)
         {
-            ErrorHandler.handle(ex.getMessage());
+            ErrorHandler.handle("<DEBUG>: EXCEPTION THROWN\n" + ex.getLocalizedMessage());
         }
 
         this.scaffoldDb();
@@ -42,7 +43,7 @@ public class Startup
         try(Statement sql = conn.createStatement())
         {
             String sqlString;
-            if(!ConfigurationDriver.isDbScaffolded())
+            if(!driver.isDbScaffolded())
             {
                 try
                 {
@@ -55,17 +56,17 @@ public class Startup
 
                     sql.executeUpdate(sqlString);
 
-                    ConfigurationDriver.scaffoldDb();
+                    driver.scaffoldDb();
                 }
                 catch(Exception ex)
                 {
-                    ErrorHandler.handle(ex.getMessage());
+                    ErrorHandler.handle("Exception handled \n" + ex.getMessage());
                 }
             }
         } 
         catch (Exception ex)
         {
-            ErrorHandler.handle(ex.getMessage());
+            ErrorHandler.handle("Exception handled: " + ex.getMessage());
         }
     }
 
@@ -75,9 +76,9 @@ public class Startup
         {
             conn.close();
         } 
-        catch (Exception ex) 
+        catch (Exception e) 
         {
-            ErrorHandler.handle(ex.getMessage());
+            ErrorHandler.handle("Exception thrown on dispose:\n" + e.getMessage());
         }
     }
 }

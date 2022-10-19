@@ -1,0 +1,6 @@
+code 0: position change
+code 1: team change
+code 2: new pitcher 
+code 3: new catcher
+code 4: new infielder
+code 5: new outfielder
