@@ -26,7 +26,6 @@ public class Startup
         try
         {
             conn = DriverManager.getConnection(connectionString);
-            ErrorHandler.handle("Connection Established");
         }
         catch(Exception ex)
         {
@@ -36,7 +35,6 @@ public class Startup
         this.scaffoldDb();
         this.dispose();
     }
-
 
     public void scaffoldDb()
     {
