@@ -24,3 +24,19 @@ Connection Established
 
 Connection Established
 
+Beginning query
+
+Query ran
+
+someTeam
+
+someTeam
+
+Beginning query
+
+Query ran
+
+aTeam
+
+aTeam
+

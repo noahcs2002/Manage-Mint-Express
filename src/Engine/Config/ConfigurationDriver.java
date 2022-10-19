@@ -1,4 +1,4 @@
-package Engine;
+package Engine.Config;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,7 @@ public class ConfigurationDriver
 
     public ConfigurationDriver()
     {
-        try(BufferedReader reader = new BufferedReader(new FileReader(new File("config\\config.txt"))))
+        try(BufferedReader reader = new BufferedReader(new FileReader(new File("assets\\config.txt"))))
         {
             String currentLine = reader.readLine();
 
@@ -40,7 +40,7 @@ public class ConfigurationDriver
         
         if(configLines.contains("startup_ran : false"))
         {
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("config\\config.txt"))))
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("assets\\config.txt"))))
             {
                 writer.write("startup_ran : true");
             }

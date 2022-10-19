@@ -1,4 +1,4 @@
-package Engine;
+package Engine.Config;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,7 +14,7 @@ public class ConfigIO
     {
         ArrayList<String> configLines = new ArrayList<>();
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(new File("config\\config.txt"))))
+        try(BufferedReader reader = new BufferedReader(new FileReader(new File("assets\\config.txt"))))
         {
             String currentLine = reader.readLine();
 
@@ -34,7 +34,7 @@ public class ConfigIO
 
     public static void reset()
     {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("config\\config.txt"))))
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("assets\\config.txt"))))
         {
             writer.write("startup_ran : false");
         }

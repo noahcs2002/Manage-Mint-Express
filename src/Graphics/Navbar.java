@@ -2,7 +2,7 @@ package Graphics;
 
 import javax.swing.*;
 
-import Engine.ConfigIO;
+import Engine.Config.ConfigIO;
 import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
