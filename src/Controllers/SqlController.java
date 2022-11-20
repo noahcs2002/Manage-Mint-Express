@@ -15,6 +15,7 @@ public class SqlController
 {
     private final String connectionString =  
     "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
+    // "jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java";
 
     private Connection conn ;
 

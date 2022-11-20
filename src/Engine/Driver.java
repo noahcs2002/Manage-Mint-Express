@@ -47,6 +47,5 @@ public class Driver
                 System.out.println("Fatal Error Occurred, please see error log for more details.");
             }
         }
-        
     }
 }

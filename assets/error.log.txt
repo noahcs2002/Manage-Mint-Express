@@ -49,3 +49,107 @@ aaa
 aaa
 
 aaa
+Exception getting team
+null
+Exception getting team
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Exception getting team
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Exception getting team
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused: no further information. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Exception getting team
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+This driver is not configured for integrated authentication. ClientConnectionId:6a9f430b-f2cf-4682-8f02-8300612ef379
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+This driver is not configured for integrated authentication. ClientConnectionId:b3c739dc-82af-4a5f-8c08-6c7cf4490464
+Exception getting team
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+Cannot open database "NS.baseball.manager" requested by the login. The login failed. ClientConnectionId:b7e859e2-9f3d-4a97-ad2e-00f60952a546
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+Cannot open database "NS.baseball.manager" requested by the login. The login failed. ClientConnectionId:bc9c82ab-cd03-4647-83c1-4de2b7e03327
+Exception getting team
+null
+<DEBUG> : EXCPETION HANDLED : Invalid object name 'PitchingStaff'.
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+Exception getting team
+null
+<DEBUG> : EXCPETION HANDLED : Invalid object name 'PitchingStaff'.
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+Beginning query
+<DEBUG>: EXCEPTION THROWN
+
+
+Invalid object name 'Teams'.
+Murray Tigers
+Beginning query
+Query ran
+Murray Tigers
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('Me', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+<DEBUG>: EXCEPTION THROWN
+
+
+No suitable driver found for jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java
+Exception thrown making connection in Startup
+No suitable driver found for jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java
+Exception handled: Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+Exception thrown disposing startup procs:
+Cannot invoke "java.sql.Connection.close()" because "this.conn" is null
+null
+<DEBUG>: EXCEPTION THROWN
+
+
+No suitable driver found for jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java
+<DEBUG> : EXCPETION HANDLED : Cannot invoke "java.sql.Connection.createStatement()" because "this.conn" is null
+<DEBUG> EXCEPTION HANDLED (PitchersPanel): Cannot invoke "java.util.ArrayList.iterator()" because "results" is null
+<DEBUG>: EXCEPTION THROWN
+
+
+No suitable driver found for jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java
+Beginning query
+Query ran
+Murray Tigers
