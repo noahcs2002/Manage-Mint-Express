@@ -11,5 +11,6 @@ public enum InfoCode
     NEW_TEAM,
     NEW_GAME,
     CLEARED_DATA,
-    TERMINATE
+    TERMINATE,
+    UPDATE_DATA
 }

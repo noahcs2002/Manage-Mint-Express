@@ -1,15 +1,14 @@
 package Graphics;
 
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import Controllers.SqlController;
 import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
 import Subscribers.ISubscribable;
 import Subscribers.ISubscriber;
-
 
 /**
  * Main information panel.
@@ -25,6 +24,8 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
     private String currentTeamSelection;
 
     ArrayList<ISubscriber> subs = new ArrayList<>();
+
+    DefaultTableModel tableModel;
 
     private final String[] pitchingTableColumnNames = 
     {
@@ -107,14 +108,13 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
         "Number"
     };
 
-
     public InformationPanel(String teamName)
     {
         currentPositionSelection = "Pitchers";
         currentTeamSelection = teamName;
         try
         {
-            DefaultTableModel tableModel = new DefaultTableModel(pitchingTableColumnNames, 0);
+            tableModel = new DefaultTableModel(pitchingTableColumnNames, 0);
             
             ArrayList<Object[]> results = connectionDriver.getPitchers(teamName);
 
@@ -142,7 +142,6 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
      */
     private void updateInformation(String team, String position)
     {
-        DefaultTableModel tableModel ;
         ArrayList<Object[]> results ;
 
         switch(position)
@@ -218,6 +217,11 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
                 updateInformation(currentTeamSelection, currentPositionSelection);
             break;
 
+            case UPDATE_DATA:
+                this.updateInformation(change.toString());
+            break;
+
+
             default : break;
         }
     }
@@ -252,4 +256,24 @@ public class InformationPanel extends JPanel implements ISubscribable, ISubscrib
     {
         this.subs.remove(subscriber);
     }
+
+    public void updateInformation(String pos)
+    {
+        ArrayList<Object[]> data = new ArrayList<>();
+
+        for(int i = 0; i < tableModel.getRowCount(); i += 1)
+        {
+            Object[] objs = new Object[tableModel.getColumnCount()];
+
+            for(int j = 0; j < tableModel.getColumnCount(); j += 1)
+            {
+                objs[j] = tableModel.getValueAt(i, j);
+            }
+
+            data.add(objs);
+        }
+
+        connectionDriver.applyUpdate(data, this.currentTeamSelection, pos);
+    }
+    
 }

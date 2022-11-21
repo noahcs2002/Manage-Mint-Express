@@ -100,9 +100,4 @@ public class RecordGameDialog extends JDialog implements ISubscribable
     {
         this.subs.remove(subscriber);
     }
-
-    
-
-
-
 }

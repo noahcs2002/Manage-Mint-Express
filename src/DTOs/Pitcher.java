@@ -67,5 +67,4 @@ public class Pitcher
     {
         return this.name;
     }
-    
 }

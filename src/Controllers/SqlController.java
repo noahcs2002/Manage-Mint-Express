@@ -554,4 +554,153 @@ public class SqlController
             ErrorHandler.handle("Exception in clearData(*)");
         }
     }
+
+    public void applyUpdate(ArrayList<Object[]> data, String team, String pos)
+    {
+        //start at 1 to avoid column names
+
+        switch(pos)
+                {
+                    case "Pitchers":
+                        for(int i = 1; i < data.size(); i += 1)
+                        {
+                            try(Statement statement = conn.createStatement())
+                            {
+                                String sqlString = "UPDATE PitchingStaff "
+                                + " SET Player = \'" + data.get(i)[0]
+                                + "\', Team = \'" + team
+                                + "\', InningsPitched = " + data.get(i)[2]
+                                + ", Hits = " + data.get(i)[3]
+                                + ", Runs = " + data.get(i)[4]
+                                + ", EarnedRuns = " + data.get(i)[5]
+                                + ", Walks = " + data.get(i)[6]
+                                + ", Strikeouts = " + data.get(i)[7]
+                                + ", Homeruns = " + data.get(i)[8]
+                                + ", Saves = " + data.get(i)[9]
+                                + ", ERA = " + data.get(i)[10]
+                                + ", WHIP = " + data.get(i)[11]
+                                + ", IsInjured = " + (data.get(i)[12].equals(false) ? 0 : 1)  
+                                + ", Injury = \'" + data.get(i)[13]
+                                + "\', IsSuspended = " + (data.get(i)[14].equals(false) ? 0 : 1)
+                                + ", Suspension = \'" + data.get(i)[15]
+                                + "\',Number = " + data.get(i)[16]
+                                + " WHERE RefID = " + i;
+
+                                statement.execute(sqlString);
+                                // System.out.println(sqlString);
+                            }
+                            catch(Exception ex)
+                            {
+                                System.out.println(ex.getLocalizedMessage());
+                            }
+                        }
+                        
+                    break;
+
+                    case("Catchers"):
+                        for(int i = 1; i < data.size(); i += 1)
+                        {
+                            try(Statement statement = conn.createStatement())
+                            {
+                                String sqlString = "UPDATE CatchingStaff "
+                                + " SET Name = \'" + data.get(i)[0]
+                                + "\', Team = \'" + team
+                                + "\', GamesPlayed = " + data.get(i)[2]
+                                + ", GamesStarted = " + data.get(i)[3]
+                                + ", InningsPlayed = " + data.get(i)[4]
+                                + ", TotalChances = " + data.get(i)[5]
+                                + ", PutOuts = " + data.get(i)[6]
+                                + ", Assists = " + data.get(i)[7]
+                                + ", Errors = " + data.get(i)[8]
+                                + ", DoublePlays = " + data.get(i)[9]
+                                + ", IsInjured = " + (data.get(i)[10].equals(false) ? 0 : 1)  
+                                + ", Injury = \'" + data.get(i)[11]
+                                + "\', IsSuspended = " + (data.get(i)[12].equals(false) ? 0 : 1)
+                                + ", Suspension = \'" + data.get(i)[13]
+                                + "\', Position = \'" + data.get(i)[14]
+                                + "\', Number = " + data.get(i)[15]
+                                + " WHERE RefID = " + i;
+
+                                statement.execute(sqlString);
+                                // System.out.println(sqlString);
+                            }
+                            catch(Exception ex)
+                            {
+                                System.out.println(ex.getMessage());
+                            }
+                        }
+                    break;
+
+                    case("Infielders"):
+                    for(int i = 1; i < data.size(); i += 1)
+                    {
+                        try(Statement statement = conn.createStatement())
+                        {
+                            String sqlString = "UPDATE Infielders "
+                            + " SET Name = \'" + data.get(i)[0]
+                            + "\', Team = \'" + team
+                            + "\', GamesPlayed = " + data.get(i)[2]
+                            + ", GamesStarted = " + data.get(i)[3]
+                            + ", InningsPlayed = " + data.get(i)[4]
+                            + ", TotalChances = " + data.get(i)[5]
+                            + ", PutOuts = " + data.get(i)[6]
+                            + ", Assists = " + data.get(i)[7]
+                            + ", Errors = " + data.get(i)[8]
+                            + ", DoublePlays = " + data.get(i)[9]
+                            + ", IsInjured = " + (data.get(i)[10].equals(false) ? 0 : 1)  
+                            + ", Injury = \'" + data.get(i)[11]
+                            + "\', IsSuspended = " + (data.get(i)[12].equals(false) ? 0 : 1)
+                            + ", Suspension = \'" + data.get(i)[13]
+                            + "\', Position = \'" + data.get(i)[14]
+                            + "\', Number = " + data.get(i)[15]
+                            + " WHERE RefID = " + i;
+
+                            statement.execute(sqlString);
+                            // System.out.println(sqlString);
+                        }
+                        catch(Exception ex)
+                        {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+
+                    break;
+
+                    case("Outfielders"):
+                    for(int i = 1; i < data.size(); i += 1)
+                    {
+                        try(Statement statement = conn.createStatement())
+                        {
+                            String sqlString = "UPDATE Outfielders "
+                            + " SET Name = \'" + data.get(i)[0]
+                            + "\', Team = \'" + team
+                            + "\', GamesPlayed = " + data.get(i)[2]
+                            + ", GamesStarted = " + data.get(i)[3]
+                            + ", InningsPlayed = " + data.get(i)[4]
+                            + ", TotalChances = " + data.get(i)[5]
+                            + ", PutOuts = " + data.get(i)[6]
+                            + ", Assists = " + data.get(i)[7]
+                            + ", Errors = " + data.get(i)[8]
+                            + ", DoublePlays = " + data.get(i)[9]
+                            + ", IsInjured = " + (data.get(i)[10].equals(false) ? 0 : 1)  
+                            + ", Injury = \'" + data.get(i)[11]
+                            + "\', IsSuspended = " + (data.get(i)[12].equals(false) ? 0 : 1)
+                            + ", Suspension = \'" + data.get(i)[13]
+                            + "\', Position = \'" + data.get(i)[14]
+                            + "\', Number = " + data.get(i)[15]
+                            + " WHERE RefID = " + i;
+
+                            statement.execute(sqlString);
+                            // System.out.println(sqlString);
+                        }
+                        catch(Exception ex)
+                        {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+                    break;
+                }
+        
+
+    }
 }

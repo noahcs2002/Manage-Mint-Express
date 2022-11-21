@@ -3,9 +3,7 @@ package Graphics;
 import javax.swing.*;
 import Controllers.SqlController;
 import Engine.ErrorHandler.ErrorHandler;
-
 import java.awt.*;
-import java.awt.event.*;
 
 /**
  * Dialog for project start up procs.
@@ -59,29 +57,21 @@ public class StartupDialog extends JDialog
         this.add(panel, BorderLayout.CENTER);
         this.pack();
         
-
-        addTeamButton.addActionListener(new ActionListener()
+        addTeamButton.addActionListener(e -> 
         {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
+            try
             {
-                try
-                {
-                    team = teamNameField.getText();
-                    int teamRank = 1;
+                team = teamNameField.getText();
+                int teamRank = 1;
 
-                    connection.makeTeam(team, teamRank);
+                connection.makeTeam(team, teamRank);
 
-                    dispose();
-                }
-                catch(Exception ex)
-                {
-                    ErrorHandler.handle("<DEBUG>: Exception Handled\n\n\n" + ex.getLocalizedMessage());
-                }
+                dispose();
             }
+            catch(Exception ex)
+            {
+                ErrorHandler.handle("<DEBUG>: Exception Handled\n\n\n" + ex.getLocalizedMessage());
+            } 
         });
-
     }
-
 }

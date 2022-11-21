@@ -1,7 +1,6 @@
 package Graphics;
 
 import javax.swing.*;
-
 import Engine.Config.ConfigIO;
 import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
@@ -49,17 +48,15 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         confirmResetMenu.add(confirmReset);
         resetMenu.add(confirmResetMenu);
 
-
         gameDayMenu.add(pastGames);
         gameDayMenu.add(upcomingGames);
 
         addPlayer.add(pitcher);
         addPlayer.add(catcher);
-        addPlayer.add(outfielder);
         addPlayer.add(infielder);
+        addPlayer.add(outfielder);
 
         help.add(faq);
-        help.add(howToUse);
         help.add(documentation);
 
         this.add(help);

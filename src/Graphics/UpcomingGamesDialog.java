@@ -15,7 +15,6 @@ import Subscribers.ISubscriber;
  */
 public class UpcomingGamesDialog extends JDialog implements ISubscriber
 {
-
     JPanel panel;
     DefaultTableModel tableModel;
     JTable table;

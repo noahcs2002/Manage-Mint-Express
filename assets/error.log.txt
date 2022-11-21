@@ -153,3 +153,33 @@ No suitable driver found for jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?
 Beginning query
 Query ran
 Murray Tigers
+Beginning query
+Query ran
+Beginning query
+Query ran
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('Pitcher', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+INSERT INTO CatchingStaff (Name, Team, GamesPlayed, GamesStarted,InningsPlayed, TotalChances, PutOuts, Assists, Errors, DoublePlays,IsInjured, Injury, IsSuspended, Suspension, Number )VALUES ( 'Catcher', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+INSERT INTO Outfielders VALUES('Outfielder', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1, 'na', 0, 'na', 'a', 0);
+INSERT INTO Infielders VALUES('inf', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 1, 'drugs', 'ah', 0);
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('Me', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+Beginning query
+Query ran
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('Noah', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('Jaylee', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+Murray Tigers
+INSERT INTO CatchingStaff (Name, Team, GamesPlayed, GamesStarted,InningsPlayed, TotalChances, PutOuts, Assists, Errors, DoublePlays,IsInjured, Injury, IsSuspended, Suspension, Number )VALUES ( 'a', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);
+Murray Tigers
+INSERT INTO Infielders VALUES('b', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0a', 0);
+INSERT INTO Outfielders VALUES('d', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0a', 0);
+INSERT INTO Infielders VALUES('na', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0b', 0);
+INSERT INTO Outfielders VALUES('ted', 'Murray Tigers', 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0a', 0);
+INSERT INTO Infielders VALUES('asdf', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0', 0);
+Murray Tigers
+INSERT INTO PitchingStaff VALUES ('jajaj', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'false', 0, 'na', 0);
+INSERT INTO Infielders VALUES('inf', 'Murray Tigers', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', '0a', 0);
+Beginning query
+Query ran

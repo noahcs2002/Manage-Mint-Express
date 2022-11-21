@@ -19,7 +19,8 @@ public class FAQDialog extends JDialog
             "2. Hitting 'Clear All' will clear all entries OF THAT SPECIFIC POSITION. Clear All while on pitchers clears pitchers etc.",
             "3. To record a game, simply open the past games dialog and enter in the team you played against, and the date of the game. (Note: "
             + "You cannot record a game that was not scheduled. To do this, schedule the game, then record it).",
-            "4. If you have issues adding a player, make sure all values are full, and then go to the last column and hit tab, then the confirm button."
+            "4. If you have issues adding a player, make sure all values are full, and then go to the last column and hit tab, then the confirm button.",
+            "5. Inj. and Sus. MUST be entered as true or false."
         };
 
         JList<String> list = new JList<>(faqs);

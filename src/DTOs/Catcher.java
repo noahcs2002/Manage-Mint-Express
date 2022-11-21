@@ -40,7 +40,6 @@ public class Catcher
         String number
     )
     {
-
         this.name = name;
         this.team = team;
         this.gamesPlayed = gamesPlayed;
@@ -57,7 +56,4 @@ public class Catcher
         this.suspension = suspension;
         this.number = number;
     }
-
-    
-    
 }

@@ -1,4 +1,4 @@
--- Used to clear or scaffold the necessary tables -- 
+-- Used to clear and/or scaffold the necessary tables -- 
 
 IF object_id ('CatchingStaff' , 'U') IS NOT NULL
 	DROP TABLE CatchingStaff;
@@ -20,6 +20,7 @@ IF object_id ('Games' , 'U') IS NOT NULL
 
 
 CREATE TABLE CatchingStaff (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -39,6 +40,7 @@ CREATE TABLE CatchingStaff (
 );
 
 CREATE TABLE Infielders (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -58,6 +60,7 @@ CREATE TABLE Infielders (
 );
 
 CREATE TABLE Outfielders (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Name nvarchar(MAX),
 	Team nvarchar(MAX),
 	GamesPlayed decimal(18,0),
@@ -77,6 +80,7 @@ CREATE TABLE Outfielders (
 );
 
 CREATE TABLE PitchingStaff (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Player nvarchar(MAX),
 	Team nvarchar(MAX),
 	InningsPitched decimal(18,0),
@@ -97,11 +101,13 @@ CREATE TABLE PitchingStaff (
 );
 
 CREATE TABLE Teams (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Name nvarchar(MAX),
 	Rank decimal(18, 0)
 );
 
 CREATE TABLE Games (
+	RefID INT IDENTITY(1,1) NOT NULL,
 	Time nvarchar(MAX) NOT NULL,
 	Versus nvarchar(MAX) NOT NULL,
 	HasBeenPlayed bit NOT NULL

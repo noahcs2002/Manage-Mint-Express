@@ -49,12 +49,12 @@ public class Startup
             {
                 try
                 {
-                    sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\Startup\\ResetQuery.sql"));
+                    sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\01_startup.sql"));
                     sql.executeUpdate(sqlString);
 
-                    sqlString = "drop table Teams;" 
-                    + "create table Teams (Name nvarchar(MAX), Rank decimal(18,0) );"
-                    + "insert into Teams values ('" + team + "', 1);";
+                    sqlString = "DROP TABLE Teams;" 
+                    + "CREATE TABLE Teams (Name NVARCHAR(MAX), Rank DECIMAL(18,0) );"
+                    + "INSERT INTO Teams VALUES ('" + team + "', 1);";
 
                     sql.executeUpdate(sqlString);
 

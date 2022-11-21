@@ -33,5 +33,4 @@ public class Game
         this.hits = hits;
         this.errors = errors;
     }
-
 }

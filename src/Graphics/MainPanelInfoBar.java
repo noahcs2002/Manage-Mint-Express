@@ -6,6 +6,8 @@ import Misc.InfoCode;
 import Subscribers.ISubscriber;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.xml.catalog.Catalog;
+
 import java.awt.*;
 
 /**
@@ -60,9 +62,17 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
             alert(null, InfoCode.CLEARED_DATA);
         });
 
+        JButton updateButton = new JButton("Update");
+
+        updateButton.addActionListener(e -> 
+        {
+            alert(this.pos, InfoCode.UPDATE_DATA);
+        });
+
         this.setLayout(new BorderLayout());
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout());
+        flowPanel.add(updateButton);
         flowPanel.add(clearAllButton);
         flowPanel.add(positionChoice);
 
@@ -101,7 +111,16 @@ public class MainPanelInfoBar extends JPanel implements ISubscriber, ISubscribab
         switch(infoCode)
         {
             case TEAM_CHANGE :
-                this.team = (String) change;
+                try
+                {
+                    this.team = (String) change;
+                    this.positionChoice.setSelectedItem(change);
+                    this.alert(change, infoCode);
+                }
+                catch(Exception ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
             break;
 
             default : break;
