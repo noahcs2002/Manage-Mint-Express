@@ -18,16 +18,13 @@ public class Startup
     // prod database 
     "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_prod; trustServerCertificate = true; user = admin; password = csc325finalproject";
 
-    // dev database
-    // "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_dev; trustServerCertificate = true; user = admin; password = csc325finalproject";
-
-
     private Connection conn ;
     private String team ;
 
     public Startup(String teamName)
     {
         team = teamName;
+        
         try
         {
             conn = DriverManager.getConnection(connectionString);
@@ -56,6 +53,7 @@ public class Startup
                     sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\01_startup.sql"));
                     sql.executeUpdate(sqlString);
 
+                    // this might not be neccessary anymore, but I'm afraid to touch it, so it stays.
                     sqlString = "DROP TABLE Teams;" 
                     + "CREATE TABLE Teams (Name NVARCHAR(MAX), Rank DECIMAL(18,0) );"
                     + "INSERT INTO Teams VALUES ('" + team + "', 1);";

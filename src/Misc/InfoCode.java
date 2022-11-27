@@ -1,5 +1,8 @@
 package Misc;
 
+/**
+ * Enum used to include the type of change provided to a subscriber.
+ */
 public enum InfoCode 
 {
     TEAM_CHANGE,

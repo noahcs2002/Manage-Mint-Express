@@ -24,25 +24,27 @@ public class Pitcher
     public String number;
 
 
-    public Pitcher( String playerName,
-                    String teamName,
-                    double inningsPitched,
-                    double hits,
-                    double runs, 
-                    double earnedRuns,
-                    double walks,
-                    double strikeOuts,
-                    double homeruns,
-                    double saves,
-                    double era,
-                    double whip,
-                    //0/1 for false and true
-                    int isInjured,
-                    int isSuspended,
-                    String injury,
-                    String suspension,
-                    String number, 
-                    String team)
+    public Pitcher( 
+        String playerName,
+        String teamName,
+        double inningsPitched,
+        double hits,
+        double runs, 
+        double earnedRuns,
+        double walks,
+        double strikeOuts,
+        double homeruns,
+        double saves,
+        double era,
+        double whip,
+        //0/1 for false and true
+        int isInjured,
+        int isSuspended,
+        String injury,
+        String suspension,
+        String number, 
+        String team
+    )
     {
         this.name = playerName;
         this.InningsPitched = inningsPitched;

@@ -16,7 +16,8 @@ public class Driver
 {
     public static void main(String[] args) 
     {
-        // If config hasn't ran, run it, and when it's done, start program
+        // If config hasn't ran, run it, and when it's done, start program.
+        // This allows the database to begin with a team made, set by the user
         if(!ConfigIO.hasStartupRan())
         {
             StartupDialog d = new StartupDialog();

@@ -8,14 +8,13 @@ import Engine.ErrorHandler.ErrorHandler;
 
 /**
  * Custom SQL utility tool that extracts SQL files and turns them into SqlStrings to 
- * be parsed through the JDBC driver. I will most likely make this more formal as my 
- * next project.
+ * be parsed through the JDBC driver.
  */
 public class SqlUtilityTool
 {
   /**
    * 
-   * @param file File to parse into SqlString
+   * @param file File to parse into SqlString. Typically an SQL file, but can be a txt file.
    * @return SqlString representation of an SQL file
    * @throws FileNotFoundException File Not Found -> Exception to be handled
    */
@@ -24,15 +23,15 @@ public class SqlUtilityTool
         String result = "";
         try(BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
-          String currentLine = reader.readLine();
-          while(currentLine != null)
-          {
-            result += currentLine;
-            result += "\n";
-            currentLine = reader.readLine();
-          }
+            String currentLine = reader.readLine();
+            while(currentLine != null)
+            {
+              result += currentLine;
+              result += "\n";
+              currentLine = reader.readLine();
+            }
 
-          return result;
+            return result;
         }
         catch(Exception ex)
         {

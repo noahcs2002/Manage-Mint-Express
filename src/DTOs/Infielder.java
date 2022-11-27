@@ -23,10 +23,22 @@ public class Infielder
     public String number;
 
     public Infielder(
-        String name, String team, double gamesPlayed, double gamesStarted,
-        double inningsPlayed, double totalChances, double putOuts,
-        double assists, double errors, double doublePlaysTurned, 
-        int isInjured, String injury, int isSuspended, String suspension, String position, String number
+        String name,
+        String team,
+        double gamesPlayed,
+        double gamesStarted,
+        double inningsPlayed,
+        double totalChances,
+        double putOuts,
+        double assists,
+        double errors,
+        double doublePlaysTurned, 
+        int isInjured,
+        String injury,
+        int isSuspended,
+        String suspension,
+        String position,
+        String number
     )
     {
         this.team = team;
