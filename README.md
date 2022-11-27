@@ -1,6 +1,15 @@
 # Baseball Manager
 
-This is a mock project for CSC325 : Advanced Object Oriented Programming
+This is a mock project for CSC325 : Advanced Object Oriented Programming.
+
+## IMPORTANT!
+You *MUST* configure the Java classpath to run the `mssql-jdbc-11.2.0.jre18.jar` file. I used VSCode to create this project, and did not use Maven or Gradle, so these dependencies are not wrapped into the project. As such, you *must* configure them yourself. At the barest minimum, the `mssql-jdbc-11.2.0.jre18.jar` needs to be configured. These can be found in the `lib` folder in the source code. Furthermore, you *might* need to install the driver, and add `mssql-jdbc_auth-11.2.0.x64.dll` file to the binary section of your Java JDK.
+
+### Adding The Necessary Driver
+
+1) First, open the Java JDK installed on your machine. This is commonly installed under `C:\Program Files\Java`. From there, open the JDK files, and then open the `bin` folder. Paste the `mssql-jdbc_auth-11.2.0.x64.dll` file into this folder. (Note: If your JDK is not in the above specified path, you must locate it on your own.)
+
+2) Second, open the source code for MME in your IDE of choice, and configure the Java Classpath to include the `mssql-jdbc-11.2.0.jre18.jar` found there. Optionally, you can include the `hamcrest-core-1.4.jar` and/or `junit-4.13.2.jar` files. This is not necessary, as those were for unit tests that are not included in the `master` branch of code.
 
 ## Proposal:
 
