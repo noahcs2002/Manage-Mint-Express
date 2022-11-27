@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,13 +10,18 @@ import DTOs.Catcher;
 import DTOs.Infielder;
 import DTOs.Outfielder;
 import DTOs.Pitcher;
+import Engine.SqlUtilityTool;
 import Engine.ErrorHandler.ErrorHandler;
 
 public class SqlController 
 {
-    private final String connectionString =  
-    "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
-    // "jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java";
+    private final String connectionString = 
+    // prod database 
+    "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_prod; trustServerCertificate = true; user = admin; password = csc325finalproject";
+
+    // dev database
+    // "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_dev; trustServerCertificate = true; user = admin; password = csc325finalproject";
+    
 
     private Connection conn ;
 
@@ -700,7 +706,27 @@ public class SqlController
                     }
                     break;
                 }
-        
+    }
 
+    public void resetDatabase()
+    {
+        try
+        {
+            String sqlString = SqlUtilityTool.extractSqlStringFromFile(new File("sql\\99_reset.sql"));   
+            
+            try(Statement statement = conn.createStatement())
+            {
+                statement.executeQuery(sqlString);
+            }
+            catch(Exception ex)
+            {
+                ErrorHandler.handle(ex.getLocalizedMessage());
+            }
+
+        }
+        catch (Exception ex)
+        {
+            ErrorHandler.handle(ex.getLocalizedMessage());
+        }
     }
 }
