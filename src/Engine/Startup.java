@@ -15,8 +15,12 @@ public class Startup
     ConfigurationDriver driver = new ConfigurationDriver();
 
     private final String connectionString =  
-    "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
-    // "jdbc:mariadb://csclab.murraystate.edu:3306/CSC_325?user=CSC_325&password=Java";
+    // prod database 
+    "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_prod; trustServerCertificate = true; user = admin; password = csc325finalproject";
+
+    // dev database
+    // "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_dev; trustServerCertificate = true; user = admin; password = csc325finalproject";
+
 
     private Connection conn ;
     private String team ;

@@ -1,6 +1,8 @@
 package Graphics;
 
 import javax.swing.*;
+
+import Controllers.SqlController;
 import Engine.Config.ConfigIO;
 import Engine.ErrorHandler.ErrorHandler;
 import Misc.InfoCode;
@@ -130,6 +132,8 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         confirmReset.addActionListener(e -> 
         {
             ConfigIO.reset();
+            SqlController controller = new SqlController();
+            controller.resetDatabase(); 
             this.alert(null, InfoCode.TERMINATE);
         });
     }
