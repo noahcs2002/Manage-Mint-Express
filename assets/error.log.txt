@@ -1,2 +1,6 @@
 Beginning query
 Query ran
+Beginning query
+Query ran
+asdasd
+INSERT INTO PitchingStaff VALUES ('as', 'asdasd', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 'na', 0, 'na', 0);

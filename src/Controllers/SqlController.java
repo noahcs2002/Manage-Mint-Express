@@ -73,7 +73,7 @@ public class SqlController
     {
         try
         {
-            String sql = "SELECT * FROM PitchingStaff WHERE Team = '" + teamName + "';";
+            String sql = "SELECT * FROM PitchingStaff";
 
             Statement statement = conn.createStatement();
 
@@ -122,7 +122,7 @@ public class SqlController
     {
         try
         {
-            final String sql = "SELECT * FROM CatchingStaff WHERE Team = '" + teamName + "';";
+            final String sql = "SELECT * FROM CatchingStaff";
 
             Statement statement = conn.createStatement();
 
@@ -172,7 +172,7 @@ public class SqlController
     {
         try
         {
-            final String sql = "SELECT * FROM Infielders WHERE Team = '" + teamName + "';";
+            final String sql = "SELECT * FROM Infielders WHERE";
 
             Statement statement = conn.createStatement();
 
@@ -225,7 +225,7 @@ public class SqlController
     {
         try
         {
-            final String sql = "SELECT * FROM Outfielders WHERE Team = '" + teamName + "';";
+            final String sql = "SELECT * FROM Outfielders";
 
             Statement statement = conn.createStatement();
 
