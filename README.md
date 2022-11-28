@@ -31,18 +31,13 @@ This is self explanatory. I made several custom GUI components, a full list of w
 
 ##### GUI Components List
 - `AddPlayerDialog.java`
-- `AddGameDialog.java`
 - `FancyFrame.java`
 - `FAQDialog.java`
 - `InformationPanel.java`
 - `Loading.java`
 - `MainPanelInfoBar.java`
 - `Navbar.java`
-- `PastGamesDialog.java`
-- `RecordGameDialog.java`
-- `ScheduleDialog.java`
 - `StartupDialog.java`
-- `UpcomingGamesDialog.java`
 
 #### Graphics and Animation
 The program opens with a loading bar, to allow the program to establish connection to the SQL server. Beyond this, graphics are minimal.

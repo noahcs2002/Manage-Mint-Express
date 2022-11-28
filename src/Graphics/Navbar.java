@@ -22,14 +22,10 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     
     JMenu help = new JMenu("Help");
     JMenu addPlayer = new JMenu("Add Player");
-    JMenu gameDayMenu = new JMenu("Enter Game Day");
-    JMenu resetMenu = new JMenu("Reset");
-    JMenu confirmResetMenu = new JMenu("Confirm Reset");
+    JMenu resetMenu = new JMenu("Reset Software");
+    JMenu confirmResetMenu = new JMenu("Confirm Reset Software");
 
     JMenuItem confirmReset = new JMenuItem("Confirm Reset (Irreversible)");
-
-    JMenuItem pastGames = new JMenuItem("Past Games");
-    JMenuItem upcomingGames = new JMenuItem("Upcoming Games");
 
     JMenuItem pitcher = new JMenuItem("Pitcher");
     JMenuItem catcher = new JMenuItem("Catcher");
@@ -37,7 +33,6 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
     JMenuItem outfielder = new JMenuItem("Outfielder");
 
     JMenuItem faq = new JMenuItem("FAQ's");
-    JMenuItem howToUse = new JMenuItem("How to use");
     JMenuItem documentation = new JMenuItem("Docs");
     private final String uri = "https://github.com/noahcs2002/Mangage-Mint-Express";
 
@@ -50,9 +45,6 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         confirmResetMenu.add(confirmReset);
         resetMenu.add(confirmResetMenu);
 
-        gameDayMenu.add(pastGames);
-        gameDayMenu.add(upcomingGames);
-
         addPlayer.add(pitcher);
         addPlayer.add(catcher);
         addPlayer.add(infielder);
@@ -63,17 +55,11 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
 
         this.add(help);
         this.add(addPlayer);
-        this.add(gameDayMenu);
         this.add(resetMenu);
 
         faq.addActionListener(e -> 
         {
             new FAQDialog();
-        });
-
-        howToUse.addActionListener(e -> 
-        {
-
         });
 
         documentation.addActionListener(e -> 
@@ -117,16 +103,6 @@ public class Navbar extends JMenuBar implements ISubscriber, ISubscribable
         {
             AddPlayerDialog dialog = new AddPlayerDialog(this.currentTeam, "Outfielders");
             this.subscribe(dialog);
-        });
-
-        pastGames.addActionListener(e -> 
-        {
-            new PastGamesDialog();
-        });
-
-        upcomingGames.addActionListener(e ->
-        {
-            new UpcomingGamesDialog();
         });
 
         confirmReset.addActionListener(e -> 
