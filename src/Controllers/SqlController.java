@@ -17,10 +17,12 @@ public class SqlController
 {
     private final String connectionString = 
     // prod database 
-    "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_prod; trustServerCertificate = true; user = admin; password = csc325finalproject";
+    // "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_prod; trustServerCertificate = true; user = admin; password = csc325finalproject";
 
     // dev database
     // "jdbc:sqlserver://mme.cu8pbttixbup.us-east-2.rds.amazonaws.com:1433; DatabaseName = mme_dev; trustServerCertificate = true; user = admin; password = csc325finalproject";
+
+    "jdbc:sqlserver://localhost; encrypt=true; DatabaseName=NS.baseball.manager; trustServerCertificate = true;  integratedSecurity=true;";
 
     private Connection conn ;
 
